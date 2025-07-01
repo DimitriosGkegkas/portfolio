@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSpring } from "@react-spring/core";
 import SceneManager from "./Components/SceneManager";
 import UIManager from "./Components/UIManager";
@@ -6,16 +6,6 @@ import UIManager from "./Components/UIManager";
 export default function App() {
   const [state, setState] = useState({ open: false, project: null as string | null });
   const [loaded, setLoaded] = useState(false);
-
-
-  // For DEBUG
-  useEffect(() => {
-    const path = window.location.pathname;
-    const segments = path.split("/").filter(Boolean);
-    if (segments.length === 1) {
-      setState({ open: true, project: segments[0] });
-    }
-  }, []);
 
   const props = useSpring({
     open: Number(state.open),

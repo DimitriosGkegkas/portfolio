@@ -12,7 +12,7 @@ interface ItemTextProps {
 
 export const ItemText: React.FC<ItemTextProps> = ({ text, position, scale, color }) => {
   const ref = React.useRef<THREE.Mesh>(null);
-  const { camera, size } = useThree();
+  const { camera } = useThree();
 
   useFrame(() => {
     if (!ref.current) return;
@@ -24,7 +24,13 @@ export const ItemText: React.FC<ItemTextProps> = ({ text, position, scale, color
     // Convert NDC Y to screen Y (top-left origin)
     const screenY = (1 - (vector.y * 0.5 + 0.5));
 
-    ref.current.material.opacity = 1.3 - 2*Math.abs(screenY); // Fade out based on screen Y position
+    // ref.current.material if list then the first one 
+    if (!ref.current.material || !Array.isArray(ref.current.material)) {
+      ref.current.material.opacity = 1.3 - 2*Math.abs(screenY); // Fade out based on screen Y position
+    }
+    else {
+      ref.current.material[0].opacity = 1.3 - 2*Math.abs(screenY); // Fade out based on screen Y position
+    }
 
     // console.log(`Text "${text}" is at screen Y:`, screenY.toFixed(2));
   });

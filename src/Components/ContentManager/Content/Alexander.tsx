@@ -1,6 +1,5 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { Item } from "../Item";
 import PaperScreen from "../../SceneManager/PaperScreen";
 import { useThree } from "@react-three/fiber";
 
