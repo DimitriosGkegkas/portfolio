@@ -1,0 +1,45 @@
+.project-text {
+  position: absolute;
+  width: 30vw;
+  /* min-width: 300px; */
+  right: 5vw;
+  font-size: 2em;
+  transform: translate3d(0, 0%, 0);
+  line-height: 1.4;
+
+    /* Frosted glass effect */
+  background: rgba(240, 240, 240, 0.0); /* subtle transparent background */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); /* Safari support */
+  border-radius: 12px;
+  border-color: #f0f0f0;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .project-text {
+    width: 40vw;
+    font-size: 1.7em;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-text {
+    width: 60vw;
+    font-size: 1.4em;
+    right: 3vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-text {
+    width: 80vw;
+    font-size: 1.1em;
+    right: 2vw;
+    line-height: 1.6;
+  }
+}

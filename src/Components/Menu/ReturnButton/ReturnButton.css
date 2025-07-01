@@ -1,0 +1,22 @@
+.return-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 10000000;
+}
+
+.return-button:hover .arrow-icon {
+  transform: translateX(-2px);
+}
+
+.arrow-icon {
+  transition: transform 0.2s ease;
+}

@@ -1,0 +1,18 @@
+.menu-bar {
+  display: flex;
+  gap: 0px;
+  z-index: 10000;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.menu-item:hover {
+  text-decoration: underline;
+}

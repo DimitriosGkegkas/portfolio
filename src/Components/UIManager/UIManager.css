@@ -1,0 +1,33 @@
+.welcome-heading {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6em;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 0;
+  color: #000;
+}
+
+.highlight-name {
+  color: #fbbf24; /* Tailwind's yellow-400 */
+}
+
+/* Responsive font size breakpoints */
+@media (max-width: 1024px) {
+  .welcome-heading {
+    font-size: 4em;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-heading {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-heading {
+    font-size: 2em;
+  }
+}
