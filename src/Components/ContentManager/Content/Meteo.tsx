@@ -4,6 +4,7 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { Item } from "../Item";
 import { useThree } from "@react-three/fiber";
+import { asset } from "../../../utils/asset";
 
 export const Meteo: FC = () => {
   const { width } = useThree((state) => state.viewport);
@@ -11,11 +12,9 @@ export const Meteo: FC = () => {
   return (
     <ScrollControls damping={0.1} pages={3}>
       <Scroll>
-
-
-        <Item url='/projects/meteo/meteo1.png' position={[width/3, 0, 30]} scale={20.5} />
-        <Item url='/projects/meteo/meteo2.png' position={[width/3, -20, 20]} scale={17} />
-        <Item url='/projects/meteo/meteo3.png' position={[width/3, -38, 10]} scale={17} />
+        <Item url={asset("/projects/meteo/meteo1.png")} position={[width / 3, 0, 30]} scale={20.5} />
+        <Item url={asset("/projects/meteo/meteo2.png")} position={[width / 3, -20, 20]} scale={17} />
+        <Item url={asset("/projects/meteo/meteo3.png")} position={[width / 3, -38, 10]} scale={17} />
 
         {/* Visual highlights or animated keywords can go here later */}
         {/* Example: <ItemText text='Node.js' scale={2.5} position={[0, -10, 10]} color="#34D399" /> */}

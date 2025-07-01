@@ -5,10 +5,10 @@ import { useTexture } from "@react-three/drei";
 
 import ImageFadeMaterialDisplacementCover, { type ImageFadeMaterialDisplacementProps, ImageFadeMaterialDisplacement } from "./ImageFadeMaterialDisplacementCover.js";
 import { damp } from "maath/easing";
-
+import { asset } from "../../utils/asset.js";
 
 const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: string; position: [number, number, number]; scaleFactor: number }) => {
-  const [gridTexture, dispTexture] = useTexture([src, "/perlin3.jpeg"]);
+  const [gridTexture, dispTexture] = useTexture([src, asset("/perlin3.jpeg")]);
   dispTexture.wrapS = dispTexture.wrapT = THREE.RepeatWrapping;
 
   const viewport = useThree((state) => state.viewport);
@@ -40,7 +40,7 @@ const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: stri
     <>
       <mesh scale={[scaleFactor * scale[0], scaleFactor * scale[1], scaleFactor * scale[2]]} position={position} rotation={[0, Math.PI, 0]} ref={paperRef}>
         <planeGeometry />
-        <ImageFadeMaterialDisplacementCover dispFactor={1} ref={material} useHole={true} tex={gridTexture} disp={dispTexture} background={true} transparent={true}  holeSmoothEdges={0.3} />
+        <ImageFadeMaterialDisplacementCover dispFactor={1} ref={material} useHole={true} tex={gridTexture} disp={dispTexture} background={true} transparent={true} holeSmoothEdges={0.3} />
       </mesh>
     </>
   );

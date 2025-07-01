@@ -2,16 +2,17 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import PaperScreen from "../../SceneManager/PaperScreen";
 import { useThree } from "@react-three/fiber";
+import { asset } from "../../../utils/asset";
 
 export const Alexander: FC = () => {
   const { width } = useThree((state) => state.viewport);
   return (
     <ScrollControls damping={0.1} pages={3}>
       <Scroll>
-         <PaperScreen src='/projects/alex/alex1.jpeg' scaleFactor={20.5} position={[width/3, 0, 30]} />
-         <PaperScreen src='/projects/alex/alex2.jpeg' scaleFactor={15.5} position={[width/3, -15, 30]} />
-         <PaperScreen src='/projects/alex/alex3.jpeg' scaleFactor={20.5} position={[width/4, -25, 30]} />
-         <PaperScreen src='/projects/alex/alex4.jpeg' scaleFactor={20.5} position={[width/2, -35, 30]} />
+         <PaperScreen src={asset('/projects/alex/alex1.jpeg')} scaleFactor={20.5} position={[width/3, 0, 30]} />
+         <PaperScreen src={asset('/projects/alex/alex2.jpeg')} scaleFactor={15.5} position={[width/3, -15, 30]} />
+         <PaperScreen src={asset('/projects/alex/alex3.jpeg')} scaleFactor={20.5} position={[width/4, -25, 30]} />
+         <PaperScreen src={asset('/projects/alex/alex4.jpeg')} scaleFactor={20.5} position={[width/2, -35, 30]} />
 
 
       </Scroll>

@@ -7,6 +7,7 @@ import { SpringValue } from "@react-spring/core";
 import Terminal3D from "../Terminal/Terminal";
 import { useThree } from "@react-three/fiber";
 import "./Laptop.css";
+import { asset } from "../../utils/asset";
 
 type GLTFResult = {
   nodes: {
@@ -30,11 +31,11 @@ type GLTFResult = {
 
 const positionA = new THREE.Vector3(0, -4.2, 2); // closed
 const positionB = new THREE.Vector3(0, -2.5, -17); // open
-const positionC = new THREE.Vector3(15, -10, -17);// project
+const positionC = new THREE.Vector3(15, -10, -17); // project
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
 const rotationB = new THREE.Euler(-0.2, Math.PI, 0);
-const rotationC = new THREE.Euler(-0.1, Math.PI*3/2, 0, "YXZ");
+const rotationC = new THREE.Euler(-0.1, (Math.PI * 3) / 2, 0, "YXZ");
 
 interface ModelProps {
   hinge: SpringValue<number>;
@@ -48,7 +49,7 @@ export default function Model({ hinge, position, setState, onLoaded, onClick }: 
   const group = useRef<Group>(null);
   const [hovered, setHovered] = useState(false);
 
-  const { nodes, materials } = useGLTF("/mac-draco.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(asset("/mac-draco.glb")) as unknown as GLTFResult;
 
   const { gl } = useThree();
   useEffect(() => {
