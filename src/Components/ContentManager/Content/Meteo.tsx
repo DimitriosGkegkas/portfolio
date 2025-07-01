@@ -1,20 +1,22 @@
 // components/ProjectContent.tsx
 
 import { Scroll, ScrollControls } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { type FC } from "react";
-import { ItemText } from "../ItemText";
 import { Item } from "../Item";
+import PaperScreen from "../../SceneManager/PaperScreen";
+import { useThree } from "@react-three/fiber";
 
 export const Meteo: FC = () => {
-  const { width: w, height: h } = useThree((state) => state.viewport);
+  const { width, height } = useThree((state) => state.viewport);
 
   return (
     <ScrollControls damping={0.1} pages={3}>
       <Scroll>
-        <Item url='/projects/meteo/meteo1.png' position={[-3, 0, 30]} scale={20.5} />
-        <Item url='/projects/meteo/meteo2.png' position={[-4, -20, 20]} scale={17} />
-        <Item url='/projects/meteo/meteo3.png' position={[-1, -38, 10]} scale={17} />
+
+
+        <Item url='/projects/meteo/meteo1.png' position={[width/3, 0, 30]} scale={20.5} />
+        <Item url='/projects/meteo/meteo2.png' position={[width/3, -20, 20]} scale={17} />
+        <Item url='/projects/meteo/meteo3.png' position={[width/3, -38, 10]} scale={17} />
 
         {/* Visual highlights or animated keywords can go here later */}
         {/* Example: <ItemText text='Node.js' scale={2.5} position={[0, -10, 10]} color="#34D399" /> */}

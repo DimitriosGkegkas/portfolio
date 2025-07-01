@@ -480,7 +480,7 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
           instance.write(data);
       }
     });
-  }, [commits, instance, onCommand, prompt]);
+  }, [instance]);
 
   return (
     <>

@@ -5,6 +5,7 @@ import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
 import { Light } from "../Light";
 import { ContentManager } from "../ContentManager/ContentManager";
+import { PerspectiveCamera } from "@react-three/drei";
 
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
@@ -16,7 +17,8 @@ interface SceneManagerProps {
 export default function SceneManager({ props, state, setState, setLoaded }: SceneManagerProps) {
   return (
     <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "hidden", zIndex: 1000 }}>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, -30], fov: 35 }}>
+      <Canvas dpr={[1, 2]}>
+        <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
         <animated.group
           position={props.loaded.to((p) => {
             const v = new Vector3(0, -10, 0).lerp(new Vector3(0, 0, 0), p);

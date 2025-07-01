@@ -30,11 +30,11 @@ type GLTFResult = {
 
 const positionA = new THREE.Vector3(0, -4.2, 2); // closed
 const positionB = new THREE.Vector3(0, -2.5, -17); // open
-const positionC = new THREE.Vector3(13, -4, 2); // project
+const positionC = new THREE.Vector3(15, -10, -17);// project
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
 const rotationB = new THREE.Euler(-0.2, Math.PI, 0);
-const rotationC = new THREE.Euler(-0.1, Math.PI + 0.9, 0, "YXZ");
+const rotationC = new THREE.Euler(-0.1, Math.PI*3/2, 0, "YXZ");
 
 interface ModelProps {
   hinge: SpringValue<number>;
@@ -128,7 +128,7 @@ export default function Model({ hinge, position, setState, onLoaded, onClick }: 
             <mesh geometry={nodes.Cube008.geometry} material={materials.aluminium} />
             <mesh geometry={nodes.Cube008_1.geometry} material={materials["matte.001"]} />
             <mesh geometry={nodes.Cube008_2.geometry} material={nodes.Cube008_2.material}>
-              {position.goal > 0.4 &&  gl.domElement.parentElement && (
+              {position.goal > 0.4 && gl.domElement.parentElement && (
                 <Html
                   transform
                   portal={{ current: gl.domElement.parentElement }}
