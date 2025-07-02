@@ -21,14 +21,14 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
         <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
         <animated.group
           position={props.loaded.to((p) => {
-            const v = new Vector3(0, -10, 0).lerp(new Vector3(0, 0, 0), p);
+            const v = new Vector3(0, 0, -20).lerp(new Vector3(0, 0, 0), p);
             return [v.x, v.y, v.z] as [number, number, number];
           })}
           rotation={[0, 0, 0]}>
           <Suspense fallback={null}>
             <Laptop
               onLoaded={() => setLoaded(true)}
-              hinge={props.open}
+              state={state}
               position={props.position}
               setState={setState}
               onClick={(e: React.MouseEvent) => {

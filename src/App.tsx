@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useSpring } from "@react-spring/core";
-import SceneManager from "./Components/SceneManager";
 import UIManager from "./Components/UIManager";
+
+const SceneManager = lazy(() => import("./Components/SceneManager"));
 
 export default function App() {
   const [state, setState] = useState({ open: false, project: null as string | null });
@@ -17,7 +18,9 @@ export default function App() {
   return (
     <>
       <SceneManager props={props} state={state} setState={setState} setLoaded={setLoaded} />
-      <UIManager props={props} state={state} setState={setState} loaded={loaded} />
+      <Suspense fallback={null}>
+        <UIManager props={props} state={state} setState={setState} loaded={loaded} />
+      </Suspense>
     </>
   );
 }

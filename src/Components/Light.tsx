@@ -8,9 +8,9 @@ export const Light = ({ position }: { position: SpringValue<number> }) => {
       {/* Warm contrast light */}
       <three.pointLight
         position={[3, 1.5, -15]}
-        intensity={400}
+        intensity={position.to([0, 1, 2], [150, 400, 400])} // Adjusted intensity based on position
         distance={20}
-        color={position.to([0, 1, 2], ["#f0f0f0", "rgb(255, 132, 1)", "#f0f0f0"])} // Warm golden hue
+        color={position.to([0, 1, 2], ["rgb(255, 255, 255)", "rgb(255, 132, 1)", "#f0f0f0"])} // Warm golden hue
       />
 
       {/* Simulated saturated screen light */}
@@ -18,14 +18,14 @@ export const Light = ({ position }: { position: SpringValue<number> }) => {
         position={[0, 5, -15]}
         intensity={200}
         distance={18}
-        color={position.to([0, 1, 2], ["#f0f0f0", "rgb(147, 190, 242)", "#99f0ff"])} // Vivid aqua / teal tones
+        color={position.to([0, 1, 2], ["rgb(147, 190, 242)", "rgb(147, 190, 242)", "#99f0ff"])} // Vivid aqua / teal tones
       />
 
       <three.pointLight
-        position={[-3, 4, -15]}
+        position={position.to((v) => [-3, 4, 10 + v * -25])}
         intensity={250}
         distance={20}
-        color={position.to([0, 1, 2], ["#f0f0f0", "rgb(126, 83, 253)", "#f0f0f0"])} // Warm golden hue
+        color={position.to([0, 1, 2], ["rgb(238, 228, 213)", "rgb(126, 83, 253)", "#f0f0f0"])} // Warm golden hue
       />
 
       <Environment preset='warehouse' environmentIntensity={0.2} />
