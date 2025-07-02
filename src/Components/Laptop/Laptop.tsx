@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { useEffect, useRef, useState } from "react";
-import { ContactShadows, Html, useGLTF } from "@react-three/drei";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Html, useGLTF } from "@react-three/drei";
 import { a as animated } from "@react-spring/three";
 import { Group } from "three";
 import { SpringValue, useSpring } from "@react-spring/core";
@@ -9,6 +9,7 @@ import { useThree } from "@react-three/fiber";
 import "./Laptop.css";
 import { asset } from "../../utils/asset";
 import { type GLTF } from "three-stdlib";
+import { Light } from "../Light";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,11 +34,11 @@ type GLTFResult = GLTF & {
 };
 const positionA = new THREE.Vector3(0, -4.2, 2); // closed
 const positionB = new THREE.Vector3(0, -2.5, -17); // open
-const positionC = new THREE.Vector3(15, -10, -17); // project
+const positionC = new THREE.Vector3(5, -3, -17); // project
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
 const rotationB = new THREE.Euler(-0.2, Math.PI, 0);
-const rotationC = new THREE.Euler(-0.1, (Math.PI * 3) / 2, 0, "YXZ");
+const rotationC = new THREE.Euler(-0.1, (Math.PI * 2.5) / 2, 0, "YXZ");
 
 interface ModelProps {
   position: SpringValue<number>;
@@ -67,24 +68,26 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
   }, [hovered]);
 
   // Apply emissive effect once when materials are ready
-  useEffect(() => {
-    const screenMaterial: THREE.MeshStandardMaterial | undefined = materials["screen.001"] as THREE.MeshStandardMaterial | undefined;
-    if (screenMaterial) {
-      screenMaterial.emissiveIntensity = 1;
-      screenMaterial.emissive = new THREE.Color(0xffffff); // Optional, but helps glow stand out
-      screenMaterial.emissiveMap = screenMaterial.map;
-      screenMaterial.toneMapped = false; // Disable tone mapping for emissive effect
-      screenMaterial.needsUpdate = true;
-      // Set full emissive so lighting doesn’t matter visually
-      screenMaterial.color.set(0x000000);
-      screenMaterial.toneMapped = false;
-      screenMaterial.needsUpdate = true;
+  const screenMaterial = useMemo(() => {
+    const screenMaterial: THREE.MeshStandardMaterial = materials["screen.001"] as THREE.MeshStandardMaterial;
+    screenMaterial.roughness = 111;
+    // screenMaterial.emissiveIntensity = 0;
+    // screenMaterial.emissive = new THREE.Color(0xffffff); // Optional, but helps glow stand out
+    // screenMaterial.emissiveMap = screenMaterial.map;
+    // // Set full emissive so lighting doesn’t matter visually
+    // screenMaterial.color.set(0x000000);
+    // screenMaterial.toneMapped = false;
+    // screenMaterial.needsUpdate = true;
+    // screenMaterial.roughness = 1;
+    // materials["screen.001"] = screenMaterial;
 
-      nodes.Cube008_2.material = new THREE.MeshBasicMaterial({
-        map: (materials["screen.001"] as THREE.MeshStandardMaterial).map,
-      });
-    }
+    // nodes.Cube008_2.material = new THREE.MeshBasicMaterial({
+    //   map: (materials["screen.001"] as THREE.MeshStandardMaterial).map,
+    // });
+    return screenMaterial;
   }, [materials, nodes.Cube008_2]);
+
+  const target = useRef<THREE.Object3D>(new THREE.Object3D());
 
   return (
     <>
@@ -127,10 +130,11 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
           <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
             <mesh geometry={nodes.Cube008.geometry} material={materials.aluminium} />
             <mesh geometry={nodes.Cube008_1.geometry} material={materials["matte.001"]} />
-            <mesh geometry={nodes.Cube008_2.geometry} material={materials["screen.001"]}>
+            <mesh geometry={nodes.Cube008_2.geometry} material={screenMaterial}>
               {position.goal > 0.4 && gl.domElement.parentElement && (
                 <Html
                   transform
+                  // occlude
                   portal={{ current: gl.domElement.parentElement }}
                   position={[0.8, 0, 0]}
                   rotation={[-Math.PI / 2, 0, 0]}
@@ -143,15 +147,17 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
           </group>
         </animated.group>
 
+        <Light position={position} target={target.current}/>
+
         <mesh geometry={nodes.keyboard.geometry} material={materials.keys} position={[1.79, 0, 3.45]} />
 
         <group position={[0, -0.1, 3.39]}>
           <mesh geometry={nodes.Cube002.geometry} material={materials.aluminium}>
-            <ContactShadows position={[0, -0.2, 0]} opacity={0.7} scale={20} blur={5} far={10} near={0.01} resolution={256} color='#000000' />
+            {/* <ContactShadows position={[0, -0.2, 0]} opacity={0.7} scale={20} blur={5} far={1000} near={0.000001} resolution={256} color='#000000' /> */}
           </mesh>
           <mesh geometry={nodes.Cube002_1.geometry} material={materials.trackpad}></mesh>
         </group>
-        <group position={[0, -0.027, 1.201]}>
+        <group position={[0, -0.027, 1.201]} ref={target}>
           <mesh geometry={nodes.Cube011.geometry} material={materials.touchbar} />
           <mesh geometry={nodes.Cube011_1.geometry} material={materials["touchbar.001"]} />
         </group>
@@ -163,7 +169,7 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
           }}
           onPointerOut={() => setHovered(false)}>
           <boxGeometry args={[9, 0.5, 6]} />
-          <meshStandardMaterial visible={false}/>
+          <meshStandardMaterial visible={false} />
         </mesh>
       </animated.group>
     </>

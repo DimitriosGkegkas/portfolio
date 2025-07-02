@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { a as animated, SpringValue } from "@react-spring/three";
+import { useSpring, a as web } from "@react-spring/web";
 import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
-import { Light } from "../Light";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
 
@@ -15,9 +15,13 @@ interface SceneManagerProps {
 }
 
 export default function SceneManager({ props, state, setState, setLoaded }: SceneManagerProps) {
+  const { getContent } = useSpring({
+    getContent: state.project ? 1 : 0,
+    config: { mass: 1, tension: 25, friction: 10 },
+  });
   return (
-    <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "hidden", zIndex: 1000 }}>
-      <Canvas dpr={[1, 2]}>
+    <>
+      <Canvas id='scene' dpr={[1, 2]} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 1000 }}>
         <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
         <animated.group
           position={props.loaded.to((p) => {
@@ -42,9 +46,24 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
             />
           </Suspense>
         </animated.group>
-        <Light position={props.position} />
-        <ContentManager page={state.project} />
       </Canvas>
-    </div>
+      <web.div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          zIndex: 1001,
+          pointerEvents: "auto",
+          transform: getContent.to((o: number) => `translate3d(0,${(1 - o) * 100}vh,0)`),
+        }}>
+        <Canvas id='content' dpr={[1, 2]}>
+          <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
+          <ContentManager page={state.project} />
+        </Canvas>
+      </web.div>
+    </>
   );
 }

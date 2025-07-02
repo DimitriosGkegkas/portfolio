@@ -1,34 +1,52 @@
-import { Environment } from "@react-three/drei";
 import { SpringValue, a as three } from "@react-spring/three";
+import * as THREE from "three";
 
-export const Light = ({ position }: { position: SpringValue<number> }) => {
+export const Light = ({ position, target }: { position: SpringValue<number>; target?: THREE.Object3D }) => {
   //rgb(168, 121, 3),rgb(0, 115, 255),rgb(126, 83, 253)
   return (
     <>
       {/* Warm contrast light */}
-      <three.pointLight
-        position={[3, 1.5, -15]}
-        intensity={position.to([0, 1, 2], [150, 400, 400])} // Adjusted intensity based on position
+      <three.spotLight
+        position={[-10, 10, -2]}
+        angle={0.6}
+        penumbra={0.5}
+        target={target}
+        intensity={position.to([0, 1, 2], [200, 400, 400])} // Adjusted intensity based on position
         distance={20}
         color={position.to([0, 1, 2], ["rgb(255, 255, 255)", "rgb(255, 132, 1)", "#f0f0f0"])} // Warm golden hue
       />
 
       {/* Simulated saturated screen light */}
-      <three.pointLight
-        position={[0, 5, -15]}
-        intensity={200}
-        distance={18}
-        color={position.to([0, 1, 2], ["rgb(147, 190, 242)", "rgb(147, 190, 242)", "#99f0ff"])} // Vivid aqua / teal tones
+      <three.spotLight
+        position={[0, 10, -2]}
+        angle={0.6}
+        penumbra={0.5}
+        target={target}
+        intensity={position.to([0, 1, 2], [200, 400, 400])} // Adjusted intensity based on position
+        color={position.to([0, 1, 2], ["rgb(255, 255, 255)", "rgb(147, 190, 242)", "#99f0ff"])} // Vivid aqua / teal tones
       />
 
-      <three.pointLight
-        position={position.to((v) => [-3, 4, 10 + v * -25])}
-        intensity={250}
-        distance={20}
-        color={position.to([0, 1, 2], ["rgb(238, 228, 213)", "rgb(126, 83, 253)", "#f0f0f0"])} // Warm golden hue
+      <three.spotLight
+        position={[10, 10, -2]}
+        angle={0.6}
+        penumbra={0.5}
+        target={target}
+        intensity={position.to([0, 1, 2], [500, 200, 200])} // Adjusted intensity based on position
+
+        color={position.to([0, 1, 2], ["rgb(255, 255, 255)", "rgb(126, 83, 253)", "#f0f0f0"])} // Warm golden hue
       />
 
-      <Environment preset='warehouse' environmentIntensity={0.2} />
+      <three.spotLight
+        position={[0, 5, 10]}
+        angle={0.8}
+        penumbra={1.9}
+        target={target}
+        intensity={100}
+
+        color={"#f0f0f0"} // Warm golden hue
+      />
+
+      {/* <Environment preset='warehouse' environmentIntensity={0.1} /> */}
     </>
   );
 };

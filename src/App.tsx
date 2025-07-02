@@ -13,6 +13,7 @@ export default function App() {
     position: Number(state.open ? (state.project ? 2 : 1) : 0),
     loaded: Number(loaded),
     background: Number(state.open && !state.project),
+    config: { mass: 1, tension: 25, friction: 10 },
   });
 
   return (

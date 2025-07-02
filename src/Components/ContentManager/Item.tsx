@@ -28,7 +28,7 @@ export const Item: React.FC<ItemProps> = ({ url, scale, position }) => {
 
   return (
     <group position={position} rotation={[0, Math.PI, 0]}>
-      <Image zoom={0.5} ref={ref} url={url} scale={scale} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} material-toneMapped={false} transparent />
+      <Image zoom={0.5} ref={ref} url={url} scale={scale} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} material-toneMapped={false} transparent material-depthWrite={false} material-depthTest={false} />
     </group>
   );
 };
