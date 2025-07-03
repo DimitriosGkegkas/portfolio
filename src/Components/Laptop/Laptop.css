@@ -7,10 +7,6 @@
   border-radius: 8px;
 }
 
-.xterm, .xterm-dom-renderer-owner-2, .xterm-rows {
-  height: 100% ! important;
-  width: 100% ! important;
-}
 
 .terminal-wrapper {
   border-radius: 10px;

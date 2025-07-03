@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { use, useEffect, useMemo, useRef, useState } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { a as animated } from "@react-spring/three";
 import { Group } from "three";
 import { SpringValue, useSpring } from "@react-spring/core";
 import Terminal3D from "../Terminal/Terminal";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import "./Laptop.css";
 import { asset } from "../../utils/asset";
 import { type GLTF } from "three-stdlib";
@@ -32,12 +32,14 @@ type GLTFResult = GLTF & {
     ["touchbar.001"]: THREE.MeshStandardMaterial;
   };
 };
+
+const screenOffset = 0.2;
 const positionA = new THREE.Vector3(0, -4.2, 2); // closed
 const positionB = new THREE.Vector3(0, -2.5, -17); // open
 const positionC = new THREE.Vector3(5, -3, -17); // project
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
-const rotationB = new THREE.Euler(-0.2, Math.PI, 0);
+const rotationB = new THREE.Euler(-screenOffset, Math.PI, 0);
 const rotationC = new THREE.Euler(-0.1, (Math.PI * 2.5) / 2, 0, "YXZ");
 
 interface ModelProps {
@@ -89,6 +91,16 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
 
   const target = useRef<THREE.Object3D>(new THREE.Object3D());
 
+  const testRef = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    if (testRef.current) {
+      const d = testRef.current.getWorldQuaternion(new THREE.Quaternion())
+      // print the euler angles
+      const euler = new THREE.Euler().setFromQuaternion(d, "YXZ");
+      console.log("testRef.current", euler.x / Math.PI, euler.y / Math.PI, euler.z / Math.PI);
+    }
+  });
+
   return (
     <>
       <animated.group
@@ -126,19 +138,21 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
           return result.z;
         })}
         dispose={null}>
-        <animated.group rotation-x={open.to([0, 1], [1.57, -0.225])} position={[0, -0.04, 0.41]}>
+        <animated.group rotation-x={open.to([0, 1], [1.57, -screenOffset])} position={[0, -0.04, 0.41]}>
           <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
             <mesh geometry={nodes.Cube008.geometry} material={materials.aluminium} />
             <mesh geometry={nodes.Cube008_1.geometry} material={materials["matte.001"]} />
-            <mesh geometry={nodes.Cube008_2.geometry} material={screenMaterial}>
+            <mesh geometry={nodes.Cube008_2.geometry} material={screenMaterial} ref={testRef}>
               {position.goal > 0.4 && gl.domElement.parentElement && (
                 <Html
                   transform
                   // occlude
-                  portal={{ current: gl.domElement.parentElement }}
-                  position={[0.8, 0, 0]}
+                  // portal={{ current: document.getElementById("root") }}
+                  position={[0.5, 0, 0]}
                   rotation={[-Math.PI / 2, 0, 0]}
-                  scale={[0.35, 0.35, 0.35]} // ← Key for making it look sharp
+                  distanceFactor={3.6} // tweak this!
+                  // scale={2}
+                  // scale={[0.36, 0.36, 0.36]} // ← Key for making it look sharp
                   className='content'>
                   <Terminal3D setState={setState} />
                 </Html>
@@ -147,7 +161,7 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
           </group>
         </animated.group>
 
-        <Light position={position} target={target.current}/>
+        <Light position={position} target={target.current} />
 
         <mesh geometry={nodes.keyboard.geometry} material={materials.keys} position={[1.79, 0, 3.45]} />
 

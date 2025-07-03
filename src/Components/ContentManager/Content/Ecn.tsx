@@ -20,7 +20,6 @@ export const Ecn: FC = () => {
           position={[-w / 2 + w / 2.3, -4.5, 10]}
           color='#FBBF24'
         />
-
         <ItemText text='ROS' scale={3} position={[-w / 2 + w / 2.8, -10, 30]} color='#34D399' />
         <ItemText text='Control' scale={2} position={[-w / 2 + w / 2.45, -18, 20]} color='#F472B6' />
       </Scroll>

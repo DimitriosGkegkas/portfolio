@@ -1,6 +1,6 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 interface ItemDivProps {
   offset: number; // vertical offset in vh
@@ -13,8 +13,7 @@ export const ItemDiv: React.FC<ItemDivProps> = ({ offset, children }) => {
   const [opacity, setOpacity] = useState(0);
 
   useFrame(() => {
-    console.log(scroll.offset);
-    const pageHeight = 7.8; // single page normalized
+    const pageHeight =  scroll.pages; // single page normalized
     const scrollOffset = (pageHeight - 1)* scroll.offset + 0.6; // normalized [0, 1]
     const itemScroll = offset / 100; // convert vh to normalized scroll (assuming 100vh = 1 page)
 

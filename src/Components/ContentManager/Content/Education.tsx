@@ -14,9 +14,9 @@ export const Education: FC = () => {
       {/* Adjust pages based on total scroll height */}
       <Scroll>
         {/* ECN */}
-        <group position={[0, -h * 0.0, 0]}>
+        <group position={[0, -h * 0.14, 0]}>
           <ItemText text='KEIO' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
-          <ItemText text='2025' scale={5} position={[-w / 2 + w / 5, h / 0.8, 100]} color='#9CA3AF' />
+          <ItemText text='2025' scale={5} position={[-w / 2 + w / 5, h / 1, 100]} color='#9CA3AF' />
 
           <ItemText text='JEMARO' scale={1.5} position={[-w / 2 + w / 2.3, h / 5, 20]} color='#60A5FA' />
           <ItemText text='RL' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#FBBF24' />
