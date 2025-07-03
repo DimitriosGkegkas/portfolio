@@ -290,11 +290,11 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
             write(`${COLOR.green}| └──  ${c.university} - ${c.location}${COLOR.reset}`);
           }
         });
+         setState((prev) => ({ ...prev, project: "education" }));
       }
       // else if it is one of the hashes in the commits
       else if (currentBranch.current && Object.values(commits[currentBranch.current]).some((c) => c.hash === branch)) {
         const found = Object.values(commits[currentBranch.current]).find((c) => c.hash === branch);
-        console.log(found?.project);
         if (found) {
           setState((prev) => ({ ...prev, project: found.project || null }));
         } else {

@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
-
+import { Perf } from "r3f-perf";
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
   state: { open: boolean; project: string | null };
@@ -22,7 +22,8 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
   return (
     <>
       <Canvas id='scene' dpr={[1, 2]} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 1000 }}>
-        <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
+       {/* <Perf position="bottom-right" /> */}
+        <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]} near={0.1} far={1000}></PerspectiveCamera>
         <animated.group
           position={props.loaded.to((p) => {
             const v = new Vector3(0, 0, -20).lerp(new Vector3(0, 0, 0), p);
@@ -60,6 +61,7 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           transform: getContent.to((o: number) => `translate3d(0,${(1 - o) * 100}vh,0)`),
         }}>
         <Canvas id='content' dpr={[1, 2]}>
+          {/* <Perf position="top-left" /> */}
           <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
           <ContentManager page={state.project} />
         </Canvas>

@@ -9,6 +9,7 @@ import { DigitizationPipeline } from "./Content/DigitizationPipeline";
 import { Rotunda } from "./Content/Rotunda";
 import "./ContentManager.css";
 import { Alexander } from "./Content/Alexander";
+import { Education } from "./Content/Education";
 
 interface ContentManagerProps {
   page: string | null;
@@ -27,6 +28,8 @@ export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
         return <Keio />;
       case "ecn":
         return <Ecn />;
+      case "education":
+        return <Education />;
 
       // Projects
       case "meteoBot":
