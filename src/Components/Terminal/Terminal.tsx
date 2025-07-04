@@ -9,10 +9,9 @@ import { prompt } from "./parts/promt";
 import { getCommands } from "./parts/commands";
 import { provideLinksHandler } from "./parts/links/provideLinksHandler";
 import { aboutHandler, contactHandler, educationHandler, projectsHandler } from "./parts/links/handlers";
-import type { SpringValue } from "@react-spring/core";
 import { a as web } from "@react-spring/web";
 
-const Terminal3D = ({ setState, position }: { setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>>; position?: SpringValue<number> }) => {
+const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>> }) => {
   const { instance, ref } = useXTerm();
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputBuffer = useRef<string>("");

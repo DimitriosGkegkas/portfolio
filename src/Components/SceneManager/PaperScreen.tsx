@@ -31,6 +31,9 @@ const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: stri
     const eased = 1 - Math.pow(1 - screenY, 3); // Exponential ease-out
     material.current.noiseIntensity = 2.9 - eased * 2.5;
     material.current.hole = 0.4 + eased * 0.3;
+    if (!material.current.time)
+      // Ensure time is defined
+      material.current.time = 0;
     material.current.time += delta * 0.2;
 
     material.current.holeSmoothEdges = 0.2;

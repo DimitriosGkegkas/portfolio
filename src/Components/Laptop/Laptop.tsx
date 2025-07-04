@@ -5,7 +5,7 @@ import { a as animated } from "@react-spring/three";
 import { Group } from "three";
 import { SpringValue, useSpring } from "@react-spring/core";
 import Terminal3D from "../Terminal/Terminal";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import "./Laptop.css";
 import { asset } from "../../utils/asset";
 import { type GLTF } from "three-stdlib";
