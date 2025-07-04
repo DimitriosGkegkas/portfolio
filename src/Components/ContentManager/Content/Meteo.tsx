@@ -60,7 +60,7 @@ export const Meteo: FC = () => {
 
 const imageContainerStyles: (vh: number) => React.CSSProperties = (vh) => ({
   position: "absolute",
-  top: `${vh}vh`,
+  top: `${vh}svh`,
   left: "10vw",
   width: "250px",
   height: "500px",

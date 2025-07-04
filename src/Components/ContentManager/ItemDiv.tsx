@@ -39,5 +39,5 @@ export const ItemDiv: React.FC<ItemDivProps> = ({ offset, children }) => {
 };
 
 const styles: (vh: number) => React.CSSProperties = (vh) => ({
-  top: `${vh}vh`,
+  top: `${vh}svh`,
 });

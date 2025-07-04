@@ -43,5 +43,5 @@ export const Keio: FC = () => {
 };
 
 const styles: (vh: number) => React.CSSProperties = (vh) => ({
-  top: `${vh}vh`,
+  top: `${vh}svh`,
 });
