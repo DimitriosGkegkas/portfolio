@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -12,6 +12,9 @@ main,
   height: 100%;
   margin: 0;
   padding: 0;
+}
+button {
+  color: black;
 }
 
 body {
@@ -37,7 +40,7 @@ h1 {
 * {
   /* overflow: auto; */
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 *::-webkit-scrollbar {

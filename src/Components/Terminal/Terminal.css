@@ -1,0 +1,75 @@
+.terminal-window-wrapper {
+  position: absolute;
+  width: 70vh;
+  height: 58vh;
+  /* max-height: 58vh; */
+  max-width: 90vh;
+  z-index: 100000000000000000;
+}
+
+.terminal-wrapper {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1e1e1e; /* Terminal-like background */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px 0px 8px 8px; /* Rounded corners for the bottom */
+  padding: 0px 28px 0px 28px;
+  background-color: rgb(16, 20, 32);
+}
+
+.macos-header {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  background: #ddd; /* Optional: mimic titlebar or keep darker */
+  gap: 8px;
+  user-select: none;
+  border-radius: 8px 8px 0 0; /* Rounded corners for the header */
+}
+
+@media screen and (max-width: 550px) {
+  .terminal-window-wrapper {
+    /* left: 35vw; */
+    width: calc(100vw + 14px);
+  }
+  .terminal-wrapper {
+    padding: 0px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .terminal-window-wrapper {
+    font-size: 12px !important; /* Adjust font size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .macos-dot {
+    display: none;
+  }
+}
+
+.macos-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  color: black;
+  /* display: inline-block; */
+}
+
+.macos-dot.red {
+  background-color: #ff5f56;
+}
+
+.macos-dot.yellow {
+  background-color: #ffbd2e;
+}
+
+.macos-dot.green {
+  background-color: #27c93f;
+}

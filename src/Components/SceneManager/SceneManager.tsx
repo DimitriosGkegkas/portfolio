@@ -6,6 +6,7 @@ import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
+import Terminal3D from "../Terminal/Terminal";
 
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
@@ -31,9 +32,10 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
   }, [hovered]);
   return (
     <>
+      {/* <Terminal3D setState={setState} position={props.position} /> */}
       <Canvas id='scene' dpr={[1, 2]} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 1000 }}>
         {/* <Perf position="bottom-right" /> */}
-        <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]} near={0.1} far={1000}></PerspectiveCamera>
+        <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]} near={0.1} far={1000}> </PerspectiveCamera>
         <animated.group
           position={props.loaded.to((p) => {
             const v = new Vector3(0, 0, -20).lerp(new Vector3(0, 0, 0), p);
@@ -81,7 +83,7 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           </mesh>
           <mesh rotation={[-0.2, Math.PI * 0.26, 0]} position={[6, -9, 0]} onClick={cancelProject} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
             <boxGeometry args={[20, 0.5, 18]} />
-            <meshStandardMaterial visible={false}/>
+            <meshStandardMaterial visible={false} />
           </mesh>
         </Canvas>
       </web.div>

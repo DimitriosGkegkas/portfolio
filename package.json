@@ -23,6 +23,7 @@
     "@react-spring/web": "^10.0.1",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
+    "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
     "path": "^0.12.7",
     "react": "^19.1.0",
@@ -33,9 +34,7 @@
     "url-join": "^5.0.0",
     "vite-plugin-glsl": "^1.5.1",
     "vite-plugin-pages": "^0.33.1",
-    "vite-plugin-sitemap": "^0.8.2",
-    "xterm": "^5.3.0",
-    "xterm-addon-web-links": "^0.9.0"
+    "vite-plugin-sitemap": "^0.8.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

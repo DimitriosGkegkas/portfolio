@@ -1,4 +1,4 @@
-const COLOR = {
+export const COLOR: Record<string, string> = {
   green: "\x1b[32m",
   blue: "\x1b[34m",
   yellow: "\x1b[33m",
@@ -136,5 +136,87 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       created: "May 1 2023",
       content: "# \ud83d\udd2c Digitization Automation Pipeline\nAutomation and computer vision for scanning delicate artifacts.\n\n- Stack: Python, OpenCV\n- Tags: Automation, CV, Heritage\n- Role: ML Engineer\n- Highlights: Streamlined pipeline for museum artifact digitization",
     },
+  ],
+};
+
+export const commits: Record<string, { hash: string; year?: string; university?: string; location?: string; message?: string; project: string; title?: string; color?: string; tech?: string[]; tags?: string[] }[]> = {
+  education: [
+    {
+      hash: "h7i8j9k",
+      year: "2025",
+      university: "Keio University",
+      location: "Tokyo, Japan",
+      message: "MSc in Robotics and Control (in progress)",
+      project: "keio",
+    },
+    {
+      hash: "d4e5f6g",
+      year: "2024",
+      university: "Centrale Université de Nantes",
+      location: "Nantes, France",
+      message: "MSc in Advanced Robotics (JEMARO Double Degree)",
+      project: "ecn",
+    },
+    {
+      hash: "a1b2c3d",
+      year: "2022",
+      university: "National Technical University of Athens",
+      location: "Athens, Greece",
+      color: COLOR.cyan,
+      message: "MSc in Electrical & Computer Engineering (5 year degree)",
+      project: "ntua",
+    },
+  ],
+
+  projects: [
+    {
+      hash: "meteo123",
+      message: "Viber Weather Chatbot",
+      title: "Conversational AI for Weather Services",
+      tech: ["Node.js", "MongoDB", "Viber API"],
+      tags: ["Chatbot", "Conversational AI"],
+      project: "meteoBot", // key to match your dynamic route/component
+    },
+    {
+      hash: "alex456",
+      message: "Alexander's Journey – Interactive Map",
+      title: "Historical Visualization of Alexander the Great's Campaign",
+      tech: ["Three.js", "React", "GIS Data"],
+      tags: ["Interactive Web", "3D", "History"],
+      project: "alexanderMap",
+    },
+    {
+      hash: "zago789",
+      message: "Zagorisia Architecture Showcase",
+      title: "Web Experience for Traditional Greek Architecture",
+      tech: ["React", "Three.js", "Custom CMS"],
+      tags: ["Architecture", "Web Design"],
+      project: "zagorisiaApp",
+    },
+    {
+      hash: "museum321",
+      message: "Digital Museums Platform",
+      title: "Online Platform for Cultural Exhibits",
+      tech: ["Next.js", "MongoDB", "Image Processing"],
+      tags: ["Cultural Tech", "Web App", "Digitization"],
+      project: "digitalMuseums",
+    },
+    {
+      hash: "rota987",
+      message: "Rotunda Digital Installation",
+      title: "Interactive E-table for the Rotunda of Thessaloniki",
+      tech: ["Touchscreen UI", "Custom CMS", "Cultural Mapping"],
+      tags: ["Cultural Heritage", "Physical Installation", "Interactive Exhibit"],
+      project: "rotunda",
+    },
+
+    // {
+    //   hash: "pipe654",
+    //   message: "Digitization Automation Pipeline",
+    //   title: "Computer Vision Workflow for Delicate Artifact Scanning",
+    //   tech: ["Python", "OpenCV", "Automation"],
+    //   tags: ["Computer Vision", "Automation"],
+    //   project: "digitizationPipeline",
+    // },
   ],
 };

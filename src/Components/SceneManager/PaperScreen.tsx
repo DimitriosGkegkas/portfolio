@@ -4,11 +4,13 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 
 import ImageFadeMaterialDisplacementCover, { type ImageFadeMaterialDisplacementProps, ImageFadeMaterialDisplacement } from "./ImageFadeMaterialDisplacementCover.js";
-import { damp } from "maath/easing";
 import { asset } from "../../utils/asset.js";
 
 const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: string; position: [number, number, number]; scaleFactor: number }) => {
-  const [gridTexture, dispTexture] = useTexture([src, asset("/perlin3.jpeg")]);
+  const [gridTexture, dispTexture] = useTexture([src, asset("/perlin3.jpg")]);
+  gridTexture.minFilter = dispTexture.minFilter = THREE.LinearFilter;
+  gridTexture.magFilter = dispTexture.magFilter = THREE.LinearFilter;
+  gridTexture.wrapS = gridTexture.wrapT = THREE.RepeatWrapping;
   dispTexture.wrapS = dispTexture.wrapT = THREE.RepeatWrapping;
 
   const viewport = useThree((state) => state.viewport);
@@ -25,10 +27,13 @@ const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: stri
     vector.project(camera); // project to NDC
 
     // Convert NDC Y to screen Y (top-left origin)
-    const screenY = Math.min(vector.y * 0.8 + 1, 1); // Clamp to 0.8 to avoid excessive noise intensity
+    const screenY = Math.max(vector.y * 0.5 + 0.5, 0); // Clamp to 0.8 to avoid excessive noise intensity
+    const eased = 1 - Math.pow(1 - screenY, 3); // Exponential ease-out
+    material.current.noiseIntensity = 2.9 - eased * 2.5;
+    material.current.hole = 0.4 + eased * 0.3;
+    material.current.time += delta * 0.2;
 
-    damp(material.current, "noiseIntensity", 1 - screenY * 0.4, 0.1, delta);
-    damp(material.current, "hole", 0.2 + screenY * 0.5, 0.1, delta);
+    material.current.holeSmoothEdges = 0.2;
   });
 
   const scale = useMemo(() => {
@@ -40,7 +45,7 @@ const PaperScreen = ({ src, scaleFactor = 1, position = [0, 0, 0] }: { src: stri
     <>
       <mesh scale={[scaleFactor * scale[0], scaleFactor * scale[1], scaleFactor * scale[2]]} position={position} rotation={[0, Math.PI, 0]} ref={paperRef}>
         <planeGeometry />
-        <ImageFadeMaterialDisplacementCover dispFactor={1} ref={material} useHole={true} tex={gridTexture} disp={dispTexture} background={true} transparent={true} holeSmoothEdges={0.3} />
+        <ImageFadeMaterialDisplacementCover dispFactor={1} ref={material} useHole={true} tex={gridTexture} disp={dispTexture} background={true} transparent={true} />
       </mesh>
     </>
   );

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { use, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { a as animated } from "@react-spring/three";
 import { Group } from "three";
@@ -73,39 +73,30 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
   const screenMaterial = useMemo(() => {
     const screenMaterial: THREE.MeshStandardMaterial = materials["screen.001"] as THREE.MeshStandardMaterial;
     screenMaterial.roughness = 111;
-    // screenMaterial.emissiveIntensity = 0;
-    // screenMaterial.emissive = new THREE.Color(0xffffff); // Optional, but helps glow stand out
-    // screenMaterial.emissiveMap = screenMaterial.map;
-    // // Set full emissive so lighting doesn’t matter visually
-    // screenMaterial.color.set(0x000000);
-    // screenMaterial.toneMapped = false;
-    // screenMaterial.needsUpdate = true;
-    // screenMaterial.roughness = 1;
-    // materials["screen.001"] = screenMaterial;
 
-    // nodes.Cube008_2.material = new THREE.MeshBasicMaterial({
-    //   map: (materials["screen.001"] as THREE.MeshStandardMaterial).map,
-    // });
     return screenMaterial;
   }, [materials, nodes.Cube008_2]);
 
   const target = useRef<THREE.Object3D>(new THREE.Object3D());
 
   const testRef = useRef<THREE.Mesh>(null);
-  useFrame(() => {
-    if (testRef.current) {
-      const d = testRef.current.getWorldQuaternion(new THREE.Quaternion())
-      // print the euler angles
-      const euler = new THREE.Euler().setFromQuaternion(d, "YXZ");
-      console.log("testRef.current", euler.x / Math.PI, euler.y / Math.PI, euler.z / Math.PI);
-    }
-  });
+
+  const htmlContentref = useRef<HTMLDivElement>(null);
+
+  const { height, width } = useThree((state) => state.size);
+
+  // useFrame(() => {
+  //   const div = htmlContentref.current?.children[0];
+  //   if (div) {
+  //     const rect = div.getBoundingClientRect();
+  //     console.log("Screen Position (px):", height, width, rect.height, rect.width, rect.width / 800, rect.height / (0.555 * height));
+  //   }
+  // });
 
   return (
     <>
       <animated.group
         ref={group}
-        onClick={onClick}
         position={position.to((p) => {
           const pos = p < 1 ? positionA.clone().lerp(positionB, p) : positionB.clone().lerp(positionC, p - 1);
           return [pos.x, pos.y, pos.z] as [number, number, number];
@@ -145,12 +136,15 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
             <mesh geometry={nodes.Cube008_2.geometry} material={screenMaterial} ref={testRef}>
               {position.goal > 0.4 && gl.domElement.parentElement && (
                 <Html
+                  ref={htmlContentref}
                   transform
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
-                  position={[0.5, 0, 0]}
+                  position={width > 650 ? [-2.5, 0, -2.5] : [(-(width / 800) * 3212.549) / height, 0, -2.5]}
                   rotation={[-Math.PI / 2, 0, 0]}
-                  distanceFactor={3.6} // tweak this!
+                  // scale={0.5}
+                  distanceFactor={3212.549 / height} // tweak this!
+                  // fullscreen
                   // scale={2}
                   // scale={[0.36, 0.36, 0.36]} // ← Key for making it look sharp
                   className='content'>
@@ -181,7 +175,8 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
             e.stopPropagation();
             setHovered(true);
           }}
-          onPointerOut={() => setHovered(false)}>
+          onPointerOut={() => setHovered(false)}
+          onClick={onClick}>
           <boxGeometry args={[9, 0.5, 6]} />
           <meshStandardMaterial visible={false} />
         </mesh>
