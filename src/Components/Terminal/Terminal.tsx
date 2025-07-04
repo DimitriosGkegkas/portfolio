@@ -43,9 +43,10 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
     if (!terminalElement) return;
 
     const fitAddon = new FitAddon();
+    instance.loadAddon(fitAddon);
     const observer = new ResizeObserver(([args]) => {
-      instance.options.fontSize = args.contentRect.width / 45; // Adjust font size based on width
       fitAddon.fit();
+      instance.options.fontSize = args.contentRect.width / 45; // Adjust font size based on width
       // if (args.contentRect.width < 350 || args.contentRect.height < 200) {
       //   instance.options.fontSize = 10; // Set font size
       // } else if (args.contentRect.width < 600) {
@@ -54,9 +55,9 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
       //   instance.options.fontSize = 14; // Set larger font size
       // }
     });
+
     observer.observe(terminalElement);
 
-    instance.loadAddon(fitAddon);
     fitAddon.fit();
 
     instance.registerLinkProvider({

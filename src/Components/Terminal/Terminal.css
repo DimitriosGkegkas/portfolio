@@ -7,8 +7,6 @@
 }
 
 .terminal-wrapper {
-  height: 100svh;
-  width: 100svh;
   border-radius: 10px;
   overflow: hidden;
   background-color: #1e1e1e; /* Terminal-like background */
