@@ -14,6 +14,7 @@ import { MultiDroneSLAM } from "./Content/MultiDroneSLAM";
 import { GanMetrics } from "./Content/GanMetrics";
 import { RoboticArm } from "./Content/RoboticArm";
 import { KeioThesis } from "./Content/KeioThesis";
+import { getProjectById } from "../../Data/portfolioData";
 
 interface ContentManagerProps {
   page: string | null;
@@ -24,6 +25,52 @@ export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
   console.log("ContentManager page:", page);
 
   const renderContent = () => {
+    // Get project data from centralized source
+    const project = getProjectById(page);
+    
+    if (project && project.component) {
+      // Use the component mapping from centralized data
+      switch (project.component) {
+        // Education
+        case "Ntua":
+          return <Ntua />;
+        case "Keio":
+          return <Keio />;
+        case "Ecn":
+          return <Ecn />;
+        case "Education":
+          return <Education />;
+
+        // Web Development Projects
+        case "Meteo":
+          return <Meteo />;
+        case "Alexander":
+          return <Alexander />;
+        case "Zagorisia":
+          return <Zagorisia />;
+        case "DigitalMuseum":
+          return <DigitalMuseum />;
+        case "DigitizationPipeline":
+          return <DigitizationPipeline />;
+        case "Rotunda":
+          return <Rotunda />;
+
+        // Robotics & AI Projects
+        case "KeioThesis":
+          return <KeioThesis />;
+        case "MultiDroneSLAM":
+          return <MultiDroneSLAM />;
+        case "GanMetrics":
+          return <GanMetrics />;
+        case "RoboticArm":
+          return <RoboticArm />;
+
+        default:
+          return null;
+      }
+    }
+
+    // Fallback to original switch statement for backward compatibility
     switch (page) {
       // Education
       case "ntua":

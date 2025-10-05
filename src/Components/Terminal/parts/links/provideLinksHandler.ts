@@ -3,6 +3,7 @@ import { commits } from "../constants";
 import type { RefObject } from "react";
 import { prompt } from "../promt";
 import { educationHandler, webDevHandler, roboticsHandler } from "./handlers";
+import { getBranchProjects, type Project } from "../../../../Data/portfolioData";
 
 export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<string>, currentBranch: RefObject<string | null>, onCommand: (cmd: string) => void) => (y: number, callback: (links: ILink[] | undefined) => void) => {
   const line = instance.buffer.active.getLine(y - 1);
@@ -28,30 +29,18 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
     addLink("web-development", webDevHandler(instance, onCommand, currentPath, currentBranch));
     addLink("robotics-ai", roboticsHandler(instance, onCommand, currentPath, currentBranch));
   }
-  commits["education"].forEach((c) =>
-    addLink(c.hash, () => {
-      instance?.writeln(`git checkout ${c.hash}`);
-      onCommand(`git checkout ${c.hash}`);
-      instance.scrollToBottom();
-      prompt(currentPath, currentBranch, instance);
-    })
-  );
-  commits["web-development"].forEach((c) =>
-    addLink(c.hash, () => {
-      instance?.writeln(`git checkout ${c.hash}`);
-      onCommand(`git checkout ${c.hash}`);
-      instance.scrollToBottom();
-      prompt(currentPath, currentBranch, instance);
-    })
-  );
-  commits["robotics-ai"].forEach((c) =>
-    addLink(c.hash, () => {
-      instance?.writeln(`git checkout ${c.hash}`);
-      onCommand(`git checkout ${c.hash}`);
-      instance.scrollToBottom();
-      prompt(currentPath, currentBranch, instance);
-    })
-  );
+  // Add links for all projects in each branch
+  Object.keys(commits).forEach((branchName) => {
+    const branchProjects = getBranchProjects(branchName);
+    branchProjects.forEach((project: Project) => {
+      addLink(project.hash, () => {
+        instance?.writeln(`git checkout ${project.hash}`);
+        onCommand(`git checkout ${project.hash}`);
+        instance.scrollToBottom();
+        prompt(currentPath, currentBranch, instance);
+      });
+    });
+  });
 
   addLink("dimitrisgegas01@gmail.com", () => {
     // Open email client
@@ -60,6 +49,10 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
   addLink("https://www.linkedin.com/in/dimitris-gkegkas/", () => {
     // Open LinkedIn profile
     window.open(`https://www.linkedin.com/in/dimitris-gkegkas/`, "_blank");
+  });
+  addLink("Get my CV", () => {
+    // Open CV in a new tab
+    window.open("/CV.pdf", "_blank");
   });
 
   callback(links);

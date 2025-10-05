@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { useXTerm } from "react-xtermjs";
 import { FitAddon } from "@xterm/addon-fit";
 import { COLOR, fs_data } from "./parts/constants";
@@ -9,6 +9,7 @@ import { getCommands } from "./parts/commands";
 import { provideLinksHandler } from "./parts/links/provideLinksHandler";
 import { aboutHandler, contactHandler, educationHandler, webDevHandler, roboticsHandler } from "./parts/links/handlers";
 import DraggableWindow from "../DraggableWindow/DraggableWindow";
+import FaceTimeCall from "../FaceTimeCall/FaceTimeCall";
 
 // Define terminal options outside component to prevent re-creation on every render
 const terminalOptions = {
@@ -18,12 +19,15 @@ const terminalOptions = {
 const Terminal3D = ({ 
   setState, 
   onWebDevClick, 
-  onRoboticsClick 
+  onRoboticsClick,
+  onEducationClick
 }: { 
   setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>>;
   onWebDevClick?: () => void;
   onRoboticsClick?: () => void;
+  onEducationClick?: () => void;
 }) => {
+  const [showFaceTimeCall, setShowFaceTimeCall] = useState(false);
   const { instance, ref } = useXTerm({
     options: terminalOptions
   });
@@ -133,14 +137,27 @@ const Terminal3D = ({
   }, [instance, onCommand]);
 
   const handleContactClick = useMemo(() => {
-    if (instance) return contactHandler(instance, onCommand, currentPath, currentBranch);
+    if (instance) {
+      const originalHandler = contactHandler(instance, onCommand, currentPath, currentBranch);
+      return () => {
+        originalHandler();
+        // Show FaceTime call popup
+        setShowFaceTimeCall(true);
+      };
+    }
     return () => { };
   }, [instance, onCommand]);
 
   const handleEducationClick = useMemo(() => {
-    if (instance) return educationHandler(instance, onCommand, currentPath, currentBranch);
+    if (instance) {
+      const originalHandler = educationHandler(instance, onCommand, currentPath, currentBranch);
+      return () => {
+        originalHandler();
+        onEducationClick?.(); // Trigger Finder to come to front
+      };
+    }
     return () => { };
-  }, [instance, onCommand]);
+  }, [instance, onCommand, onEducationClick]);
 
   const handleWebDevClick = useMemo(() => {
     if (instance) {
@@ -165,23 +182,30 @@ const Terminal3D = ({
   }, [instance, onCommand, onRoboticsClick]);
 
   return (
-    <DraggableWindow
-      menuButtons={[
-        { label: "About", onClick: handleAboutClick },
-        { label: "Education", onClick: handleEducationClick },
-        { label: "Web Dev", onClick: handleWebDevClick },
-        { label: "Robotics & AI", onClick: handleRoboticsClick },
-        { label: "Contact", onClick: handleContactClick },
-      ]}
-      style={{
-        transform: `translateX(-50%) translateY(-50%)`
-      }}
-      windowId="terminal-window"
-    >
-      <div className='terminal-wrapper' onPointerDown={(e) => e.stopPropagation()}>
-        <div ref={ref} id='terminal' />
-      </div>
-    </DraggableWindow>
+    <>
+      <DraggableWindow
+        menuButtons={[
+          { label: "About", onClick: handleAboutClick },
+          { label: "Education", onClick: handleEducationClick },
+          { label: "Web Dev", onClick: handleWebDevClick },
+          { label: "Robotics & AI", onClick: handleRoboticsClick },
+          { label: "Contact", onClick: handleContactClick },
+        ]}
+        style={{
+          transform: `translateX(-50%) translateY(-50%)`
+        }}
+        windowId="terminal-window"
+      >
+        <div className='terminal-wrapper' onPointerDown={(e) => e.stopPropagation()}>
+          <div ref={ref} id='terminal' />
+        </div>
+      </DraggableWindow>
+      
+      <FaceTimeCall 
+        isVisible={showFaceTimeCall} 
+        onClose={() => setShowFaceTimeCall(false)} 
+      />
+    </>
   );
 };
 

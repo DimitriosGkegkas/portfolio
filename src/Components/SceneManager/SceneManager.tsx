@@ -6,6 +6,7 @@ import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
+import { ProjectTooltip } from "../ProjectTooltip/ProjectTooltip";
 
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
@@ -26,9 +27,17 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
     }));
   }, [setState]);
   const [hovered, setHovered] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<any>(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  
   useEffect(() => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
+
+  const handleProjectHover = (project: any, position: { x: number; y: number }) => {
+    setHoveredProject(project);
+    setTooltipPosition(position);
+  };
   return (
     <>
       {/* <Terminal3D setState={setState} position={props.position} /> */}
@@ -49,6 +58,7 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
               state={state}
               position={props.position}
               setState={setState}
+              onProjectHover={handleProjectHover}
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
                 setState((prev) => ({
@@ -88,6 +98,12 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           </mesh>
         </Canvas>
       </web.div>
+      
+      {/* Project Tooltip rendered at DOM level outside Canvas */}
+      <ProjectTooltip 
+        project={hoveredProject} 
+        position={tooltipPosition} 
+      />
     </>
   );
 }

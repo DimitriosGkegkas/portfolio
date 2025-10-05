@@ -74,16 +74,17 @@ interface ModelProps {
   setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>>;
   onLoaded: () => void;
   onClick?: (e: React.MouseEvent) => void;
+  onProjectHover?: (project: any, position: { x: number; y: number }) => void;
 }
 
-export default function Model({ position, state, setState, onLoaded, onClick }: ModelProps) {
+export default function Model({ position, state, setState, onLoaded, onClick, onProjectHover }: ModelProps) {
   const group = useRef<Group>(null);
   const [hovered, setHovered] = useState(false);
 
   // Component that uses the window manager - memoized to prevent re-renders
   const LaptopContent = memo(() => {
     const { bringToFront } = useWindowManager();
-    const [currentCategory, setCurrentCategory] = useState<'web-development' | 'robotics-ai' | undefined>(undefined);
+    const [currentCategory, setCurrentCategory] = useState<'web-development' | 'robotics-ai' | 'education' | undefined>(undefined);
     
     const handleWebDevClick = () => {
       bringToFront('finder-window');
@@ -95,18 +96,32 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
       setCurrentCategory('robotics-ai');
     };
 
+    const handleEducationClick = () => {
+      bringToFront('finder-window');
+      setCurrentCategory('education');
+    };
+
+    const handleProjectHover = (project: any, position: { x: number; y: number }) => {
+      if (onProjectHover) {
+        onProjectHover(project, position);
+      }
+    };
+
     return (
       <>
         <Terminal3D 
           setState={setState} 
           onWebDevClick={handleWebDevClick}
           onRoboticsClick={handleRoboticsClick}
+          onEducationClick={handleEducationClick}
         />
         <FinderWindow 
           onProjectClick={(projectId) => setState(prev => ({ ...prev, project: projectId }))} 
           position={{ x: 15, y: -10 }}
           onClose={() => console.log("Finder closed")}
           category={currentCategory}
+          onCategoryChange={(category) => setCurrentCategory(category || undefined)}
+          onProjectHover={handleProjectHover}
         />
       </>
     );
@@ -227,7 +242,7 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
                 <Html
                   ref={htmlContentref}
                   transform
-        
+                  
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
 

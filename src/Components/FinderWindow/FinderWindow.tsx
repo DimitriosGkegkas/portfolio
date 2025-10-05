@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { type FC } from "react";
 import DraggableWindow from "../DraggableWindow/DraggableWindow";
 import { commits } from "../Terminal/parts/constants";
 import "./FinderWindow.css";
@@ -8,26 +8,37 @@ interface Project {
     name: string;
     icon: string;
     description: string;
+    techStack?: string;
+    tags?: string[];
+    title?: string;
+    thumbnails?: string[];
 }
 
 interface FinderWindowProps {
   onProjectClick: (projectId: string) => void;
   position?: { x: number; y: number };
   onClose?: () => void;
-  category?: 'web-development' | 'robotics-ai';
+  category?: 'web-development' | 'robotics-ai' | 'education';
+  onCategoryChange?: (category: 'web-development' | 'robotics-ai' | 'education' | null) => void;
+  onProjectHover?: (project: Project | null, position: { x: number; y: number }) => void;
 }
 
 // Function to get projects based on category
-const getProjectsByCategory = (category?: 'web-development' | 'robotics-ai'): Project[] => {
+const getProjectsByCategory = (category?: 'web-development' | 'robotics-ai' | 'education'): Project[] => {
   if (!category) return [];
   
-  const categoryProjects = commits[category] || [];
+  const branch = commits[category];
+  if (!branch || !branch.projects) return [];
   
-  return categoryProjects.map(project => ({
-    id: project.project,
-    name: project.message,
-    icon: getProjectIcon(project.project),
-    description: project.description || project.title || ''
+  return branch.projects.map((project: any) => ({
+    id: project.id,
+    name: project.name || project.title || 'Untitled Project',
+    icon: getProjectIcon(project.id),
+    description: project.description || project.title || '',
+    techStack: project.techStack?.join(', '),
+    tags: project.tags,
+    title: project.title,
+    thumbnails: getProjectThumbnails(project.id)
   }));
 };
 
@@ -41,106 +52,103 @@ const getProjectIcon = (projectId: string): string => {
     'rotunda': '🏛️',
     'keioThesis': '🚗',
     'multiDroneSLAM': '🚁',
-    'digitizationPipeline': '📸'
+    'digitizationPipeline': '📸',
+    'keio': '🎓',
+    'ecn': '🇫🇷',
+    'ntua': '🏛️',
+    'ganMetrics': '🧠',
+    'roboticArm': '🦾'
   };
   return iconMap[projectId] || '📁';
 };
 
-const projects: Project[] = [
-    {
-        id: "meteoBot",
-        name: "MeteoBot",
-        icon: "🌤️",
-        description: "Viber Weather Chatbot"
-    },
-    {
-        id: "alexanderMap",
-        name: "Alexander's Journey",
-        icon: "🗺️",
-        description: "Interactive Historical Map"
-    },
-    {
-        id: "zagorisiaApp",
-        name: "Zagorisia",
-        icon: "🏛️",
-        description: "Architecture Showcase"
-    },
-    {
-        id: "digitalMuseums",
-        name: "Digital Museums",
-        icon: "🖼️",
-        description: "Cultural Platform"
-    },
-    {
-        id: "digitizationPipeline",
-        name: "Digitization Pipeline",
-        icon: "📷",
-        description: "Automation System"
-    },
-    {
-        id: "rotunda",
-        name: "Rotunda",
-        icon: "🏛️",
-        description: "Digital Installation"
-    },
-    {
-        id: "keioThesis",
-        name: "Keio Thesis",
-        icon: "🎓",
-        description: "Research Project"
-    },
-    {
-        id: "multiDroneSLAM",
-        name: "Multi-Drone SLAM",
-        icon: "🚁",
-        description: "Robotics System"
-    },
-    {
-        id: "roboticArm",
-        name: "Robotic Arm",
-        icon: "🦾",
-        description: "Control System"
-    },
-    {
-        id: "ganMetrics",
-        name: "GAN Metrics",
-        icon: "🧠",
-        description: "AI Research"
-    },
-    {
-        id: "project11",
-        name: "Project 11",
-        icon: "🚀",
-        description: "New Project"
-    },
-    {
-        id: "project12",
-        name: "Project 12",
-        icon: "⚡",
-        description: "Another Project"
-    },
-    {
-        id: "project13",
-        name: "Project 13",
-        icon: "🎯",
-        description: "More Projects"
-    },
-    {
-        id: "project14",
-        name: "Project 14",
-        icon: "🌟",
-        description: "Even More"
-    }
-];
+// Function to get thumbnails for each project (max 3 images)
+const getProjectThumbnails = (projectId: string): string[] => {
+  const thumbnailMap: Record<string, string[]> = {
+    'meteoBot': [
+      '/projects/meteo/meteo1.png',
+      '/projects/meteo/meteo2.png',
+      '/projects/meteo/meteo3.png'
+    ],
+    'alexanderMap': [
+      '/projects/alex/alex1.jpeg',
+      '/projects/alex/alex2.jpeg',
+      '/projects/alex/alex3.jpeg',
+      '/projects/alex/alex4.jpeg'
+    ],
+    'zagorisiaApp': [
+      '/projects/alex1.png' // Placeholder - you can add more Zagorisia images
+    ],
+    'digitalMuseums': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'rotunda': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'keioThesis': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'multiDroneSLAM': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'digitizationPipeline': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'keio': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'ecn': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'ntua': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'ganMetrics': [
+      '/projects/alex1.png' // Placeholder
+    ],
+    'roboticArm': [
+      '/projects/alex1.png' // Placeholder
+    ]
+  };
+  return (thumbnailMap[projectId] || []).slice(0, 3); // Limit to max 3 images
+};
+
 
 export const FinderWindow: FC<FinderWindowProps> = ({
     onProjectClick,
     position = { x: 0, y: 0 },
     onClose,
-    category
+    category,
+    onCategoryChange,
+    onProjectHover
 }) => {
+
     const handleProjectClick = (projectId: string) => {
         onProjectClick(projectId);
+    };
+
+    const handleCategoryClick = (categoryType: 'web-development' | 'robotics-ai' | 'education') => {
+        if (onCategoryChange) {
+            onCategoryChange(categoryType);
+        }
+    };
+
+    const handleHomeClick = () => {
+        if (onCategoryChange) {
+            onCategoryChange(null);
+        }
+    };
+
+    const handleProjectMouseEnter = (project: Project, event: React.MouseEvent) => {
+        if (onProjectHover) {
+            onProjectHover(project, { x: event.clientX, y: event.clientY });
+        }
+    };
+
+    const handleProjectMouseLeave = () => {
+        if (onProjectHover) {
+            onProjectHover(null, { x: 0, y: 0 });
+        }
     };
 
     // Get projects based on category
@@ -152,7 +160,7 @@ export const FinderWindow: FC<FinderWindowProps> = ({
             style={{
                 left: `${50 + position.x}%`,
                 top: `${50 + position.y}%`,
-                transform: `translateX(-80%) translateY(-65%)`
+                transform: `translateX(-60%) translateY(-65%)`
             }}
             onClose={onClose}
             windowId="finder-window"
@@ -161,7 +169,10 @@ export const FinderWindow: FC<FinderWindowProps> = ({
                 <div className="finder-sidebar">
                     <div className="sidebar-section">
                         <h3>Favorites</h3>
-                        <div className="sidebar-item">
+                        <div 
+                            className={`sidebar-item ${!category ? 'active' : ''}`}
+                            onClick={handleHomeClick}
+                        >
                             <span className="sidebar-icon">🏠</span>
                             <span>Home</span>
                         </div>
@@ -173,28 +184,41 @@ export const FinderWindow: FC<FinderWindowProps> = ({
 
                     <div className="sidebar-section">
                         <h3>Categories</h3>
-                        <div className="sidebar-item">
+                        <div 
+                            className={`sidebar-item ${category === 'web-development' ? 'active' : ''}`}
+                            onClick={() => handleCategoryClick('web-development')}
+                        >
                             <span className="sidebar-icon">🌐</span>
                             <span>Web Development</span>
                         </div>
-                        <div className="sidebar-item">
+                        <div 
+                            className={`sidebar-item ${category === 'robotics-ai' ? 'active' : ''}`}
+                            onClick={() => handleCategoryClick('robotics-ai')}
+                        >
                             <span className="sidebar-icon">🤖</span>
                             <span>Robotics & AI</span>
                         </div>
-                        <div className="sidebar-item">
+                        <div 
+                            className={`sidebar-item ${category === 'education' ? 'active' : ''}`}
+                            onClick={() => handleCategoryClick('education')}
+                        >
                             <span className="sidebar-icon">🎓</span>
-                            <span>Research</span>
+                            <span>Education</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="finder-main">
                     <div className="finder-path">
-                        <span className="path-segment">🏠</span>
+                        <span className="path-segment" onClick={handleHomeClick}>🏠</span>
                         <span className="path-separator">&gt;</span>
                         <span className="path-segment">Portfolio</span>
                         <span className="path-separator">&gt;</span>
-                        <span className="path-segment active">Projects</span>
+                        <span className="path-segment">
+                            {category === 'web-development' ? 'Web Development' : 
+                             category === 'robotics-ai' ? 'Robotics & AI' : 
+                             category === 'education' ? 'Education' : 'Projects'}
+                        </span>
                     </div>
 
 
@@ -204,6 +228,8 @@ export const FinderWindow: FC<FinderWindowProps> = ({
                                 key={project.id}
                                 className="project-item"
                                 onClick={() => handleProjectClick(project.id)}
+                                onMouseEnter={(e) => handleProjectMouseEnter(project, e)}
+                                onMouseLeave={handleProjectMouseLeave}
                             >
                                 <div className="project-icon">{project.icon}</div>
                                 <div className="project-name">{project.name}</div>
@@ -213,6 +239,7 @@ export const FinderWindow: FC<FinderWindowProps> = ({
                     </div>
                 </div>
             </div>
+            
         </DraggableWindow>
     );
 };

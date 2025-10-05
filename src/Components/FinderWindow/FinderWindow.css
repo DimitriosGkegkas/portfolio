@@ -1,6 +1,6 @@
 .finder-window {
-  width: 60dvh;
-  height: 50dvh;
+  width: 80dvh;
+  height: 45dvh;
   max-width: 80vw;
   max-height: 80vh;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -104,6 +104,15 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.sidebar-item.active {
+  background: #4a9eff;
+  color: white;
+}
+
+.sidebar-item.active:hover {
+  background: #5ba9ff;
+}
+
 .sidebar-icon {
   font-size: 16px;
 }
@@ -174,12 +183,14 @@
 .projects-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-template-rows: repeat(auto-fill, 100px);
+  gap: 6px;
   padding: 16px;
   overflow-y: auto;
   max-height: calc(100% - 32px); /* Account for path bar and view options */
   min-height: 0; /* Allow flex item to shrink */
+  align-content: start;
 }
 
 /* Custom scrollbar styling for macOS look - Dark theme */
@@ -220,12 +231,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 6px;
+  padding: 10px 6px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   background: transparent;
   border: 2px solid transparent;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
 }
 
 .project-item:hover {
@@ -247,19 +261,32 @@
 }
 
 .project-name {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   color: #e0e0e0;
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   line-height: 1.2;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 0 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-description {
-  font-size: 10px;
+  font-size: 9px;
   color: #a0a0a0;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 2px;
 }
 
 /* Responsive design */
@@ -270,21 +297,35 @@
   }
   
   .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, 85px);
+    grid-template-rows: repeat(auto-fill, 85px);
+    gap: 6px;
     padding: 16px;
   }
   
+  .project-item {
+    width: 85px;
+    height: 85px;
+    padding: 8px 4px;
+  }
+  
   .project-icon {
-    font-size: 24px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
   
   .project-name {
-    font-size: 11px;
+    font-size: 9px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
   }
   
   .project-description {
-    font-size: 9px;
+    font-size: 8px;
   }
 }
 
@@ -294,20 +335,35 @@
   }
   
   .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, 70px);
+    grid-template-rows: repeat(auto-fill, 70px);
+    gap: 4px;
     padding: 12px;
   }
   
+  .project-item {
+    width: 70px;
+    height: 70px;
+    padding: 6px 3px;
+  }
+  
   .project-icon {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 3px;
   }
   
   .project-name {
-    font-size: 10px;
+    font-size: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
   }
   
   .project-description {
     display: none;
   }
 }
+
