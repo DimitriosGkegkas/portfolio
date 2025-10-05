@@ -34,9 +34,23 @@ type GLTFResult = GLTF & {
 };
 
 const screenOffset = 0.2;
-const positionA = new THREE.Vector3(0, -4.2, 2); // closed
-const positionB = new THREE.Vector3(0, -2.5, -17); // open
-const positionC = new THREE.Vector3(5, -3, -17); // project
+
+// Responsive positioning based on window width
+const getResponsivePositions = (width: number, height: number) => {
+  // Adjust Z position based on screen width - move laptop further back for smaller screens
+  let baseZ, projectZ;
+
+
+  baseZ = -17 + (Math.max(0.9 * height - width, 0) / height) * 30;
+  projectZ = baseZ;
+
+
+  return {
+    positionA: new THREE.Vector3(0, -4.2, 2), // closed (same for all screen sizes)
+    positionB: new THREE.Vector3(0, -2.5, baseZ), // open
+    positionC: new THREE.Vector3(5, -3, projectZ), // project
+  };
+};
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
 const rotationB = new THREE.Euler(-screenOffset, Math.PI, 0);
@@ -85,6 +99,9 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
 
   const { height, width } = useThree((state) => state.size);
 
+  // Get responsive positions based on current window width
+  const positions = getResponsivePositions(width, height);
+
   // useFrame(() => {
   //   const div = htmlContentref.current?.children[0];
   //   if (div) {
@@ -98,7 +115,7 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
       <animated.group
         ref={group}
         position={position.to((p) => {
-          const pos = p < 1 ? positionA.clone().lerp(positionB, p) : positionB.clone().lerp(positionC, p - 1);
+          const pos = p < 1 ? positions.positionA.clone().lerp(positions.positionB, p) : positions.positionB.clone().lerp(positions.positionC, p - 1);
           return [pos.x, pos.y, pos.z] as [number, number, number];
         })}
         rotation-x={position.to((p) => {
@@ -140,8 +157,8 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
                   transform
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
-                  
-                  position={[-3.5, 0, -2.5]}
+
+                  position={[-3.6, 0, -2.5]}
                   rotation={[-Math.PI / 2, 0, 0]}
                   // scale={0.5}
                   distanceFactor={3212.549 / height} // tweak this!

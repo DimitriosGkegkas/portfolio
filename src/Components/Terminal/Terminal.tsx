@@ -13,7 +13,7 @@ import { a as web } from "@react-spring/web";
 
 // Define terminal options outside component to prevent re-creation on every render
 const terminalOptions = {
-  rows: 35
+  rows: 32
 };
 
 const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>> }) => {

@@ -1,7 +1,6 @@
 .terminal-window-wrapper {
   position: absolute;
   width: 90svh;
-  height: 70svh;
   max-width: 90svh;
   z-index: 100000000000000000;
 }
@@ -14,7 +13,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 0px 0px 8px 8px; /* Rounded corners for the bottom */
-  padding: 0px 28px 0px 28px;
+  padding: 0px 0px 0px 2px;
   background-color: rgb(16, 20, 32);
 }
 
@@ -32,7 +31,7 @@
 @media screen and (max-width: 550px) {
   .terminal-window-wrapper {
     /* left: 35vw; */
-    width: calc(100svw + 14px);
+    /* width: calc(100svw + 14px); */
   }
   .terminal-wrapper {
     padding: 0px;
