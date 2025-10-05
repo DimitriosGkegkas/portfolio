@@ -140,7 +140,8 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
                   transform
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
-                  position={width > 650 ? [-2.5, 0, -2.5] : [(-(width / 800) * 3212.549) / height, 0, -2.5]}
+                  
+                  position={[-3.5, 0, -2.5]}
                   rotation={[-Math.PI / 2, 0, 0]}
                   // scale={0.5}
                   distanceFactor={3212.549 / height} // tweak this!

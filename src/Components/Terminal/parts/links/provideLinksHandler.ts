@@ -2,7 +2,7 @@ import type { ILink, Terminal } from "@xterm/xterm";
 import { commits } from "../constants";
 import type { RefObject } from "react";
 import { prompt } from "../promt";
-import { educationHandler, projectsHandler } from "./handlers";
+import { educationHandler, webDevHandler, roboticsHandler } from "./handlers";
 
 export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<string>, currentBranch: RefObject<string | null>, onCommand: (cmd: string) => void) => (y: number, callback: (links: ILink[] | undefined) => void) => {
   const line = instance.buffer.active.getLine(y - 1);
@@ -25,7 +25,8 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
   };
   if (text.includes("git checkout")) {
     addLink("education", educationHandler(instance, onCommand, currentPath, currentBranch));
-    addLink("projects", projectsHandler(instance, onCommand, currentPath, currentBranch));
+    addLink("web-development", webDevHandler(instance, onCommand, currentPath, currentBranch));
+    addLink("robotics-ai", roboticsHandler(instance, onCommand, currentPath, currentBranch));
   }
   commits["education"].forEach((c) =>
     addLink(c.hash, () => {
@@ -35,7 +36,15 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
       prompt(currentPath, currentBranch, instance);
     })
   );
-  commits["projects"].forEach((c) =>
+  commits["web-development"].forEach((c) =>
+    addLink(c.hash, () => {
+      instance?.writeln(`git checkout ${c.hash}`);
+      onCommand(`git checkout ${c.hash}`);
+      instance.scrollToBottom();
+      prompt(currentPath, currentBranch, instance);
+    })
+  );
+  commits["robotics-ai"].forEach((c) =>
     addLink(c.hash, () => {
       instance?.writeln(`git checkout ${c.hash}`);
       onCommand(`git checkout ${c.hash}`);

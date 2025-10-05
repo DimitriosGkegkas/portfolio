@@ -1,7 +1,7 @@
 .terminal-window-wrapper {
   position: absolute;
-  width: 70svh;
-  height: 58svh;
+  width: 90svh;
+  height: 70svh;
   max-width: 90svh;
   z-index: 100000000000000000;
 }

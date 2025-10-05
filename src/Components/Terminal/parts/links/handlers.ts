@@ -18,9 +18,16 @@ export const educationHandler = (instance: Terminal, onCommand: (cmd: string) =>
   instance.scrollToBottom();
 };
 
-export const projectsHandler = (instance: Terminal, onCommand: (cmd: string) => void, currentPath: React.RefObject<string>, currentBranch: React.RefObject<string | null>) => () => {
-  instance.write(`git checkout projects`);
-  onCommand(`git checkout projects`);
+export const webDevHandler = (instance: Terminal, onCommand: (cmd: string) => void, currentPath: React.RefObject<string>, currentBranch: React.RefObject<string | null>) => () => {
+  instance.write(`git checkout web-development`);
+  onCommand(`git checkout web-development`);
+  prompt(currentPath, currentBranch, instance);
+  instance.scrollToBottom();
+};
+
+export const roboticsHandler = (instance: Terminal, onCommand: (cmd: string) => void, currentPath: React.RefObject<string>, currentBranch: React.RefObject<string | null>) => () => {
+  instance.write(`git checkout robotics-ai`);
+  onCommand(`git checkout robotics-ai`);
   prompt(currentPath, currentBranch, instance);
   instance.scrollToBottom();
 };

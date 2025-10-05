@@ -8,11 +8,18 @@ import { welcomeMessage } from "./parts/welcome";
 import { prompt } from "./parts/promt";
 import { getCommands } from "./parts/commands";
 import { provideLinksHandler } from "./parts/links/provideLinksHandler";
-import { aboutHandler, contactHandler, educationHandler, projectsHandler } from "./parts/links/handlers";
+import { aboutHandler, contactHandler, educationHandler, webDevHandler, roboticsHandler } from "./parts/links/handlers";
 import { a as web } from "@react-spring/web";
 
+// Define terminal options outside component to prevent re-creation on every render
+const terminalOptions = {
+  rows: 35
+};
+
 const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>> }) => {
-  const { instance, ref } = useXTerm();
+  const { instance, ref } = useXTerm({
+    options: terminalOptions
+  });
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputBuffer = useRef<string>("");
   const currentBranch = useRef<"education" | "projects" | null>(null);
@@ -20,7 +27,7 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
   const fs = useRef<Record<string, { name: string; isDir: boolean; created: string; content?: string }[]>>(fs_data);
 
   const onCommand = useMemo(() => {
-    if (!instance) return () => {};
+    if (!instance) return () => { };
     const commands = getCommands(instance, fs, currentPath, currentBranch, setState);
 
     return (input: string) => {
@@ -44,9 +51,13 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
 
     const fitAddon = new FitAddon();
     instance.loadAddon(fitAddon);
-    const observer = new ResizeObserver(([args]) => {
-      fitAddon.fit();
-      instance.options.fontSize = args.contentRect.width / 45; // Adjust font size based on width
+
+      const observer = new ResizeObserver(([args]) => {
+        // Use requestAnimationFrame to ensure DOM is updated before fitting
+        requestAnimationFrame(() => {
+          fitAddon.fit();
+        });
+        instance.options.fontSize = args.contentRect.width / 60; // Adjust font size based on width
       // if (args.contentRect.width < 350 || args.contentRect.height < 200) {
       //   instance.options.fontSize = 10; // Set font size
       // } else if (args.contentRect.width < 600) {
@@ -57,8 +68,6 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
     });
 
     observer.observe(terminalElement);
-
-    fitAddon.fit();
 
     instance.registerLinkProvider({
       provideLinks: provideLinksHandler(instance, currentPath, currentBranch, onCommand),
@@ -92,28 +101,49 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
     welcomeMessage(instance);
     prompt(currentPath, currentBranch, instance);
 
+    // Fit after content is loaded - use multiple approaches to ensure it works
+    const fitTerminal = () => {
+      requestAnimationFrame(() => {
+        fitAddon.fit();
+      });
+    };
+
+    // Fit immediately
+    fitTerminal();
+
+    // Fit after a short delay to ensure content is rendered
+    setTimeout(fitTerminal, 50);
+
+    // Fit after content is fully loaded
+    setTimeout(fitTerminal, 200);
+
     // Cleanup on unmount
     return () => observer.disconnect();
   }, [instance]);
 
   const handleAboutClick = useMemo(() => {
     if (instance) return aboutHandler(instance, onCommand, currentPath, currentBranch);
-    return () => {};
+    return () => { };
   }, [instance, onCommand]);
 
   const handleContactClick = useMemo(() => {
     if (instance) return contactHandler(instance, onCommand, currentPath, currentBranch);
-    return () => {};
+    return () => { };
   }, [instance, onCommand]);
 
   const handleEducationClick = useMemo(() => {
     if (instance) return educationHandler(instance, onCommand, currentPath, currentBranch);
-    return () => {};
+    return () => { };
   }, [instance, onCommand]);
 
-  const handleProjectsClick = useMemo(() => {
-    if (instance) return projectsHandler(instance, onCommand, currentPath, currentBranch);
-    return () => {};
+  const handleWebDevClick = useMemo(() => {
+    if (instance) return webDevHandler(instance, onCommand, currentPath, currentBranch);
+    return () => { };
+  }, [instance, onCommand]);
+
+  const handleRoboticsClick = useMemo(() => {
+    if (instance) return roboticsHandler(instance, onCommand, currentPath, currentBranch);
+    return () => { };
   }, [instance, onCommand]);
 
   return (
@@ -126,7 +156,8 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
           menuButtons={[
             { label: "About", onClick: handleAboutClick },
             { label: "Education", onClick: handleEducationClick },
-            { label: "Projects", onClick: handleProjectsClick },
+            { label: "Web Dev", onClick: handleWebDevClick },
+            { label: "Robotics & AI", onClick: handleRoboticsClick },
             { label: "Contact", onClick: handleContactClick },
           ]}
         />

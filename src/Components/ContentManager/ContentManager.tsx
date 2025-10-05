@@ -10,6 +10,10 @@ import { Rotunda } from "./Content/Rotunda";
 import "./ContentManager.css";
 import { Alexander } from "./Content/Alexander";
 import { Education } from "./Content/Education";
+import { MultiDroneSLAM } from "./Content/MultiDroneSLAM";
+import { GanMetrics } from "./Content/GanMetrics";
+import { RoboticArm } from "./Content/RoboticArm";
+import { KeioThesis } from "./Content/KeioThesis";
 
 interface ContentManagerProps {
   page: string | null;
@@ -31,7 +35,7 @@ export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
       case "education":
         return <Education />;
 
-      // Projects
+      // Web Development Projects
       case "meteoBot":
         return <Meteo />;
       case "alexanderMap":
@@ -44,6 +48,16 @@ export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
         return <DigitizationPipeline />;
       case "rotunda":
         return <Rotunda />;
+
+      // Robotics & AI Projects
+      case "keioThesis":
+        return <KeioThesis />;
+      case "multiDroneSLAM":
+        return <MultiDroneSLAM />;
+      case "ganMetrics":
+        return <GanMetrics />;
+      case "roboticArm":
+        return <RoboticArm />;
 
       default:
         return null;
