@@ -1,11 +1,13 @@
 import * as THREE from "three";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, memo } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { a as animated } from "@react-spring/three";
 import { Group } from "three";
 import { SpringValue, useSpring } from "@react-spring/core";
 import Terminal3D from "../Terminal/Terminal";
+import { FinderWindow } from "../FinderWindow/FinderWindow";
 import { useThree } from "@react-three/fiber";
+import { WindowManagerProvider, useWindowManager } from "../WindowManager/WindowManager";
 import "./Laptop.css";
 import { asset } from "../../utils/asset";
 import { type GLTF } from "three-stdlib";
@@ -36,20 +38,30 @@ type GLTFResult = GLTF & {
 const screenOffset = 0.2;
 
 // Responsive positioning based on window width
-const getResponsivePositions = (width: number, height: number) => {
+const getResponsivePositions = () => {
   // Adjust Z position based on screen width - move laptop further back for smaller screens
   let baseZ, projectZ;
 
-
-  baseZ = -17 + (Math.max(0.9 * height - width, 0) / height) * 30;
+  baseZ = -17;
+  // baseZ = -17 + (Math.max(0.9 * height - width, 0) / height) * 30;
+  // baseZ = -15;
   projectZ = baseZ;
-
 
   return {
     positionA: new THREE.Vector3(0, -4.2, 2), // closed (same for all screen sizes)
     positionB: new THREE.Vector3(0, -2.5, baseZ), // open
     positionC: new THREE.Vector3(5, -3, projectZ), // project
   };
+};
+
+// Calculate responsive distanceFactor based on height
+const getDistanceFactor = (height: number) => {
+  // The base distanceFactor when baseZ = -17
+  const baseDistanceFactor = 3212.549 / height;
+  
+  // Scale the distanceFactor inversely with the Z position
+  // When laptop is further back (more negative baseZ), content should be larger so basdeDistanceFactor should be larger
+  return baseDistanceFactor;
 };
 
 const rotationA = new THREE.Euler(0, Math.PI, 0);
@@ -67,6 +79,45 @@ interface ModelProps {
 export default function Model({ position, state, setState, onLoaded, onClick }: ModelProps) {
   const group = useRef<Group>(null);
   const [hovered, setHovered] = useState(false);
+
+  // Component that uses the window manager - memoized to prevent re-renders
+  const LaptopContent = memo(() => {
+    const { bringToFront } = useWindowManager();
+    const [currentCategory, setCurrentCategory] = useState<'web-development' | 'robotics-ai' | undefined>(undefined);
+    
+    const handleWebDevClick = () => {
+      bringToFront('finder-window');
+      setCurrentCategory('web-development');
+    };
+    
+    const handleRoboticsClick = () => {
+      bringToFront('finder-window');
+      setCurrentCategory('robotics-ai');
+    };
+
+    return (
+      <>
+        <Terminal3D 
+          setState={setState} 
+          onWebDevClick={handleWebDevClick}
+          onRoboticsClick={handleRoboticsClick}
+        />
+        <FinderWindow 
+          onProjectClick={(projectId) => setState(prev => ({ ...prev, project: projectId }))} 
+          position={{ x: 15, y: -10 }}
+          onClose={() => console.log("Finder closed")}
+          category={currentCategory}
+        />
+      </>
+    );
+  });
+
+  // Memoize the entire WindowManagerProvider and its children to prevent re-initialization
+  const memoizedWindowContent = useMemo(() => (
+    <WindowManagerProvider>
+      <LaptopContent />
+    </WindowManagerProvider>
+  ), [setState]);
 
   const { open } = useSpring({
     open: state.open ? 1 : Number(hovered) / 15,
@@ -86,7 +137,25 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
   // Apply emissive effect once when materials are ready
   const screenMaterial = useMemo(() => {
     const screenMaterial: THREE.MeshStandardMaterial = materials["screen.001"] as THREE.MeshStandardMaterial;
-    screenMaterial.roughness = 111;
+    screenMaterial.roughness = 1;
+    screenMaterial.metalness = 0.;
+    
+    // Load and apply desktop.png texture
+    const textureLoader = new THREE.TextureLoader();
+    const desktopTexture = textureLoader.load(asset("desktop.png"));
+    
+    // Flip the texture to appear correctly
+    desktopTexture.flipY = false;
+    
+    // Make the screen appear normal regardless of lighting
+    screenMaterial.map = desktopTexture;
+    screenMaterial.color = new THREE.Color(0xffffff); // White base color
+    screenMaterial.metalness = 0; // Non-metallic
+    screenMaterial.roughness = 1; // Slightly glossy
+    screenMaterial.envMapIntensity = 0; // No environment reflection
+    screenMaterial.emissiveMap = desktopTexture;
+    screenMaterial.emissiveIntensity = 0.1;
+    screenMaterial.needsUpdate = true;
 
     return screenMaterial;
   }, [materials, nodes.Cube008_2]);
@@ -97,10 +166,13 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
 
   const htmlContentref = useRef<HTMLDivElement>(null);
 
-  const { height, width } = useThree((state) => state.size);
+  const { height } = useThree((state) => state.size);
 
   // Get responsive positions based on current window width
-  const positions = getResponsivePositions(width, height);
+  const positions = getResponsivePositions();
+  
+  // Calculate the distanceFactor
+  const distanceFactor = getDistanceFactor(height);
 
   // useFrame(() => {
   //   const div = htmlContentref.current?.children[0];
@@ -155,18 +227,19 @@ export default function Model({ position, state, setState, onLoaded, onClick }: 
                 <Html
                   ref={htmlContentref}
                   transform
+        
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
 
-                  position={[-3.6, 0, -2.5]}
+                  // position={[-3.6, 0, -2.5]}
                   rotation={[-Math.PI / 2, 0, 0]}
                   // scale={0.5}
-                  distanceFactor={3212.549 / height} // tweak this!
-                  // fullscreen
+                  distanceFactor={distanceFactor}
+
                   // scale={2}
                   // scale={[0.36, 0.36, 0.36]} // ← Key for making it look sharp
                   className='content'>
-                  <Terminal3D setState={setState} />
+                  {memoizedWindowContent}
                 </Html>
               )}
             </mesh>

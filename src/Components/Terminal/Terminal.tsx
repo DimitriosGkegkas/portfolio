@@ -1,26 +1,32 @@
 import { useRef, useEffect, useMemo } from "react";
 import { useXTerm } from "react-xtermjs";
 import { FitAddon } from "@xterm/addon-fit";
-import { MenuBar } from "../Menu/MenuBar/MenuBar";
 import { COLOR, fs_data } from "./parts/constants";
-import "./Terminal.css"; // Assuming you have a CSS file for styling the terminal
+import "./Terminal.css";
 import { welcomeMessage } from "./parts/welcome";
 import { prompt } from "./parts/promt";
 import { getCommands } from "./parts/commands";
 import { provideLinksHandler } from "./parts/links/provideLinksHandler";
 import { aboutHandler, contactHandler, educationHandler, webDevHandler, roboticsHandler } from "./parts/links/handlers";
-import { a as web } from "@react-spring/web";
+import DraggableWindow from "../DraggableWindow/DraggableWindow";
 
 // Define terminal options outside component to prevent re-creation on every render
 const terminalOptions = {
   rows: 32
 };
 
-const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>> }) => {
+const Terminal3D = ({ 
+  setState, 
+  onWebDevClick, 
+  onRoboticsClick 
+}: { 
+  setState: React.Dispatch<React.SetStateAction<{ open: boolean; project: string | null }>>;
+  onWebDevClick?: () => void;
+  onRoboticsClick?: () => void;
+}) => {
   const { instance, ref } = useXTerm({
     options: terminalOptions
   });
-  const terminalRef = useRef<HTMLDivElement>(null);
   const inputBuffer = useRef<string>("");
   const currentBranch = useRef<"education" | "projects" | null>(null);
   const currentPath = useRef<string>("~/portfolio/");
@@ -46,18 +52,18 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
 
   useEffect(() => {
     if (!instance) return;
-    const terminalElement = terminalRef.current;
+    const terminalElement = document.getElementById('terminal');
     if (!terminalElement) return;
 
     const fitAddon = new FitAddon();
     instance.loadAddon(fitAddon);
 
-      const observer = new ResizeObserver(([args]) => {
-        // Use requestAnimationFrame to ensure DOM is updated before fitting
-        requestAnimationFrame(() => {
-          fitAddon.fit();
-        });
-        instance.options.fontSize = args.contentRect.width / 60; // Adjust font size based on width
+    const observer = new ResizeObserver(([args]) => {
+      // Use requestAnimationFrame to ensure DOM is updated before fitting
+      requestAnimationFrame(() => {
+        fitAddon.fit();
+      });
+      instance.options.fontSize = args.contentRect.width / 60; // Adjust font size based on width
       // if (args.contentRect.width < 350 || args.contentRect.height < 200) {
       //   instance.options.fontSize = 10; // Set font size
       // } else if (args.contentRect.width < 600) {
@@ -137,36 +143,45 @@ const Terminal3D = ({ setState }: { setState: React.Dispatch<React.SetStateActio
   }, [instance, onCommand]);
 
   const handleWebDevClick = useMemo(() => {
-    if (instance) return webDevHandler(instance, onCommand, currentPath, currentBranch);
+    if (instance) {
+      const originalHandler = webDevHandler(instance, onCommand, currentPath, currentBranch);
+      return () => {
+        originalHandler();
+        onWebDevClick?.(); // Trigger Finder to come to front
+      };
+    }
     return () => { };
-  }, [instance, onCommand]);
+  }, [instance, onCommand, onWebDevClick]);
 
   const handleRoboticsClick = useMemo(() => {
-    if (instance) return roboticsHandler(instance, onCommand, currentPath, currentBranch);
+    if (instance) {
+      const originalHandler = roboticsHandler(instance, onCommand, currentPath, currentBranch);
+      return () => {
+        originalHandler();
+        onRoboticsClick?.(); // Trigger Finder to come to front
+      };
+    }
     return () => { };
-  }, [instance, onCommand]);
+  }, [instance, onCommand, onRoboticsClick]);
 
   return (
-    <web.div ref={terminalRef} className='terminal-window-wrapper'>
-      <div className='macos-header'>
-        <span className='macos-dot red'></span>
-        <span className='macos-dot yellow'></span>
-        <span className='macos-dot green'></span>
-        <MenuBar
-          menuButtons={[
-            { label: "About", onClick: handleAboutClick },
-            { label: "Education", onClick: handleEducationClick },
-            { label: "Web Dev", onClick: handleWebDevClick },
-            { label: "Robotics & AI", onClick: handleRoboticsClick },
-            { label: "Contact", onClick: handleContactClick },
-          ]}
-        />
-      </div>
-
+    <DraggableWindow
+      menuButtons={[
+        { label: "About", onClick: handleAboutClick },
+        { label: "Education", onClick: handleEducationClick },
+        { label: "Web Dev", onClick: handleWebDevClick },
+        { label: "Robotics & AI", onClick: handleRoboticsClick },
+        { label: "Contact", onClick: handleContactClick },
+      ]}
+      style={{
+        transform: `translateX(-50%) translateY(-50%)`
+      }}
+      windowId="terminal-window"
+    >
       <div className='terminal-wrapper' onPointerDown={(e) => e.stopPropagation()}>
         <div ref={ref} id='terminal' />
       </div>
-    </web.div>
+    </DraggableWindow>
   );
 };
 

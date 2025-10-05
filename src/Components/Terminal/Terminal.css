@@ -1,10 +1,3 @@
-.terminal-window-wrapper {
-  position: absolute;
-  width: 90svh;
-  max-width: 90svh;
-  z-index: 100000000000000000;
-}
-
 .terminal-wrapper {
   border-radius: 10px;
   overflow: hidden;
@@ -17,55 +10,14 @@
   background-color: rgb(16, 20, 32);
 }
 
-.macos-header {
-  display: flex;
-  align-items: center;
-  height: 32px;
-  padding: 0 12px;
-  background: #ddd; /* Optional: mimic titlebar or keep darker */
-  gap: 8px;
-  user-select: none;
-  border-radius: 8px 8px 0 0; /* Rounded corners for the header */
-}
-
 @media screen and (max-width: 550px) {
-  .terminal-window-wrapper {
-    /* left: 35vw; */
-    /* width: calc(100svw + 14px); */
-  }
   .terminal-wrapper {
     padding: 0px;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .terminal-window-wrapper {
+  .terminal-wrapper {
     font-size: 12px !important; /* Adjust font size for smaller screens */
   }
-}
-
-@media screen and (max-width: 350px) {
-  .macos-dot {
-    display: none;
-  }
-}
-
-.macos-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  color: black;
-  /* display: inline-block; */
-}
-
-.macos-dot.red {
-  background-color: #ff5f56;
-}
-
-.macos-dot.yellow {
-  background-color: #ffbd2e;
-}
-
-.macos-dot.green {
-  background-color: #27c93f;
 }
