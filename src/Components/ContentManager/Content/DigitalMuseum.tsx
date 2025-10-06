@@ -1,12 +1,28 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import { VimeoVideo } from "../VimeoVideo";
 
 export const DigitalMuseum: FC = () => {
   return (
     <>
       <ScrollControls damping={0.1} pages={3} style={{ zIndex: 100000000 }}>
-        <Scroll html style={{ width: "100%", height: "100%"}}>
+        <StaticItemDiv
+          top="-40%"
+          left="-40%"
+          threshold={0.1}
+        >
+          <VimeoVideo videoId="1124866938" />
+        </StaticItemDiv>
+        <StaticItemDiv
+          top="-10%"
+          left="-45%"
+          threshold={0.4}
+        >
+          <VimeoVideo videoId="1124866986" />
+        </StaticItemDiv>
+        <Scroll html style={{ width: "100%", height: "100%" }}>
           <ItemDiv offset={40}>
             🖼️ A fully interactive <span style={{ color: "#60A5FA" }}>digital museum platform</span> developed for the <span style={{ color: "#60A5FA" }}>Rizarios Foundation</span>
           </ItemDiv>

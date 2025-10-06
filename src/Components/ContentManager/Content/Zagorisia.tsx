@@ -29,26 +29,26 @@ export const Zagorisia: FC = () => {
       </Scroll>
 
       <StaticItemDiv
-          top="-40%"
-          left="-40%"
-          threshold={0.1}
-        >
-          <VimeoVideo videoId="1124791001" />
-        </StaticItemDiv>
-        <StaticItemDiv
-          top="-20%"
-          left="-45%"
-          threshold={0.4}
-        >
-          <VimeoVideo videoId="1124791196" />
-        </StaticItemDiv>
-        <StaticItemDiv
-          top="-30%"
-          left="-35%"
-          threshold={0.7}
-        >
-          <VimeoVideo videoId="1124790861" />
-        </StaticItemDiv>
+        top="-40%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <VimeoVideo videoId="1124791001" />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-20%"
+        left="-45%"
+        threshold={0.4}
+      >
+        <VimeoVideo videoId="1124791196" />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-35%"
+        threshold={0.7}
+      >
+        <VimeoVideo videoId="1124790861" />
+      </StaticItemDiv>
     </ScrollControls>
   );
 };

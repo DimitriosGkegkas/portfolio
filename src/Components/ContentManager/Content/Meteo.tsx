@@ -2,24 +2,37 @@
 
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { Item } from "../Item";
-import { useThree } from "@react-three/fiber";
-import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
 
 export const Meteo: FC = () => {
-  const { width, height } = useThree((state) => state.viewport);
 
   return (
-    <ScrollControls damping={0.1} pages={3.2}>
-      <Scroll>
-        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
+    <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
 
-        {/* Visual highlights or animated keywords can go here later */}
-        {/* Example: <ItemText text='Node.js' scale={2.5} position={[0, -10, 10]} color="#34D399" /> */}
-      </Scroll>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <img src='/projects/meteo/meteo1.png' alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
+      </StaticItemDiv>
+
+      <StaticItemDiv
+        top="-30%"
+        left="-20%"
+        threshold={0.3}
+      >
+        <img src='/projects/meteo/meteo2.png' alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
+      </StaticItemDiv>
+
+      <StaticItemDiv
+        top="5%"
+        left="-38%"
+        threshold={0.8}
+      >
+        <img src='/projects/meteo/meteo3.png' alt='Meteo chatbot UI 1' className='mockup-image' width={500} />
+      </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
         <ItemDiv offset={10}>
@@ -54,6 +67,7 @@ export const Meteo: FC = () => {
           </div>
         </div>
       </Scroll>
+
     </ScrollControls>
   );
 };

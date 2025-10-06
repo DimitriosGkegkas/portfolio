@@ -1,15 +1,19 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import { VimeoVideo } from "../VimeoVideo";
 
 export const Rotunda: FC = () => {
   return (
-    <ScrollControls damping={0.1} pages={3}>
-      <Scroll>
-        {/* <Item url='/projects/rotunda/rotunda1.png' position={[-3, 0, 30]} scale={18} />
-        <Item url='/projects/rotunda/rotunda2.png' position={[-4, -20, 20]} scale={16} />
-        <Item url='/projects/rotunda/rotunda3.png' position={[-1, -38, 10]} scale={16} /> */}
-      </Scroll>
+    <ScrollControls damping={0.1} pages={3} style={{ zIndex: 1000000000 }}>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.05}
+      >
+        <VimeoVideo videoId="1124860764" />
+      </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
         <ItemDiv offset={40}>

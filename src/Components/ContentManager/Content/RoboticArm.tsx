@@ -4,17 +4,49 @@ import { Item } from "../Item";
 import { useThree } from "@react-three/fiber";
 import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import { VimeoVideo } from "../VimeoVideo";
 
 export const RoboticArm: FC = () => {
   const { width, height } = useThree((state) => state.viewport);
 
   return (
-    <ScrollControls damping={0.1} pages={3.2}>
-      <Scroll>
-        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
-      </Scroll>
+    <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <img src='/projects/roboHack/place.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <img src='/projects/roboHack/robot.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <img src='/projects/roboHack/code.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <VimeoVideo videoId="1124883391" />
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
+        <VimeoVideo videoId="1124883419" />
+      </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
         <ItemDiv offset={10}>
