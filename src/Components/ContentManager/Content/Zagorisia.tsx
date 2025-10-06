@@ -1,17 +1,13 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import { VimeoVideo } from "../VimeoVideo";
 
 export const Zagorisia: FC = () => {
   return (
-    <ScrollControls damping={0.1} pages={3}>
-      <Scroll>
-        {/* <Item url='/projects/zagorisia/zagorisia1.png' position={[-3, 0, 30]} scale={18} />
-        <Item url='/projects/zagorisia/zagorisia2.png' position={[-4, -20, 20]} scale={16} />
-        <Item url='/projects/zagorisia/zagorisia3.png' position={[-1, -38, 10]} scale={16} /> */}
-      </Scroll>
-
-      <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
+    <ScrollControls damping={0.1} pages={3.5} style={{ zIndex: 100000000 }}>
+      <Scroll html style={{ width: "100%", height: "100%" }}>
         <ItemDiv offset={40}>
           🏛️ A digital archive celebrating <span style={{ color: "#60A5FA" }}>Zagorian architectural heritage</span> in collaboration with the <span style={{ color: "#60A5FA" }}>Rizarios Foundation</span>
         </ItemDiv>
@@ -31,6 +27,28 @@ export const Zagorisia: FC = () => {
           ✨ A project bridging <span style={{ color: "#FCD34D" }}>technology</span> and <span style={{ color: "#FCD34D" }}>cultural preservation</span> through architectural immersion
         </ItemDiv>
       </Scroll>
+
+      <StaticItemDiv
+          top="-40%"
+          left="-40%"
+          threshold={0.1}
+        >
+          <VimeoVideo videoId="1124791001" />
+        </StaticItemDiv>
+        <StaticItemDiv
+          top="-20%"
+          left="-45%"
+          threshold={0.4}
+        >
+          <VimeoVideo videoId="1124791196" />
+        </StaticItemDiv>
+        <StaticItemDiv
+          top="-30%"
+          left="-35%"
+          threshold={0.7}
+        >
+          <VimeoVideo videoId="1124790861" />
+        </StaticItemDiv>
     </ScrollControls>
   );
 };

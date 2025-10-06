@@ -99,6 +99,9 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
         </Canvas>
       </web.div>
       
+      {/* Static Item Container for DigitalMuseum */}
+      <div id="static-item-div"></div>
+      
       {/* Project Tooltip rendered at DOM level outside Canvas */}
       <ProjectTooltip 
         project={hoveredProject} 

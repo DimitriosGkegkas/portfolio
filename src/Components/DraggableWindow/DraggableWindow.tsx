@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useWindowManager } from "../WindowManager/WindowManager";
+import Window from "./Window";
 import "./DraggableWindow.css";
 
 interface DraggableWindowProps {
@@ -206,31 +207,15 @@ const DraggableWindow = ({
       onMouseDown={handleMouseDownForDrag}
       onTouchStart={handleTouchStart}
     >
-      <div className={`macos-header ${isDragging ? 'dragging' : ''}`}>
-        <div className="control-dots">
-          <button className='macos-dot red' onClick={handleClose} title="Close"></button>
-          <button className='macos-dot yellow' title="Minimize"></button>
-          <button className='macos-dot green' title="Maximize"></button>
-        </div>
-        
-        {menuButtons.length > 0 && (
-          <div className="menu-bar">
-            {menuButtons.map((button, index) => (
-              <button
-                key={index}
-                className="menu-button"
-                onClick={button.onClick}
-              >
-                {button.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className='window-content'>
+      <Window 
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        onClose={handleClose}
+        isDragging={isDragging}
+        menuButtons={menuButtons}
+      >
         {children}
-      </div>
+      </Window>
     </animated.div>
   );
 };

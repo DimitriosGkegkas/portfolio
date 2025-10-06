@@ -1,4 +1,4 @@
-import { Suspense, type FC } from "react";
+import { Suspense, type FC, useMemo, memo } from "react";
 import { Ntua } from "./Content/Ntua";
 import { Keio } from "./Content/Keio";
 import { Ecn } from "./Content/Ecn";
@@ -20,11 +20,11 @@ interface ContentManagerProps {
   page: string | null;
 }
 
-export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
+const ContentManagerImpl: FC<ContentManagerProps> = ({ page }) => {
   if (!page) return null;
   console.log("ContentManager page:", page);
 
-  const renderContent = () => {
+  const renderContent = useMemo(() => {
     // Get project data from centralized source
     const project = getProjectById(page);
     
@@ -109,7 +109,9 @@ export const ContentManager: FC<ContentManagerProps> = ({ page }) => {
       default:
         return null;
     }
-  };
+  }, [page]);
 
-  return <Suspense fallback={null}>{renderContent()}</Suspense>;
+  return <Suspense fallback={null}>{renderContent}</Suspense>;
 };
+
+export const ContentManager = memo(ContentManagerImpl);

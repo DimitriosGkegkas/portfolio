@@ -1,0 +1,23 @@
+.vimeo-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.vimeo-container:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.vimeo-iframe {
+  border: none;
+
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
