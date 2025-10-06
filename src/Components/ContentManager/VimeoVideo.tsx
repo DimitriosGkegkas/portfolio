@@ -1,9 +1,4 @@
-import { useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useIntersect, Html } from "@react-three/drei";
-import * as THREE from "three";
 import "./VimeoVideo.css";
-import DraggableWindow from "../DraggableWindow/DraggableWindow";
 import Window from "../DraggableWindow/Window";
 
 interface VimeoVideoProps {

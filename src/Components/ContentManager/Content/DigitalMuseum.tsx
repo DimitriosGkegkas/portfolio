@@ -1,8 +1,6 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
-import { VimeoVideo } from "../VimeoVideo";
-import { StaticItemDiv } from "../StaticItemDiv";
 
 export const DigitalMuseum: FC = () => {
   return (
