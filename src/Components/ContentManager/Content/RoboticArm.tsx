@@ -1,88 +1,47 @@
-import React from 'react';
+import { Scroll, ScrollControls } from "@react-three/drei";
+import { type FC } from "react";
+import { Item } from "../Item";
+import { useThree } from "@react-three/fiber";
+import { asset } from "../../../utils/asset";
+import { ItemDiv } from "../ItemDiv";
 
-export const RoboticArm: React.FC = () => {
+export const RoboticArm: FC = () => {
+  const { width, height } = useThree((state) => state.viewport);
+
   return (
-    <div className="content-container">
-      <div className="content-header">
-        <h1>🤖 Robotic Arm Pick & Place</h1>
-        <p className="subtitle">Hackathon Project - 2nd Place</p>
-      </div>
-      
-      <div className="content-body">
-        <div className="project-overview">
-          <h2>Project Overview</h2>
-          <p>
-            This hackathon project involved developing a robotic arm system capable of performing pick and place 
-            tasks autonomously. The system combines computer vision, robotics control, and intelligent planning 
-            to achieve precise manipulation tasks. The project secured 2nd place in the competition.
-          </p>
-        </div>
+    <ScrollControls damping={0.1} pages={3.2}>
+      <Scroll>
+        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
+        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
+        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
+      </Scroll>
 
-        <div className="project-details">
-          <h2>Key Features</h2>
-          <ul>
-            <li>Autonomous pick and place operations</li>
-            <li>Computer vision-based object detection and localization</li>
-            <li>Real-time path planning and obstacle avoidance</li>
-            <li>Precise robotic manipulation control</li>
-            <li>Integration of multiple sensors for robust operation</li>
-          </ul>
-        </div>
-
-        <div className="tech-stack">
-          <h2>Technology Stack</h2>
-          <div className="tech-tags">
-            <span className="tech-tag">ROS</span>
-            <span className="tech-tag">Python</span>
-            <span className="tech-tag">Computer Vision</span>
-            <span className="tech-tag">Robotics</span>
-            <span className="tech-tag">OpenCV</span>
-            <span className="tech-tag">Path Planning</span>
-            <span className="tech-tag">Control Systems</span>
-            <span className="tech-tag">Sensor Fusion</span>
-          </div>
-        </div>
-
-        <div className="competition-details">
-          <h2>Competition Details</h2>
-          <p>
-            This project was developed during a robotics hackathon focused on robotic manipulation tasks. 
-            The competition required teams to build and program robotic systems capable of performing 
-            complex pick and place operations with high accuracy and efficiency.
-          </p>
-        </div>
-
-        <div className="achievements">
-          <h2>Key Achievements</h2>
-          <ul>
-            <li>Secured 2nd place in robotics hackathon</li>
-            <li>Achieved high precision in pick and place operations</li>
-            <li>Developed robust computer vision pipeline</li>
-            <li>Implemented efficient path planning algorithms</li>
-            <li>Created reliable robotic control system</li>
-          </ul>
-        </div>
-
-        <div className="technical-challenges">
-          <h2>Technical Challenges</h2>
-          <ul>
-            <li>Real-time object detection and tracking</li>
-            <li>Precise robotic arm control and calibration</li>
-            <li>Path planning with obstacle avoidance</li>
-            <li>Integration of multiple sensor systems</li>
-            <li>Optimization for speed and accuracy</li>
-          </ul>
-        </div>
-
-        <div className="impact">
-          <h2>Project Impact</h2>
-          <p>
-            This project demonstrates practical application of robotics, computer vision, and control systems 
-            in a competitive environment. The successful implementation showcases skills in rapid prototyping, 
-            system integration, and problem-solving under time constraints.
-          </p>
-        </div>
-      </div>
-    </div>
+      <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
+        <ItemDiv offset={10}>
+          🤖 <span style={{ color: "#60A5FA" }}>Robotic Arm Pick & Place</span> - Hackathon Project (2nd Place)
+        </ItemDiv>
+        <ItemDiv offset={55}>
+          🎯 Developed <span style={{ color: "#FBBF24" }}>autonomous pick and place system</span> with computer vision
+        </ItemDiv>
+        <ItemDiv offset={95}>
+          👁️ Implemented <span style={{ color: "#F472B6" }}>real-time object detection</span> and localization
+        </ItemDiv>
+        <ItemDiv offset={135}>
+          🛤️ Created <span style={{ color: "#34D399" }}>path planning algorithms</span> with obstacle avoidance
+        </ItemDiv>
+        <ItemDiv offset={175}>
+          🛠️ Built with <span style={{ color: "#A78BFA" }}>ROS</span>, <span style={{ color: "#A78BFA" }}>Python</span>, and <span style={{ color: "#A78BFA" }}>OpenCV</span>
+        </ItemDiv>
+        <ItemDiv offset={215}>
+          🏆 Secured <span style={{ color: "#6EE7B7" }}>2nd place</span> in robotics hackathon competition
+        </ItemDiv>
+        <ItemDiv offset={255}>
+          ⚡ Achieved <span style={{ color: "#F59E0B" }}>high precision</span> in manipulation tasks
+        </ItemDiv>
+        <ItemDiv offset={295}>
+          🔧 Integrated <span style={{ color: "#EC4899" }}>multiple sensors</span> for robust operation
+        </ItemDiv>
+      </Scroll>
+    </ScrollControls>
   );
 };

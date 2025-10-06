@@ -1,78 +1,47 @@
-import React from 'react';
+import { Scroll, ScrollControls } from "@react-three/drei";
+import { type FC } from "react";
+import { Item } from "../Item";
+import { useThree } from "@react-three/fiber";
+import { asset } from "../../../utils/asset";
+import { ItemDiv } from "../ItemDiv";
 
-export const GanMetrics: React.FC = () => {
+export const GanMetrics: FC = () => {
+  const { width, height } = useThree((state) => state.viewport);
+
   return (
-    <div className="content-container">
-      <div className="content-header">
-        <h1>🎨 GAN Metrics for Image Quality Evaluation</h1>
-        <p className="subtitle">Interactive Framework for AI Model Validation</p>
-      </div>
-      
-      <div className="content-body">
-        <div className="project-overview">
-          <h2>Project Overview</h2>
-          <p>
-            This Master's thesis project focuses on developing an interactive framework for evaluating 
-            Generative Adversarial Network (GAN) models using user feedback. The system provides comprehensive 
-            metrics for image quality evaluation and creates an interactive validation framework for AI models.
-          </p>
-        </div>
+    <ScrollControls damping={0.1} pages={3.2}>
+      <Scroll>
+        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
+        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
+        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
+      </Scroll>
 
-        <div className="project-details">
-          <h2>Key Features</h2>
-          <ul>
-            <li>Interactive AI model validation framework</li>
-            <li>User feedback integration for model evaluation</li>
-            <li>Comprehensive GAN metrics implementation</li>
-            <li>Real-time image quality assessment</li>
-            <li>Comparative analysis tools for different GAN architectures</li>
-          </ul>
-        </div>
-
-        <div className="tech-stack">
-          <h2>Technology Stack</h2>
-          <div className="tech-tags">
-            <span className="tech-tag">Python</span>
-            <span className="tech-tag">TensorFlow</span>
-            <span className="tech-tag">PyTorch</span>
-            <span className="tech-tag">Computer Vision</span>
-            <span className="tech-tag">GAN</span>
-            <span className="tech-tag">Machine Learning</span>
-            <span className="tech-tag">Image Processing</span>
-            <span className="tech-tag">Interactive UI</span>
-          </div>
-        </div>
-
-        <div className="project-context">
-          <h2>Academic Context</h2>
-          <p>
-            This project was completed as part of the Master's thesis for the MEng in Electrical & Computer 
-            Engineering at the National Technical University of Athens, Greece. It represents advanced work in 
-            artificial intelligence, computer vision, and human-computer interaction.
-          </p>
-        </div>
-
-        <div className="achievements">
-          <h2>Key Achievements</h2>
-          <ul>
-            <li>Developed novel metrics for GAN evaluation</li>
-            <li>Created interactive validation framework</li>
-            <li>Integrated user feedback mechanisms</li>
-            <li>Conducted comprehensive comparative studies</li>
-            <li>Published research findings in academic context</li>
-          </ul>
-        </div>
-
-        <div className="research-impact">
-          <h2>Research Impact</h2>
-          <p>
-            This work contributes to the field of AI model evaluation by providing a more comprehensive 
-            and user-centric approach to assessing GAN performance. The interactive framework enables 
-            researchers and practitioners to better understand and validate their AI models through 
-            human feedback integration.
-          </p>
-        </div>
-      </div>
-    </div>
+      <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
+        <ItemDiv offset={10}>
+          🎨 <span style={{ color: "#60A5FA" }}>GAN Metrics for Image Quality Evaluation</span> - Interactive AI Validation
+        </ItemDiv>
+        <ItemDiv offset={55}>
+          🎓 <span style={{ color: "#FBBF24" }}>Master's Thesis</span> at NTUA - Advanced AI Research
+        </ItemDiv>
+        <ItemDiv offset={95}>
+          🤖 Developed <span style={{ color: "#F472B6" }}>interactive validation framework</span> for AI models
+        </ItemDiv>
+        <ItemDiv offset={135}>
+          👥 Integrated <span style={{ color: "#34D399" }}>user feedback mechanisms</span> for model evaluation
+        </ItemDiv>
+        <ItemDiv offset={175}>
+          🛠️ Built with <span style={{ color: "#A78BFA" }}>Python</span>, <span style={{ color: "#A78BFA" }}>TensorFlow</span>, and <span style={{ color: "#A78BFA" }}>PyTorch</span>
+        </ItemDiv>
+        <ItemDiv offset={215}>
+          📊 Created <span style={{ color: "#6EE7B7" }}>comprehensive GAN metrics</span> for quality assessment
+        </ItemDiv>
+        <ItemDiv offset={255}>
+          🔬 Advanced research in <span style={{ color: "#F59E0B" }}>computer vision</span> and <span style={{ color: "#F59E0B" }}>machine learning</span>
+        </ItemDiv>
+        <ItemDiv offset={295}>
+          🚀 Contributed to <span style={{ color: "#EC4899" }}>AI model evaluation</span> methodologies
+        </ItemDiv>
+      </Scroll>
+    </ScrollControls>
   );
 };
