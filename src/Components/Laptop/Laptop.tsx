@@ -149,31 +149,6 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
-  // Apply emissive effect once when materials are ready
-  const screenMaterial = useMemo(() => {
-    const screenMaterial: THREE.MeshStandardMaterial = materials["screen.001"] as THREE.MeshStandardMaterial;
-    screenMaterial.roughness = 1;
-    screenMaterial.metalness = 0.;
-    
-    // Load and apply desktop.png texture
-    const textureLoader = new THREE.TextureLoader();
-    const desktopTexture = textureLoader.load(asset("desktop.png"));
-    
-    // Flip the texture to appear correctly
-    desktopTexture.flipY = false;
-    
-    // Make the screen appear normal regardless of lighting
-    screenMaterial.map = desktopTexture;
-    screenMaterial.color = new THREE.Color(0xffffff); // White base color
-    screenMaterial.metalness = 0; // Non-metallic
-    screenMaterial.roughness = 1; // Slightly glossy
-    screenMaterial.envMapIntensity = 0; // No environment reflection
-    screenMaterial.emissiveMap = desktopTexture;
-    screenMaterial.emissiveIntensity = 0.1;
-    screenMaterial.needsUpdate = true;
-
-    return screenMaterial;
-  }, [materials, nodes.Cube008_2]);
 
   const target = useRef<THREE.Object3D>(new THREE.Object3D());
 
@@ -237,7 +212,7 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
           <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
             <mesh geometry={nodes.Cube008.geometry} material={materials.aluminium} />
             <mesh geometry={nodes.Cube008_1.geometry} material={materials["matte.001"]} />
-            <mesh geometry={nodes.Cube008_2.geometry} material={screenMaterial} ref={testRef}>
+            <mesh geometry={nodes.Cube008_2.geometry} material={materials["screen.001"]} ref={testRef}>
               {position.goal > 0.4 && gl.domElement.parentElement && (
                 <Html
                   ref={htmlContentref}
