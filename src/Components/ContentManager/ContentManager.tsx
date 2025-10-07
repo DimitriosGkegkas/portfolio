@@ -9,6 +9,7 @@ import { DigitizationPipeline } from "./Content/DigitizationPipeline";
 import { Rotunda } from "./Content/Rotunda";
 import "./ContentManager.css";
 import { Alexander } from "./Content/Alexander";
+import { Thessaloniki } from "./Content/Thessaloniki";
 import { Education } from "./Content/Education";
 import { MultiDroneSLAM } from "./Content/MultiDroneSLAM";
 import { GanMetrics } from "./Content/GanMetrics";
@@ -46,6 +47,8 @@ const ContentManagerImpl: FC<ContentManagerProps> = ({ page }) => {
           return <Meteo />;
         case "Alexander":
           return <Alexander />;
+        case "Thessaloniki":
+          return <Thessaloniki />;
         case "Zagorisia":
           return <Zagorisia />;
         case "DigitalMuseum":
@@ -87,6 +90,8 @@ const ContentManagerImpl: FC<ContentManagerProps> = ({ page }) => {
         return <Meteo />;
       case "alexanderMap":
         return <Alexander />;
+      case "thessalonikiMap":
+        return <Thessaloniki />;
       case "zagorisiaApp":
         return <Zagorisia />;
       case "digitalMuseums":

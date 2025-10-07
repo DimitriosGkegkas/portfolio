@@ -1,51 +1,48 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { Item } from "../Item";
-import { useThree } from "@react-three/fiber";
-import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import { VimeoVideo } from "../VimeoVideo";
+import Window from "../../DraggableWindow/Window";
 
 export const RoboticArm: FC = () => {
-  const { width, height } = useThree((state) => state.viewport);
 
   return (
     <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
       <StaticItemDiv
-        top="-30%"
-        left="-40%"
+        top="-40%"
+        left="-30%"
         threshold={0.1}
       >
-        <img src='/projects/roboHack/place.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+        <Window>
+          <img src='/projects/roboHack/robot.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+        </Window>
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-48%"
+        threshold={0.2}
+      >
+        <Window>
+          <img src='/projects/roboHack/code.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+        </Window>
+      </StaticItemDiv>
+
+      <StaticItemDiv
+        top="-25%"
+        left="-20%"
+        threshold={0.3}
+      >
+        <VimeoVideo videoId="1124883419" ratio={1.5} height={60} />
       </StaticItemDiv>
       <StaticItemDiv
         top="-30%"
         left="-40%"
-        threshold={0.1}
+        threshold={0.4}
       >
-        <img src='/projects/roboHack/robot.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
-      </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-40%"
-        threshold={0.1}
-      >
-        <img src='/projects/roboHack/code.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
-      </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-40%"
-        threshold={0.1}
-      >
-        <VimeoVideo videoId="1124883391" />
-      </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-40%"
-        threshold={0.1}
-      >
-        <VimeoVideo videoId="1124883419" />
+        <Window>
+          <img src='/projects/roboHack/place.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+        </Window>
       </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>

@@ -1,21 +1,40 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { Item } from "../Item";
-import { useThree } from "@react-three/fiber";
-import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import Window from "../../DraggableWindow/Window";
 
 export const GanMetrics: FC = () => {
-  const { width, height } = useThree((state) => state.viewport);
 
   return (
-    <ScrollControls damping={0.1} pages={3.2}>
-      <Scroll>
-        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
-      </Scroll>
+    <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.1}
+      >
 
+        <img src='/projects/gan/0.png' alt='Gan Metrics' className='mockup-image' width={600} />
+
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-30%"
+        left="-35%"
+        threshold={0.3}
+      >
+
+        <img src='/projects/gan/1.png' alt='Gan Metrics' className='mockup-image' width={500} />
+
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-40%"
+        left="-45%"
+        threshold={0.5}
+      >
+        <Window>
+          <img src='/projects/gan/2.jpg' alt='Gan Metrics' className='mockup-image' width={300} />
+        </Window>
+      </StaticItemDiv>
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
         <ItemDiv offset={10}>
           🎨 <span style={{ color: "#60A5FA" }}>GAN Metrics for Image Quality Evaluation</span> - Interactive AI Validation

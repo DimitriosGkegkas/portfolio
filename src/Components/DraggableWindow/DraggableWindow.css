@@ -2,8 +2,9 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 90svh;
-  max-width: 100svw;
+  width: fit-content;
+  min-width: 200px;
+  max-width: 90vw;
   transition: box-shadow 0.2s ease;
   will-change: transform;
   transform: translateX(-50%) translateY(-50%);
@@ -30,7 +31,7 @@
   background-color: #1a1a1a;
   display: flex;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   flex-direction: column;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }

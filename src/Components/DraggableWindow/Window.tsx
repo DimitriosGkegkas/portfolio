@@ -7,18 +7,18 @@ interface DraggableWindowProps {
     label: string;
     onClick: () => void;
   }>;
-  isDragging: boolean;
-  isVisible: boolean;
-  setIsVisible: (isVisible: boolean) => void;
-  onClose: () => void;
+  isDragging?: boolean;
+  isVisible?: boolean;
+  setIsVisible?: (isVisible: boolean) => void;
+  onClose?: () => void;
   style?: React.CSSProperties;
 }
 
 const Window = ({
   children,
   menuButtons = [],
-  isVisible,
-  isDragging,
+  isVisible = true,
+  isDragging = false,
   setIsVisible,
   onClose,
   style
@@ -26,7 +26,7 @@ const Window = ({
 
   // Control button handlers
   const handleClose = () => {
-    setIsVisible(false);
+    setIsVisible?.(false);
     onClose?.();
   };
 

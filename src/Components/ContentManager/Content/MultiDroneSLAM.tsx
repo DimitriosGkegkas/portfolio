@@ -1,20 +1,49 @@
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { Item } from "../Item";
-import { useThree } from "@react-three/fiber";
-import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
+import { StaticItemDiv } from "../StaticItemDiv";
+import Window from "../../DraggableWindow/Window";
 
 export const MultiDroneSLAM: FC = () => {
-  const { width, height } = useThree((state) => state.viewport);
 
   return (
-    <ScrollControls damping={0.1} pages={3.2}>
-      <Scroll>
-        <Item url={asset("/projects/meteo/meteo1.png")} position={[width < 20 ? width / 2.2 : 0, 0, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo2.png")} position={[width < 20 ? width / 2.2 : 0, -height, 20]} scale={19} />
-        <Item url={asset("/projects/meteo/meteo3.png")} position={[ 0, -height * 2, 10]} scale={20} />
-      </Scroll>
+    <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
+      <StaticItemDiv
+        top="-30%"
+        left="-40%"
+        threshold={0.05}
+      >
+        <Window>
+          <img src='/projects/slam/slam_1 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={500} />
+        </Window>
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="0%"
+        left="-35%"
+        threshold={0.2}
+      >
+        <Window>
+          <img src='/projects/slam/slam_2 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+        </Window>
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="4%"
+        left="-20%"
+        threshold={0.3}
+      >
+        <Window>
+          <img src='/projects/slam/slam_3 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+        </Window>
+      </StaticItemDiv>
+      <StaticItemDiv
+        top="-25%"
+        left="-10%"
+        threshold={0.5}
+      >
+        <Window>
+          <img src='/projects/slam/slam_5 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={400} />
+        </Window>
+      </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
         <ItemDiv offset={10}>

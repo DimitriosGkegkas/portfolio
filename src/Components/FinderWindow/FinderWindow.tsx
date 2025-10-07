@@ -47,6 +47,7 @@ const getProjectIcon = (projectId: string): string => {
   const iconMap: Record<string, string> = {
     'meteoBot': '🌤️',
     'alexanderMap': '🗺️',
+    'thessalonikiMap': '🏛️',
     'zagorisiaApp': '🏛️',
     'digitalMuseums': '🏛️',
     'rotunda': '🏛️',
@@ -76,6 +77,11 @@ const getProjectThumbnails = (projectId: string): string[] => {
       '/projects/alex/alex3.jpeg',
       '/projects/alex/alex4.jpeg'
     ],
+    'thessalonikiMap': [
+      '/projects/thes/thumb_1_thumb.jpg',
+      '/projects/thes/thumb_2_thumb.jpg',
+      '/projects/thes/thumb_3_thumb.jpg'
+    ],
     'zagorisiaApp': [
       '/projects/arch/3_thumb.jpg',
       '/projects/arch/1_thumb.jpg',
@@ -93,10 +99,15 @@ const getProjectThumbnails = (projectId: string): string[] => {
       '/projects/rotunda/thum_2.jpg', 
     ],
     'keioThesis': [
-      '/projects/alex1.png' // Placeholder
+      '/projects/rl/sumo.png',
+      '/projects/rl/2.jpg',
+      '/projects/rl/1.jpg'
+
     ],
     'multiDroneSLAM': [
-      '/projects/alex1.png' // Placeholder
+      '/projects/slam/slam_1 Large.jpeg',
+      '/projects/slam/slam_2 Large.jpeg',
+      '/projects/slam/slam_4 Large.jpeg',
     ],
     'digitizationPipeline': [
       '/projects/alex1.png' // Placeholder
@@ -117,7 +128,9 @@ const getProjectThumbnails = (projectId: string): string[] => {
       '/projects/degrees/NTUA_3.jpeg',
     ],
     'ganMetrics': [
-      '/projects/alex1.png' // Placeholder
+      '/projects/gan/1.png',
+      '/projects/gan/2.jpg',
+      '/projects/gan/0.png',
     ],
     'roboticArm': [
       'public/projects/roboHack/place.jpeg',
