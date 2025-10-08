@@ -132,9 +132,9 @@ const getProjectThumbnails = (projectId: string): string[] => {
       '/projects/gan/0.png',
     ],
     'roboticArm': [
-      'public/projects/roboHack/place.jpeg',
-      'public/projects/roboHack/robot.jpeg',
-      'public/projects/roboHack/code.jpeg',
+      '/projects/roboHack/place.jpeg',
+      '/projects/roboHack/robot.jpeg',
+      '/projects/roboHack/code.jpeg',
     ]
   };
   return (thumbnailMap[projectId] || []).slice(0, 3); // Limit to max 3 images
