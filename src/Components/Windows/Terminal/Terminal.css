@@ -28,7 +28,7 @@
    width: 98svw !important;
    max-width: 98svw !important;
    min-width: 98svw !important;
-
+   top: 30vh;
    left: 1svw !important;
   }
   #terminal-window.expanded {

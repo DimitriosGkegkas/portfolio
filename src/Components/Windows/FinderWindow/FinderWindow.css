@@ -21,14 +21,17 @@
 
 @media (max-aspect-ratio: 1) {
   #finder-window {
-    max-width: 94svw !important;
-    left: 3svw !important;
+    max-width: 70svw;
+    width: 70svw;
+    min-width: 70svw;
+    left: 15svw;
     top: unset !important;
+    bottom: 40svh;
   }
   #finder-window.expanded {
     bottom: 20svh;
-    left: 3svw;
-    max-width: 94svw !important;
+    left: 10svw;
+    max-width: 70svw !important;
   }
 }
 

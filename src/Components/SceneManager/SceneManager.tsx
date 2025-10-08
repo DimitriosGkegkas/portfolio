@@ -29,6 +29,13 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
   const [hovered, setHovered] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<any>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (state.project) {
+      setHoveredProject(null);
+      setHovered(false);
+    }
+  }, [state.project]);
   
   useEffect(() => {
     document.body.style.cursor = hovered ? "pointer" : "auto";

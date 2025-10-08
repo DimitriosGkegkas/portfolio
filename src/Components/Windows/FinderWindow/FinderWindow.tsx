@@ -164,13 +164,23 @@ export const FinderWindow: FC<FinderWindowProps> = ({
     }
   };
 
-  const handleProjectMouseEnter = (project: Project, event: React.MouseEvent) => {
+  const handleProjectPointerEnter = (project: Project, event: React.PointerEvent) => {
+    // Only show tooltip for mouse/pen, not touch
+    if (event.pointerType === 'touch') {
+      return; // Skip tooltip for touch interactions
+    }
+    
     if (onProjectHover) {
       onProjectHover(project, { x: event.clientX, y: event.clientY });
     }
   };
 
-  const handleProjectMouseLeave = () => {
+  const handleProjectPointerLeave = (event: React.PointerEvent) => {
+    // Only hide tooltip if it was triggered by mouse/pen, not touch
+    if (event.pointerType === 'touch') {
+      return;
+    }
+    
     if (onProjectHover) {
       onProjectHover(null, { x: 0, y: 0 });
     }
@@ -247,8 +257,8 @@ export const FinderWindow: FC<FinderWindowProps> = ({
                 key={project.id}
                 className="project-item"
                 onClick={() => handleProjectClick(project.id)}
-                onMouseEnter={(e) => handleProjectMouseEnter(project, e)}
-                onMouseLeave={handleProjectMouseLeave}
+                onPointerEnter={(e) => handleProjectPointerEnter(project, e)}
+                onPointerLeave={(e) => handleProjectPointerLeave(e)}
               >
                 <div className="project-icon">{project.icon}</div>
                 <div className="project-name">{project.name}</div>
