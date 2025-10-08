@@ -4,6 +4,7 @@ import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import { VimeoVideo } from "../../Windows/VimeoVideo/VimeoVideo";
 import Window from "../../Windows/DraggableWindow/Window";
+import { asset } from "../../../utils/asset";
 
 export const RoboticArm: FC = () => {
 
@@ -15,7 +16,7 @@ export const RoboticArm: FC = () => {
         threshold={0.1}
       >
         <Window>
-          <img src='/projects/roboHack/robot.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+          <img src={asset('/projects/roboHack/robot.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
       <StaticItemDiv
@@ -24,7 +25,7 @@ export const RoboticArm: FC = () => {
         threshold={0.2}
       >
         <Window>
-          <img src='/projects/roboHack/code.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+          <img src={asset('/projects/roboHack/code.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
 
@@ -41,7 +42,7 @@ export const RoboticArm: FC = () => {
         threshold={0.4}
       >
         <Window>
-          <img src='/projects/roboHack/place.jpeg' alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+          <img src={asset('/projects/roboHack/place.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
 

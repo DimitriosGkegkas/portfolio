@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import Window from "../../Windows/DraggableWindow/Window";
+import { asset } from "../../../utils/asset";
 
 export const KeioThesis: FC = () => {
 
@@ -16,7 +17,7 @@ export const KeioThesis: FC = () => {
         threshold={0.15}
       >
         <Window>
-          <img src='/projects/rl/2.jpg' alt='Keio Thesis' className='mockup-image' width={450} />
+          <img src={asset('/projects/rl/2.jpg')} alt='Keio Thesis' className='mockup-image' width={450} />
         </Window>
       </StaticItemDiv>
 
@@ -26,7 +27,7 @@ export const KeioThesis: FC = () => {
         threshold={0.2}
       >
         <Window>
-          <img src='/projects/rl/3.jpg' alt='Keio Thesis' className='mockup-image' width={500} />
+          <img src={asset('/projects/rl/3.jpg')} alt='Keio Thesis' className='mockup-image' width={500} />
         </Window>
       </StaticItemDiv>
 
@@ -36,7 +37,7 @@ export const KeioThesis: FC = () => {
         threshold={0.5}
       >
         <Window>
-          <img src='/projects/rl/2 copy.jpg' alt='Keio Thesis' className='mockup-image' width={300} />
+          <img src={asset('/projects/rl/2 copy.jpg')} alt='Keio Thesis' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
 
@@ -46,7 +47,7 @@ export const KeioThesis: FC = () => {
         threshold={0.6}
       >
         <Window>
-          <img src='/projects/rl/1.jpg' alt='Keio Thesis' className='mockup-image' width={300} />
+          <img src={asset('/projects/rl/1.jpg')} alt='Keio Thesis' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
 
@@ -56,7 +57,7 @@ export const KeioThesis: FC = () => {
         threshold={0.05}
       >
         <Window>
-          <video src='/projects/rl/1.mp4' autoPlay loop muted />
+          <video src={asset('/projects/rl/1.mp4')} autoPlay loop muted />
         </Window>
       </StaticItemDiv>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './FaceTimeCall.css';
+import { asset } from '../../../utils/asset';
 
 interface FaceTimeCallProps {
   isVisible: boolean;
@@ -79,7 +80,7 @@ const FaceTimeCall: React.FC<FaceTimeCallProps> = ({ isVisible, onClose }) => {
   };
 
   const handleCVClick = () => {
-    window.open('/CV.pdf', '_blank');
+    window.open(asset('/CV.pdf'), '_blank');
     handleClose();
   };
 
@@ -98,7 +99,7 @@ const FaceTimeCall: React.FC<FaceTimeCallProps> = ({ isVisible, onClose }) => {
         <div className="facetime-call__contact">
           <div className="facetime-call__avatar">
             <img 
-              src="/profil.jpeg" 
+              src={asset('/profil.jpeg')}
               alt="Dimitrios Gkegkas" 
               className="facetime-call__avatar-img"
             />

@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import Window from "../../Windows/DraggableWindow/Window";
+import { asset } from "../../../utils/asset";
 
 export const MultiDroneSLAM: FC = () => {
 
@@ -14,7 +15,7 @@ export const MultiDroneSLAM: FC = () => {
         threshold={0.05}
       >
         <Window>
-          <img src='/projects/slam/slam_1 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={500} />
+          <img src={asset('/projects/slam/slam_1 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={500} />
         </Window>
       </StaticItemDiv>
       <StaticItemDiv
@@ -23,7 +24,7 @@ export const MultiDroneSLAM: FC = () => {
         threshold={0.2}
       >
         <Window>
-          <img src='/projects/slam/slam_2 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+          <img src={asset('/projects/slam/slam_2 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
       <StaticItemDiv
@@ -32,7 +33,7 @@ export const MultiDroneSLAM: FC = () => {
         threshold={0.3}
       >
         <Window>
-          <img src='/projects/slam/slam_3 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+          <img src={asset('/projects/slam/slam_3 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
       <StaticItemDiv
@@ -41,7 +42,7 @@ export const MultiDroneSLAM: FC = () => {
         threshold={0.5}
       >
         <Window>
-          <img src='/projects/slam/slam_5 Large.jpeg' alt='Multi-Drone SLAM' className='mockup-image' width={400} />
+          <img src={asset('/projects/slam/slam_5 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={400} />
         </Window>
       </StaticItemDiv>
 

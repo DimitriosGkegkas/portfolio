@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import Window from "../../Windows/DraggableWindow/Window";
+import { asset } from "../../../utils/asset";
 
 export const GanMetrics: FC = () => {
 
@@ -14,7 +15,7 @@ export const GanMetrics: FC = () => {
         threshold={0.1}
       >
 
-        <img src='/projects/gan/0.png' alt='Gan Metrics' className='mockup-image' width={600} />
+        <img src={asset('/projects/gan/0.png')} alt='Gan Metrics' className='mockup-image' width={600} />
 
       </StaticItemDiv>
       <StaticItemDiv
@@ -23,7 +24,7 @@ export const GanMetrics: FC = () => {
         threshold={0.3}
       >
 
-        <img src='/projects/gan/1.png' alt='Gan Metrics' className='mockup-image' width={500} />
+        <img src={asset('/projects/gan/1.png')} alt='Gan Metrics' className='mockup-image' width={500} />
 
       </StaticItemDiv>
       <StaticItemDiv
@@ -32,7 +33,7 @@ export const GanMetrics: FC = () => {
         threshold={0.5}
       >
         <Window>
-          <img src='/projects/gan/2.jpg' alt='Gan Metrics' className='mockup-image' width={300} />
+          <img src={asset('/projects/gan/2.jpg')} alt='Gan Metrics' className='mockup-image' width={300} />
         </Window>
       </StaticItemDiv>
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>

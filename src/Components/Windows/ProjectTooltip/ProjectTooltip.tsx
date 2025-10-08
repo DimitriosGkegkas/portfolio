@@ -1,5 +1,6 @@
 import { type FC, useEffect, useState } from "react";
 import "./ProjectTooltip.css";
+import { asset } from "../../../utils/asset";
 
 interface Project {
     id: string;
@@ -78,7 +79,7 @@ export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) =
                             {/* Main large image (left half) */}
                             <div className="thumbnail-main">
                                 <img 
-                                    src={project.thumbnails[0]} 
+                                    src={asset(project.thumbnails[0])} 
                                     alt={`${project.name} main screenshot`}
                                     className="thumbnail-image"
                                     loading="lazy"
@@ -90,7 +91,7 @@ export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) =
                                 {project.thumbnails.slice(1, 3).map((thumbnail, index) => (
                                     <div key={index} className="thumbnail-item">
                                         <img 
-                                            src={thumbnail} 
+                                            src={asset(thumbnail)} 
                                             alt={`${project.name} screenshot ${index + 2}`}
                                             className="thumbnail-image"
                                             loading="lazy"

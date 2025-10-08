@@ -23,7 +23,7 @@ export const catHelper = (
       return;
     }
 
-    if (fileName == "CV.pdf") {
+    if (fileName.includes("CV.pdf")) {
       // Open CV in a new tab
       window.open("/CV.pdf", "_blank");
     }

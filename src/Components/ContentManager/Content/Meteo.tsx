@@ -4,6 +4,7 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
+import { asset } from "../../../utils/asset";
 
 export const Meteo: FC = () => {
 
@@ -15,7 +16,7 @@ export const Meteo: FC = () => {
         left="-40%"
         threshold={0.1}
       >
-        <img src='/projects/meteo/meteo1.png' alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
+        <img src={asset('/projects/meteo/meteo1.png')} alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
       </StaticItemDiv>
 
       <StaticItemDiv
@@ -23,7 +24,7 @@ export const Meteo: FC = () => {
         left="-20%"
         threshold={0.3}
       >
-        <img src='/projects/meteo/meteo2.png' alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
+        <img src={asset('/projects/meteo/meteo2.png')} alt='Meteo chatbot UI 1' className='mockup-image' width={300} />
       </StaticItemDiv>
 
       <StaticItemDiv
@@ -31,7 +32,7 @@ export const Meteo: FC = () => {
         left="-38%"
         threshold={0.8}
       >
-        <img src='/projects/meteo/meteo3.png' alt='Meteo chatbot UI 1' className='mockup-image' width={500} />
+        <img src={asset('/projects/meteo/meteo3.png')} alt='Meteo chatbot UI 1' className='mockup-image' width={500} />
       </StaticItemDiv>
 
       <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
@@ -57,13 +58,13 @@ export const Meteo: FC = () => {
         {/* Optional iPhone-style mockup container */}
         <div style={imageContainerStyles(320)}>
           <div className='iphone-frame'>
-            <img src='/images/meteo-mockup-1.jpg' alt='Meteo chatbot UI 1' className='mockup-image' />
+            <img src={asset('/images/meteo-mockup-1.jpg')} alt='Meteo chatbot UI 1' className='mockup-image' />
           </div>
         </div>
 
         <div style={imageContainerStyles(380)}>
           <div className='iphone-frame'>
-            <img src='/images/meteo-mockup-2.jpg' alt='Meteo chatbot UI 2' className='mockup-image' />
+            <img src={asset('/images/meteo-mockup-2.jpg')} alt='Meteo chatbot UI 2' className='mockup-image' />
           </div>
         </div>
       </Scroll>

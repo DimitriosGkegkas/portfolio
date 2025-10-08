@@ -1,5 +1,6 @@
 import "./VimeoVideo.css";
 import Window from "../DraggableWindow/Window";
+import { asset } from "../../../utils/asset";
 
 interface VimeoVideoProps {
     videoId: string;
@@ -37,7 +38,7 @@ export const VimeoVideo: React.FC<VimeoVideoProps> = ({
             >
                 <div className="vimeo-container">
                     <iframe
-                        src={vimeoUrl}
+                        src={asset(vimeoUrl)}
                         style={height ? {
                             width: `${width / ratio}vh`,
                             height: `${height}vh`
