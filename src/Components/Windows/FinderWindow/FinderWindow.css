@@ -23,9 +23,10 @@
   #finder-window {
     max-width: 94svw !important;
     left: 3svw !important;
+    top: unset !important;
   }
   #finder-window.expanded {
-    bottom: 30svh;
+    bottom: 20svh;
     left: 3svw;
     max-width: 94svw !important;
   }
@@ -208,7 +209,6 @@
   flex: 0 1 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
-  grid-template-rows: repeat(auto-fill, 100px);
   gap: 6px;
   padding: 16px;
   overflow-y: auto;
@@ -322,7 +322,6 @@
   
   .projects-grid {
     grid-template-columns: repeat(auto-fill, 85px);
-    grid-template-rows: repeat(auto-fill, 85px);
     gap: 6px;
     padding: 16px;
   }
@@ -360,7 +359,6 @@
   
   .projects-grid {
     grid-template-columns: repeat(auto-fill, 70px);
-    grid-template-rows: repeat(auto-fill, 70px);
     gap: 4px;
     padding: 12px;
   }

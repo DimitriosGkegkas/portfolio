@@ -89,7 +89,7 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           <ContentManager page={state.project} />
           <ambientLight intensity={1} />
           <mesh rotation={[-0.2, Math.PI * 0.26, 0]} position={[10, -3, 0]} onClick={cancelProject} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
-            <boxGeometry args={[20, 20, 0.5]} />
+            <boxGeometry args={[20, 40, 0.5]} />
             <meshStandardMaterial visible={false} />
           </mesh>
           <mesh rotation={[-0.2, Math.PI * 0.26, 0]} position={[6, -9, 0]} onClick={cancelProject} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>

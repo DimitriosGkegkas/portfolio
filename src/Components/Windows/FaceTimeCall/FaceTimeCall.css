@@ -188,9 +188,6 @@
 /* Responsive design - maintain fixed width on mobile */
 @media (max-width: 768px) {
   
-  .facetime-call--visible {
-    transform: translateY(-45vh) translateX(calc(50vw));
-  }
   
   .facetime-call__actions {
     gap: 8px;

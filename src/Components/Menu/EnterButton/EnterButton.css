@@ -42,6 +42,7 @@
   text-align: center;
   letter-spacing: 0.05em;
   font-style: normal;
+  z-index: 100000000;
 }
 
 .animated-border-wrapper:hover  > .open-laptop-button {

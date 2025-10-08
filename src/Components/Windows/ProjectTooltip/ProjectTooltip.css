@@ -207,8 +207,8 @@
 
 @media screen and (max-width: 480px) {
   .project-preview-tooltip {
-    max-width: 240px;
-    min-width: 200px;
+    max-width: min(240px, calc(100vw - 16px));
+    min-width: min(200px, calc(100vw - 16px));
     padding: 10px;
   }
   
@@ -230,5 +230,31 @@
   
   .thumbnails-container {
     height: 60px;
+  }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 360px) {
+  .project-preview-tooltip {
+    max-width: calc(100vw - 16px);
+    min-width: calc(100vw - 32px);
+    padding: 8px;
+  }
+  
+  .tooltip-icon {
+    font-size: 18px;
+  }
+  
+  .tooltip-title {
+    font-size: 12px;
+  }
+  
+  .tooltip-subtitle,
+  .tooltip-content {
+    font-size: 10px;
+  }
+  
+  .thumbnails-container {
+    height: 50px;
   }
 }

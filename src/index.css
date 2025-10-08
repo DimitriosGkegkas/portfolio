@@ -12,6 +12,9 @@ main,
   height: 100svh;
   margin: 0;
   padding: 0;
+  /* position: fixed; */
+  overflow: hidden;
+  touch-action: none;
 }
 button {
   color: black;

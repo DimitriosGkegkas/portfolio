@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState, useRef } from "react";
 import "./ProjectTooltip.css";
 import { asset } from "../../../utils/asset";
 
@@ -21,27 +21,67 @@ interface ProjectTooltipProps {
 export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) => {
     const [tooltipPosition, setTooltipPosition] = useState(position);
     const [isVisible, setIsVisible] = useState(false);
+    const tooltipRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (project) {
-            // Add small offset from cursor
-            const offsetX = 15;
-            const offsetY = 15;
+            // Responsive offset - smaller on mobile
+            const isMobile = window.innerWidth <= 768;
+            const offsetX = isMobile ? 8 : 15;
+            const offsetY = isMobile ? 8 : 15;
             
-            // Get tooltip dimensions (estimated)
-            const tooltipWidth = 320;
-            const tooltipHeight = 200;
+            // Estimate tooltip dimensions based on screen size
+            const getTooltipDimensions = () => {
+                if (tooltipRef.current) {
+                    // Use actual dimensions if available
+                    return {
+                        width: tooltipRef.current.offsetWidth,
+                        height: tooltipRef.current.offsetHeight
+                    };
+                }
+                
+                // Fallback estimates based on screen width
+                if (window.innerWidth <= 480) {
+                    return { width: 240, height: 250 };
+                } else if (window.innerWidth <= 768) {
+                    return { width: 280, height: 280 };
+                } else {
+                    return { width: 320, height: 300 };
+                }
+            };
+            
+            const { width: tooltipWidth, height: tooltipHeight } = getTooltipDimensions();
+            
+            // Add padding from screen edges
+            const edgePadding = isMobile ? 8 : 16;
+            const maxX = window.innerWidth - tooltipWidth - edgePadding;
+            const maxY = window.innerHeight - tooltipHeight - edgePadding;
             
             let x = position.x + offsetX;
             let y = position.y + offsetY;
             
-            // Adjust if tooltip would go off screen
-            if (x + tooltipWidth > window.innerWidth) {
+            // Adjust if tooltip would go off screen - with proper clamping
+            if (x + tooltipWidth > window.innerWidth - edgePadding) {
+                // Try to position to the left of cursor
                 x = position.x - tooltipWidth - offsetX;
+                // If still off screen, clamp to edge
+                if (x < edgePadding) {
+                    x = edgePadding;
+                }
             }
-            if (y + tooltipHeight > window.innerHeight) {
+            
+            if (y + tooltipHeight > window.innerHeight - edgePadding) {
+                // Try to position above cursor
                 y = position.y - tooltipHeight - offsetY;
+                // If still off screen, clamp to edge
+                if (y < edgePadding) {
+                    y = edgePadding;
+                }
             }
+            
+            // Ensure tooltip stays within bounds
+            x = Math.max(edgePadding, Math.min(x, maxX));
+            y = Math.max(edgePadding, Math.min(y, maxY));
             
             setTooltipPosition({ x, y });
             setIsVisible(true);
@@ -54,6 +94,7 @@ export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) =
 
     return (
         <div
+            ref={tooltipRef}
             className="project-preview-tooltip"
             style={{
                 position: 'fixed',

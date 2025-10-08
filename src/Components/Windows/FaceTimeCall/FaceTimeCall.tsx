@@ -90,7 +90,7 @@ const FaceTimeCall: React.FC<FaceTimeCallProps> = ({ isVisible, onClose }) => {
   };
 
   // Always render the component when isVisible is true, but control visibility with CSS classes
-  if (!isVisible && !isAnimating) return null;
+  // if (!isVisible && !isAnimating) return null;
 
   return (
     <div className={`facetime-call ${isAnimating ? 'facetime-call--visible' : ''}`}>
