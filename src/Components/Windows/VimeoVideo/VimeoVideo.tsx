@@ -38,7 +38,7 @@ export const VimeoVideo: React.FC<VimeoVideoProps> = ({
             >
                 <div className="vimeo-container">
                     <iframe
-                        src={asset(vimeoUrl)}
+                        src={vimeoUrl}
                         style={height ? {
                             width: `${width / ratio}vh`,
                             height: `${height}vh`
