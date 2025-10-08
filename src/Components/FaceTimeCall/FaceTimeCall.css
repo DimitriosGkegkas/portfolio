@@ -1,6 +1,6 @@
 .facetime-call {
   position: fixed;
-  top: 20px;
+  top: 50px;
   right: 20px;
   z-index: 10000;
   width: 350px;
@@ -10,7 +10,7 @@
   border-radius: 42px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
   padding: 16px;
-  transform: translateX(calc(50vw)) translateY(calc(-100vh));
+  transform: translateY(-350px);
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -19,7 +19,7 @@
 }
 
 .facetime-call--visible {
-  transform: translateY(-45vh) translateX(calc(50vw));
+  transform: translateY(0px);
   opacity: 1;
   visibility: visible;
 }

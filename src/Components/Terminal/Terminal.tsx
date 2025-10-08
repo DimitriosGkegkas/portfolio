@@ -191,9 +191,6 @@ const Terminal3D = ({
           { label: "Robotics & AI", onClick: handleRoboticsClick },
           { label: "Contact", onClick: handleContactClick },
         ]}
-        style={{
-          transform: `translateX(-50%) translateY(-50%)`
-        }}
         windowId="terminal-window"
       >
         <div className='terminal-wrapper' onPointerDown={(e) => e.stopPropagation()}>

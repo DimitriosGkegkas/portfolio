@@ -1,5 +1,6 @@
 .content {
-  background-color: rgb(16, 20, 32);
+  width: 100vw;
+  height: 100vh;
   color: "#0f0";
   font-family: "monospace";
   font-size: "24px";

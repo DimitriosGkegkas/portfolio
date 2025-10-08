@@ -10,6 +10,33 @@
   background-color: rgb(16, 20, 32);
 }
 
+#terminal-window {
+  bottom: 22vh;
+  right: calc(50vw - 50vh + 5vh);
+  width: 90dvh;
+  min-width: 70dvh;
+}
+
+#terminal-window.expanded {
+  bottom: 10vw;
+  right: 1vw;
+  /* width: 50dvw; */
+}
+
+@media (max-aspect-ratio: 1) {
+  #terminal-window {
+   width: 98svw !important;
+   max-width: 98svw !important;
+   min-width: 98svw !important;
+
+   left: 1svw !important;
+  }
+  #terminal-window.expanded {
+    top: 18vh;
+    max-width: 98svw !important;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .terminal-wrapper {
     padding: 0px;

@@ -1,7 +1,5 @@
 .draggable-window-wrapper {
   position: absolute;
-  left: 50%;
-  top: 50%;
   width: fit-content;
   min-width: 200px;
   max-width: 90vw;
@@ -10,8 +8,9 @@
   transform: translateX(-50%) translateY(-50%);
   border-radius: 12px;
   overflow: hidden;
+  transition: top 2s ease, left 2s ease, right 2s ease, bottom 2s ease, width 2s ease, height 2s ease;
   /* Shine effect on edges */
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.1),
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -19,7 +18,7 @@
 }
 
 .draggable-window-wrapper:active {
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.15),
     0 12px 40px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -155,7 +154,16 @@
   color: #ffffff;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 570px), screen and (max-height: 635px) {
+  .menu-button {
+    padding: 0px 4px;
+    font-size: 10px;
+  }
+  .menu-bar {
+    gap: 4px;
+    margin-left: 0px;
+  }
+  
   .window-content {
     padding: 0px;
   }
@@ -163,7 +171,8 @@
 
 @media screen and (max-width: 400px) {
   .draggable-window-wrapper {
-    font-size: 12px !important; /* Adjust font size for smaller screens */
+    font-size: 12px !important;
+    /* Adjust font size for smaller screens */
   }
 }
 

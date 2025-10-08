@@ -17,7 +17,6 @@ interface Project {
 interface FinderWindowProps {
   onProjectClick: (projectId: string) => void;
   position?: { x: number; y: number };
-  onClose?: () => void;
   category?: 'web-development' | 'robotics-ai' | 'education';
   onCategoryChange?: (category: 'web-development' | 'robotics-ai' | 'education' | null) => void;
   onProjectHover?: (project: Project | null, position: { x: number; y: number }) => void;
@@ -145,7 +144,6 @@ const getProjectThumbnails = (projectId: string): string[] => {
 export const FinderWindow: FC<FinderWindowProps> = ({
   onProjectClick,
   position = { x: 0, y: 0 },
-  onClose,
   category,
   onCategoryChange,
   onProjectHover
@@ -185,12 +183,6 @@ export const FinderWindow: FC<FinderWindowProps> = ({
   return (
     <DraggableWindow
       className="finder-window"
-      style={{
-        left: `${50 + position.x}%`,
-        top: `${50 + position.y}%`,
-        transform: `translateX(-60%) translateY(-65%)`
-      }}
-      onClose={onClose}
       windowId="finder-window"
     >
       <div className="finder-content">

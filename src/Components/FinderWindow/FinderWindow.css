@@ -1,15 +1,39 @@
 .finder-window {
-  width: 80dvh;
-  height: 45dvh;
+  width: 50dvh;
   max-width: 80vw;
-  max-height: 80vh;
+  max-height: 50vh;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#finder-window {
+  top: 18vh;
+  left: calc(50vw - 50vh);
+  width: 500px;
+  max-width: 100dvh;
+  min-width: 360px;
+}
+
+#finder-window.expanded {
+  top: calc(1vw + 32px);
+  left: 5vw;
+  width: 500px;
+}
+
+@media (max-aspect-ratio: 1) {
+  #finder-window {
+    max-width: 94svw !important;
+    left: 3svw !important;
+  }
+  #finder-window.expanded {
+    bottom: 30svh;
+    left: 3svw;
+    max-width: 94svw !important;
+  }
 }
 
 .finder-content {
   display: flex;
   flex-direction: row;
-  height: 100%;
   width: 100%;
   overflow: hidden;
   background: #1a1a1a;
@@ -181,7 +205,7 @@
 }
 
 .projects-grid {
-  flex: 1;
+  flex: 0 1 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
   grid-template-rows: repeat(auto-fill, 100px);

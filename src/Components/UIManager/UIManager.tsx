@@ -26,7 +26,7 @@ export default function UIManager({ props, state, setState, loaded }: UIManagerP
     <web.main
       className='main-container'
       style={{
-        background: props.background.to([0, 1], ["#f0f0f0", "rgb(4, 5, 9)"]),
+        background: props.background.to([0, 1], ["linear-gradient(90deg, #f0f0f0, #f0f0f0)", "linear-gradient(-30deg, rgb(4, 8, 46) ,rgb(25, 12, 2) )"]),
         overflow: "hidden",
         opacity: appear,
       }}>

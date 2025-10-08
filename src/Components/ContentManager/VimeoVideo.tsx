@@ -28,7 +28,6 @@ export const VimeoVideo: React.FC<VimeoVideoProps> = ({
         <>
             <Window
                 isVisible={true}
-                setIsVisible={() => { }}
                 onClose={() => { }}
                 isDragging={false}
                 menuButtons={[]}

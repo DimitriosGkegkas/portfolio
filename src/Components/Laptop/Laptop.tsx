@@ -58,7 +58,7 @@ const getResponsivePositions = () => {
 const getDistanceFactor = (height: number) => {
   // The base distanceFactor when baseZ = -17
   const baseDistanceFactor = 3212.549 / height;
-  
+
   // Scale the distanceFactor inversely with the Z position
   // When laptop is further back (more negative baseZ), content should be larger so basdeDistanceFactor should be larger
   return baseDistanceFactor;
@@ -83,21 +83,31 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
 
   // Component that uses the window manager - memoized to prevent re-renders
   const LaptopContent = memo(() => {
-    const { bringToFront } = useWindowManager();
+    const { bringToFront, openWindow, setExpanded, closeWindow } = useWindowManager();
     const [currentCategory, setCurrentCategory] = useState<'web-development' | 'robotics-ai' | 'education' | undefined>(undefined);
+
+    useEffect(() => {
+      closeWindow('finder-window');
+    }, []);
     
     const handleWebDevClick = () => {
       bringToFront('finder-window');
+      openWindow('finder-window');
+      setExpanded(true);
       setCurrentCategory('web-development');
     };
-    
+
     const handleRoboticsClick = () => {
       bringToFront('finder-window');
+      openWindow('finder-window');
+      setExpanded(true);
       setCurrentCategory('robotics-ai');
     };
 
     const handleEducationClick = () => {
       bringToFront('finder-window');
+      openWindow('finder-window');
+      setExpanded(true);
       setCurrentCategory('education');
     };
 
@@ -107,18 +117,23 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
       }
     };
 
+    const handleProjectClick = (projectId: string) => {
+      setState(prev => ({ ...prev, project: projectId }));
+    };
+
+
+
     return (
       <>
-        <Terminal3D 
-          setState={setState} 
+        <Terminal3D
+          setState={setState}
           onWebDevClick={handleWebDevClick}
           onRoboticsClick={handleRoboticsClick}
           onEducationClick={handleEducationClick}
         />
-        <FinderWindow 
-          onProjectClick={(projectId) => setState(prev => ({ ...prev, project: projectId }))} 
+        <FinderWindow
+          onProjectClick={handleProjectClick}
           position={{ x: 15, y: -10 }}
-          onClose={() => console.log("Finder closed")}
           category={currentCategory}
           onCategoryChange={(category) => setCurrentCategory(category || undefined)}
           onProjectHover={handleProjectHover}
@@ -127,12 +142,31 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
     );
   });
 
+  const ExpandStateManger = () => {
+    const { setExpanded } = useWindowManager();
+    useEffect(() => {
+      if (state.project) {
+        setExpanded(false);
+      }
+      else {
+        setExpanded(true);
+      }
+    }, [state]);
+    return null;
+  }
+
+
   // Memoize the entire WindowManagerProvider and its children to prevent re-initialization
+  const memoizedLaptopContent = useMemo(() => (
+    <LaptopContent />
+  ), [setState]);
+
   const memoizedWindowContent = useMemo(() => (
     <WindowManagerProvider>
-      <LaptopContent />
+      {memoizedLaptopContent}
+      <ExpandStateManger />
     </WindowManagerProvider>
-  ), [setState]);
+  ), [setState, state, memoizedLaptopContent]);
 
   const { open } = useSpring({
     open: state.open ? 1 : Number(hovered) / 15,
@@ -160,7 +194,7 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
 
   // Get responsive positions based on current window width
   const positions = getResponsivePositions();
-  
+
   // Calculate the distanceFactor
   const distanceFactor = getDistanceFactor(height);
 
@@ -217,7 +251,7 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
                 <Html
                   ref={htmlContentref}
                   transform
-                  
+
                   // occlude
                   // portal={{ current: document.getElementById("root") }}
 
