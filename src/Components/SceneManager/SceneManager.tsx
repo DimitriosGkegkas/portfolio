@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 import Laptop from "../Laptop/Laptop";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
-import { ProjectTooltip } from "../ProjectTooltip/ProjectTooltip";
+import { ProjectTooltip } from "../Windows/ProjectTooltip/ProjectTooltip";
 
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };

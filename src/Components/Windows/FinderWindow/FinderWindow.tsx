@@ -143,7 +143,6 @@ const getProjectThumbnails = (projectId: string): string[] => {
 
 export const FinderWindow: FC<FinderWindowProps> = ({
   onProjectClick,
-  position = { x: 0, y: 0 },
   category,
   onCategoryChange,
   onProjectHover

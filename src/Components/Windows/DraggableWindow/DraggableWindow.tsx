@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import { useSpring, animated, to } from "@react-spring/web";
-import { useWindowManager } from "../WindowManager/WindowManager";
+import { useWindowManager } from "../../Windows/WindowManager/WindowManager";
 import Window from "./Window";
 import "./DraggableWindow.css";
 

@@ -2,8 +2,8 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
-import { VimeoVideo } from "../VimeoVideo";
-import Window from "../../DraggableWindow/Window";
+import { VimeoVideo } from "../../Windows/VimeoVideo/VimeoVideo";
+import Window from "../../Windows/DraggableWindow/Window";
 
 export const RoboticArm: FC = () => {
 

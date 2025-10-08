@@ -5,7 +5,7 @@ import { useThree } from "@react-three/fiber";
 import { asset } from "../../../utils/asset";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
-import { VimeoVideo } from "../VimeoVideo";
+import { VimeoVideo } from "../../Windows/VimeoVideo/VimeoVideo";
 
 export const Alexander: FC = () => {
   const { width, height } = useThree((state) => state.viewport);

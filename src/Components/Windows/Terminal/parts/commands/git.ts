@@ -1,8 +1,8 @@
 import type { Terminal } from "@xterm/xterm";
 import { COLOR, commits } from "../constants";
 import type { RefObject } from "react";
-import type { Project } from "../../../../Data/portfolioData";
-import { getBranchProjects } from "../../../../Data/portfolioData";
+import type { Project } from "../../../../../Data/portfolioData";
+import { getBranchProjects } from "../../../../../Data/portfolioData";
 
 export const gitHelper = (
   instance: Terminal,

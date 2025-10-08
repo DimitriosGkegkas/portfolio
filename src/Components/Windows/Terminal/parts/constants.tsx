@@ -1,5 +1,5 @@
-import { getFileSystem, getBranches, getProjects } from "../../../Data/portfolioData";
-export { COLOR } from "../../../Data/portfolioData";
+import { getFileSystem, getBranches, getProjects } from "../../../../Data/portfolioData";
+export { COLOR } from "../../../../Data/portfolioData";
 
 // Export the centralized data
 export const fs_data = getFileSystem();

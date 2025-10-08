@@ -2,7 +2,7 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
-import { VimeoVideo } from "../VimeoVideo";
+import { VimeoVideo } from "../../Windows/VimeoVideo/VimeoVideo";
 
 export const Rotunda: FC = () => {
   return (

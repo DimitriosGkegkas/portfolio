@@ -3,7 +3,7 @@ import { commits } from "../constants";
 import type { RefObject } from "react";
 import { prompt } from "../promt";
 import { educationHandler, webDevHandler, roboticsHandler } from "./handlers";
-import { getBranchProjects, type Project } from "../../../../Data/portfolioData";
+import { getBranchProjects, type Project } from "../../../../../Data/portfolioData";
 
 export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<string>, currentBranch: RefObject<string | null>, onCommand: (cmd: string) => void) => (y: number, callback: (links: ILink[] | undefined) => void) => {
   const line = instance.buffer.active.getLine(y - 1);

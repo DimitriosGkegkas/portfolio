@@ -2,7 +2,7 @@ import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
 import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
-import Window from "../../DraggableWindow/Window";
+import Window from "../../Windows/DraggableWindow/Window";
 
 export const KeioThesis: FC = () => {
 

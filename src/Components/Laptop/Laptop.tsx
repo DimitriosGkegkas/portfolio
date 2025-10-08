@@ -4,14 +4,14 @@ import { Html, useGLTF } from "@react-three/drei";
 import { a as animated } from "@react-spring/three";
 import { Group } from "three";
 import { SpringValue, useSpring } from "@react-spring/core";
-import Terminal3D from "../Terminal/Terminal";
-import { FinderWindow } from "../FinderWindow/FinderWindow";
+import { FinderWindow } from "../Windows/FinderWindow/FinderWindow";
 import { useThree } from "@react-three/fiber";
-import { WindowManagerProvider, useWindowManager } from "../WindowManager/WindowManager";
+import { WindowManagerProvider, useWindowManager } from "../Windows/WindowManager/WindowManager";
 import "./Laptop.css";
 import { asset } from "../../utils/asset";
 import { type GLTF } from "three-stdlib";
 import { Light } from "../Light";
+import Terminal3D from "../Windows/Terminal/Terminal";
 
 type GLTFResult = GLTF & {
   nodes: {

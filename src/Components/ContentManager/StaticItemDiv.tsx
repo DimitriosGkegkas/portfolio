@@ -72,7 +72,7 @@ export const StaticItemDiv: React.FC<StaticItemDivProps> = ({
 
   return (
     <Html 
-      portal={{ current: gl.domElement.parentElement }}
+      portal={{ current: gl.domElement.parentElement || document.body }}
       style={{
         position: 'fixed',
         top: 0,
