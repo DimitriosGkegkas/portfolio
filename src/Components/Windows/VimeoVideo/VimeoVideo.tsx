@@ -1,6 +1,5 @@
 import "./VimeoVideo.css";
 import Window from "../DraggableWindow/Window";
-import { asset } from "../../../utils/asset";
 
 interface VimeoVideoProps {
     videoId: string;

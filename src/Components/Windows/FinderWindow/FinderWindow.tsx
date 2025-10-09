@@ -32,112 +32,13 @@ const getProjectsByCategory = (category?: 'web-development' | 'robotics-ai' | 'e
   return branch.projects.map((project: any) => ({
     id: project.id,
     name: project.name || project.title || 'Untitled Project',
-    icon: getProjectIcon(project.id),
+    icon: project.icon || '📁',
     description: project.description || project.title || '',
     techStack: project.techStack?.join(', '),
     tags: project.tags,
     title: project.title,
-    thumbnails: getProjectThumbnails(project.id)
+    thumbnails: project.thumbnails?.slice(0, 3) || []
   }));
-};
-
-// Function to get appropriate icon for each project
-const getProjectIcon = (projectId: string): string => {
-  const iconMap: Record<string, string> = {
-    'meteoBot': '🌤️',
-    'alexanderMap': '🗺️',
-    'thessalonikiMap': '🏛️',
-    'zagorisiaApp': '🏛️',
-    'digitalMuseums': '🏛️',
-    'rotunda': '🏛️',
-    'keioThesis': '🚗',
-    'multiDroneSLAM': '🚁',
-    'digitizationPipeline': '📸',
-    'keio': '🎓',
-    'ecn': '🇫🇷',
-    'ntua': '🏛️',
-    'ganMetrics': '🧠',
-    'roboticArm': '🦾'
-  };
-  return iconMap[projectId] || '📁';
-};
-
-// Function to get thumbnails for each project (max 3 images)
-const getProjectThumbnails = (projectId: string): string[] => {
-  const thumbnailMap: Record<string, string[]> = {
-    'meteoBot': [
-      '/projects/meteo/0_thumb.jpg',
-      '/projects/meteo/1_thumb.jpg',
-      '/projects/meteo/3_thumb.jpg',
-    ],
-    'alexanderMap': [
-      '/projects/alex/alex1.jpeg',
-      '/projects/alex/alex2.jpeg',
-      '/projects/alex/alex3.jpeg',
-      '/projects/alex/alex4.jpeg'
-    ],
-    'thessalonikiMap': [
-      '/projects/thes/thumb_1_thumb.jpg',
-      '/projects/thes/thumb_2_thumb.jpg',
-      '/projects/thes/thumb_3_thumb.jpg'
-    ],
-    'zagorisiaApp': [
-      '/projects/arch/3_thumb.jpg',
-      '/projects/arch/1_thumb.jpg',
-      '/projects/arch/2_thumb.jpg',
-    ],
-    'digitalMuseums': [
-      '/projects/museum/2_thumb.jpg',
-      '/projects/museum/1_thumb.jpg',
-      '/projects/museum/3_thumb.jpg',
-    ],
-    'rotunda': [
-      '/projects/rotunda/thum_3.jpg',
-      '/projects/rotunda/thum_1.jpg',
-      '/projects/rotunda/thum_4.jpg',
-      '/projects/rotunda/thum_2.jpg', 
-    ],
-    'keioThesis': [
-      '/projects/rl/sumo.png',
-      '/projects/rl/2.jpg',
-      '/projects/rl/1.jpg'
-
-    ],
-    'multiDroneSLAM': [
-      '/projects/slam/slam_1 Large.jpeg',
-      '/projects/slam/slam_2 Large.jpeg',
-      '/projects/slam/slam_4 Large.jpeg',
-    ],
-    'digitizationPipeline': [
-      '/projects/alex1.png' // Placeholder
-    ],
-    'keio': [
-      '/projects/degrees/KEIO_1.jpeg',
-      '/projects/degrees/KEIO_2.jpeg',
-      '/projects/degrees/KEIO_3.jpeg',
-    ],
-    'ecn': [
-      '/projects/degrees/ECN_1.jpeg',
-      '/projects/degrees/ECN_2.jpeg',
-      '/projects/degrees/ECN_3.jpeg',
-    ],
-    'ntua': [
-      '/projects/degrees/NTUA_1.jpeg',
-      '/projects/degrees/NTUA_2.jpeg',
-      '/projects/degrees/NTUA_3.jpeg',
-    ],
-    'ganMetrics': [
-      '/projects/gan/1.png',
-      '/projects/gan/2.jpg',
-      '/projects/gan/0.png',
-    ],
-    'roboticArm': [
-      '/projects/roboHack/place.jpeg',
-      '/projects/roboHack/robot.jpeg',
-      '/projects/roboHack/code.jpeg',
-    ]
-  };
-  return (thumbnailMap[projectId] || []).slice(0, 3); // Limit to max 3 images
 };
 
 
