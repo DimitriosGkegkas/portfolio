@@ -44,7 +44,11 @@ export const gitHelper = (
           instance?.writeln(`${COLOR.red}git: unknown branch or commit hash '${branch}'${COLOR.reset}`);
         }
       } else {
-        instance?.writeln(`${COLOR.red}git: unknown branch${COLOR.reset}`);
+        instance?.writeln(`${COLOR.red}error: pathspec '${branch}' did not match any known branches${COLOR.reset}`);
+        instance?.writeln(`${COLOR.yellow}Available branches:${COLOR.reset}`);
+        instance?.writeln(`  ${COLOR.green}education${COLOR.reset}`);
+        instance?.writeln(`  ${COLOR.green}web-development${COLOR.reset}`);
+        instance?.writeln(`  ${COLOR.green}robotics-ai${COLOR.reset}`);
       }
     } else if (sub === "status") {
       if (currentBranch.current) {

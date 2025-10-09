@@ -5,6 +5,7 @@ import { prompt } from "../promt";
 import { educationHandler, webDevHandler, roboticsHandler } from "./handlers";
 import { getBranchProjects, type Project } from "../../../../../Data/portfolioData";
 import { asset } from "../../../../../utils/asset";
+import { helpHandler } from "../commands/help";
 
 export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<string>, currentBranch: RefObject<string | null>, onCommand: (cmd: string) => void) => (y: number, callback: (links: ILink[] | undefined) => void) => {
   const line = instance.buffer.active.getLine(y - 1);
@@ -25,10 +26,13 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
       });
     }
   };
-  if (text.includes("git checkout")) {
+  if (text.includes("git checkout") || text.includes("to view my projects.")) {
     addLink("education", educationHandler(instance, onCommand, currentPath, currentBranch));
     addLink("web-development", webDevHandler(instance, onCommand, currentPath, currentBranch));
     addLink("robotics-ai", roboticsHandler(instance, onCommand, currentPath, currentBranch));
+  }
+  if (text.includes("to see available comm")) {
+    addLink("help", helpHandler(instance));
   }
   // Add links for all projects in each branch
   Object.keys(commits).forEach((branchName) => {
