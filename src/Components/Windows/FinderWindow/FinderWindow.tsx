@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import DraggableWindow from "../DraggableWindow/DraggableWindow";
-import { commits } from "../Terminal/parts/constants";
+import { commits, projects as allProjects } from "../Terminal/parts/constants";
 import "./FinderWindow.css";
 
 interface Project {
@@ -27,18 +27,27 @@ const getProjectsByCategory = (category?: 'web-development' | 'robotics-ai' | 'e
   if (!category) return [];
 
   const branch = commits[category];
-  if (!branch || !branch.projects) return [];
+  if (!branch || !branch.projectIds) return [];
 
-  return branch.projects.map((project: any) => ({
-    id: project.id,
-    name: project.name || project.title || 'Untitled Project',
-    icon: project.icon || '📁',
-    description: project.description || project.title || '',
-    techStack: project.techStack?.join(', '),
-    tags: project.tags,
-    title: project.title,
-    thumbnails: project.thumbnails?.slice(0, 3) || []
-  }));
+  return branch.projectIds
+    .map((projectId: string) => {
+      const project = allProjects[projectId];
+      if (!project) return null;
+      
+      const mappedProject: Project = {
+        id: project.id,
+        name: project.name || project.title || 'Untitled Project',
+        icon: project.icon || '📁',
+        description: project.description || project.title || '',
+        techStack: project.techStack?.join(', '),
+        tags: project.tags,
+        title: project.title,
+        thumbnails: project.thumbnails?.slice(0, 3) || []
+      };
+      
+      return mappedProject;
+    })
+    .filter((p): p is Project => p !== null);
 };
 
 
