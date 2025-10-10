@@ -15,71 +15,159 @@ export const Ecn: FC = () => {
       damping={0.1}
       htmlContent={
         <>
-          {/* HEADER */}
-          <ProjectGroup emoji="🎓" title="Master in Control and Robotics" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              École Centrale de Nantes (2023–2024)
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                JEMARO Double Degree – Advanced Robotics program in Nantes, France.
-              </span>
-            </div>
-          </ProjectGroup>
-
-          {/* KEY PROJECT */}
-          <ProjectGroup 
-            emoji="🎯" 
-            title="KEY PROJECT" 
-            color="#FBBF24"
-            badges={["SLAM", "Multi-Agent Systems", "Sensor Fusion"]}
-            content={[
-              <>
-                <span style={{ color: "#FBBF24", fontWeight: 'bold' }}>Multi-Drone Collaborative SLAM with Kimera-Multi</span>
-              </>,
-              <>
-                Implemented <span style={{ color: "#A78BFA" }}>real-time mapping and sensor fusion</span> for distributed drone systems in AirSim/Unreal environments.
-              </>,
-              <>
-                Connected <span style={{ color: "#A78BFA" }}>Kimera-Multi to high-fidelity simulations</span> using ROS2, achieving <span style={{ color: "#A78BFA" }}>distributed autonomy</span>.
-              </>
-            ]}
-          />
-
-          {/* TECH STACK */}
-          <ProjectGroup 
-            emoji="🛠️" 
-            title="TECH STACK" 
-            color="#F472B6"
-            badges={[
-              { courses: ["ROS2", "AirSim", "Unreal Engine", "Kimera-Multi"], color: "#F472B6" },
-              { courses: ["Python", "C++"], color: "#A78BFA" }
-            ]}
-            content={[
-              <>
-                <span style={{ color: "#F472B6" }}>Specializations:</span> Control Theory, Robotic Manipulation, SLAM, Optimization
-              </>,
-              <>
-                <span style={{ color: "#F472B6" }}>Focus Areas:</span> AI-driven robotics, dynamic controllers, system modeling
-              </>
-            ]}
-          />
-
-          {/* EXPERIENCE */}
-          <ProjectGroup 
-            emoji="🌟" 
-            title="EXPERIENCE" 
-            color="#34D399"
-            content={[
-              <>
-                Studied alongside peers from across <span style={{ color: "#34D399" }}>Europe</span> in a diverse academic environment.
-              </>,
-              <>
-                A year of deepening my passion for <span style={{ color: "#FCD34D" }}>autonomy</span>, <span style={{ color: "#FCD34D" }}>intelligent systems</span>, and <span style={{ color: "#FCD34D" }}>robotics R&D</span>.
-              </>
-            ]}
-          />
-        </>
+        {/* HEADER */}
+        <ProjectGroup emoji="🎓" title="MSc in Robotics and AI – JEMARO Year 2" color="#60A5FA"
+          content={[
+          <>
+            École Centrale de Nantes (2023–2024)
+          </>,
+          <>
+            <span style={{ color: "#60A5FA" }}>
+              Advanced specialization in robotics, control, and intelligent systems as part of the JEMARO international master’s program.
+            </span>
+          </>
+          ]}
+        />
+      
+        {/* ROBOTICS & MANIPULATION */}
+        <ProjectGroup
+          emoji="🤖"
+          title="ROBOTICS & MANIPULATION"
+          color="#F472B6"
+          badges={[
+            "Advanced and Robot Programming",
+            "Modelling of Manipulators",
+            "Mechanical Design Methods in Robotics",
+            "Mobile Robots"
+          ]}
+          content={[
+            <>
+              Explored <span style={{ color: "#F472B6" }}>kinematics</span>,{" "}
+              <span style={{ color: "#F472B6" }}>dynamics</span>, and{" "}
+              <span style={{ color: "#F472B6" }}>mechanical design</span> of robotic systems from theory to implementation.
+            </>,
+            <>
+              Developed controllers for <span style={{ color: "#F472B6" }}>manipulators</span> and{" "}
+              <span style={{ color: "#F472B6" }}>mobile robots</span> through{" "}
+              <span style={{ color: "#F472B6" }}>hands-on programming projects</span> and simulation environments.
+            </>
+          ]}
+        />
+      
+        {/* CONTROL & OPTIMIZATION */}
+        <ProjectGroup
+          emoji="⚙️"
+          title="CONTROL & OPTIMIZATION"
+          color="#34D399"
+          badges={[
+            "Classical Linear Control",
+            "Dynamic Model Based Control",
+            "Optimization Techniques",
+            "Signal Processing"
+          ]}
+          content={[
+            <>
+              Strengthened control theory foundation with{" "}
+              <span style={{ color: "#34D399" }}>linear</span> and{" "}
+              <span style={{ color: "#34D399" }}>nonlinear control systems</span> applied to robotic dynamics.
+            </>,
+            <>
+              Designed <span style={{ color: "#34D399" }}>state estimators</span> and{" "}
+              <span style={{ color: "#34D399" }}>optimal controllers</span> for real-time decision-making.
+            </>,
+            <>
+              Integrated <span style={{ color: "#34D399" }}>signal processing</span> and{" "}
+              <span style={{ color: "#34D399" }}>optimization algorithms</span> for robust system modeling and tuning.
+            </>
+          ]}
+        />
+      
+        {/* AI & PERCEPTION */}
+        <ProjectGroup
+          emoji="🧠"
+          title="ARTIFICIAL INTELLIGENCE & PERCEPTION"
+          color="#FBBF24"
+          badges={[
+            "Artificial Intelligence",
+            "Artificial Intelligence for Robotics",
+            "Computer Vision"
+          ]}
+          content={[
+            <>
+              Studied <span style={{ color: "#FBBF24" }}>AI methodologies</span> for perception and decision-making in autonomous systems.
+            </>,
+            <>
+              Implemented <span style={{ color: "#FBBF24" }}>vision-based algorithms</span> for environment understanding and{" "}
+              <span style={{ color: "#FBBF24" }}>robot learning</span> applications.
+            </>
+          ]}
+        />
+      
+        {/* SOFTWARE SYSTEMS */}
+        <ProjectGroup
+          emoji="💻"
+          title="SOFTWARE ARCHITECTURE & SYSTEMS"
+          color="#A78BFA"
+          badges={[
+            "Software Architecture for Robotics",
+            "Advanced and Robot Programming",
+            "Python",
+            "C++"
+          ]}
+          content={[
+            <>
+              Built <span style={{ color: "#A78BFA" }}>modular robotic software</span> integrating perception, planning, and control layers.
+            </>,
+            <>
+              Focused on <span style={{ color: "#A78BFA" }}>software reliability</span>,{" "}
+              <span style={{ color: "#A78BFA" }}>real-time systems</span>, and{" "}
+              <span style={{ color: "#A78BFA" }}>distributed architectures</span> for robot control.
+            </>
+          ]}
+        />
+      
+        {/* RESEARCH TRACK */}
+        <ProjectGroup
+          emoji="🔬"
+          title="RESEARCH TRACK"
+          color="#6EE7B7"
+          badges={["Research Track 1", "Research Track 2"]}
+          content={[
+            <>
+              Engaged in <span style={{ color: "#6EE7B7" }}>academic research</span> focused on{" "}
+              <span style={{ color: "#6EE7B7" }}>multi-agent systems</span> and{" "}
+              <span style={{ color: "#6EE7B7" }}>autonomous decision-making</span>.
+            </>,
+            <>
+              The ECN research phase led to later thesis work on{" "}
+              <span style={{ color: "#6EE7B7" }}>decentralized multi-agent reinforcement learning</span>{" "}
+              and cooperative traffic systems.
+            </>
+          ]}
+        />
+      
+        {/* REFLECTION */}
+        <ProjectGroup
+          emoji="🌱"
+          title="REFLECTION"
+          color="#6EE7B7"
+          content={[
+            <>
+              The ECN experience deepened my expertise in{" "}
+              <span style={{ color: "#6EE7B7" }}>robotics software</span>,{" "}
+              <span style={{ color: "#6EE7B7" }}>AI-driven control</span>, and{" "}
+              <span style={{ color: "#6EE7B7" }}>optimization-based decision making</span>.
+            </>,
+            <>
+              This year connected theoretical control foundations with{" "}
+              <span style={{ color: "#6EE7B7" }}>applied machine learning</span>,{" "}
+              shaping my direction toward{" "}
+              <span style={{ color: "#6EE7B7" }}>autonomous multi-agent systems</span>.
+            </>
+          ]}
+        />
+      </>
+      
       }
     >
       <Scroll>

@@ -16,70 +16,135 @@ export const Keio: FC = () => {
       htmlContent={
         <>
           {/* HEADER */}
-          <ProjectGroup emoji="🎓" title="Master of Science in Engineering" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              Keio University, Tokyo (2024–2025)
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                JEMARO Double Degree program at one of Japan's top private universities.
-              </span>
-            </div>
-          </ProjectGroup>
-
-          {/* THESIS PROJECT */}
-          <ProjectGroup 
-            emoji="🎯" 
-            title="MASTER THESIS PROJECT" 
-            color="#FBBF24"
-            badges={["Reinforcement Learning", "Multi-Agent Systems", "V2X Communication"]}
+          <ProjectGroup emoji="🎓" title="Master of Science in Engineering" color="#60A5FA"
             content={[
               <>
-                <span style={{ color: "#FBBF24", fontWeight: 'bold' }}>Decentralized Multi-Agent Reinforcement Learning with Communication</span> for autonomous driving
+                Keio University, Tokyo (2024–2025)
               </>,
               <>
-                Focused on <span style={{ color: "#A78BFA" }}>optimization, control algorithms, and safe decision-making</span> in multi-robot systems.
-              </>,
-              <>
-                Developed <span style={{ color: "#A78BFA" }}>vehicle-to-vehicle communication infrastructure</span> for policy exchange and coordinated learning.
+                <span style={{ color: "#60A5FA" }}>
+                  JEMARO double degree program at one of Japan’s leading private universities, bridging robotics research, AI, and advanced engineering.
+                </span>
               </>
             ]}
           />
 
-          {/* TECH STACK */}
-          <ProjectGroup 
-            emoji="🛠️" 
-            title="TECH STACK" 
-            color="#F472B6"
+          {/* ACADEMIC FOCUS */}
+          <ProjectGroup
+            emoji="🤖"
+            title="ADVANCED ROBOTICS & SYSTEMS"
+            color="#A78BFA"
             badges={[
-              { courses: ["ROS2", "SUMO", "PyTorch", "Python"], color: "#F472B6" },
-              { courses: ["Multi-Agent RL", "Autonomous Driving", "V2X"], color: "#A78BFA" }
+              "Advanced Robotics",
+              "Intelligent Systems",
+              "Control Engineering",
+              "Systems Optimization"
             ]}
             content={[
               <>
-                <span style={{ color: "#F472B6" }}>Specializations:</span> Multi-Agent RL, Autonomous Driving, V2X Communication
+                Deepened expertise in <span style={{ color: "#A78BFA" }}>robotics and control</span> through the{" "}
+                <span style={{ color: "#A78BFA" }}>Namerikawa Toru Laboratory</span>, a leading research group in{" "}
+                <span style={{ color: "#A78BFA" }}>control theory</span> and{" "}
+                <span style={{ color: "#A78BFA" }}>multi-agent systems</span>.
               </>,
               <>
-                <span style={{ color: "#F472B6" }}>Validation:</span> Simulation-based validation of learning-based controllers
+                Focused on <span style={{ color: "#A78BFA" }}>distributed control architectures</span> and{" "}
+                <span style={{ color: "#A78BFA" }}>intelligent coordination</span> for robotic and cyber-physical systems.
               </>
             ]}
           />
 
-          {/* EXPERIENCE */}
-          <ProjectGroup 
-            emoji="🌏" 
-            title="EXPERIENCE" 
-            color="#34D399"
+          {/* RESEARCH PROJECT */}
+          <ProjectGroup
+            emoji="🎯"
+            title="RESEARCH PROJECT"
+            color="#FBBF24"
+            badges={["Multi-Agent RL", "SMARTS", "Autonomous Driving", "V2V Communication"]}
             content={[
               <>
-                Immersed in Japan's academic and tech ecosystem at one of its top private universities.
+                Conducted thesis research on{" "}
+                <span style={{ color: "#FBBF24", fontWeight: "bold" }}>
+                  Decentralized Multi-Agent Reinforcement Learning with Communication
+                </span>{" "}
+                using the <span style={{ color: "#FBBF24" }}>SMARTS</span> simulation environment.
               </>,
               <>
-                A capstone experience blending <span style={{ color: "#FCD34D" }}>research</span>, <span style={{ color: "#FCD34D" }}>simulation</span>, and <span style={{ color: "#FCD34D" }}>real-world impact</span>.
+                Proposed a{" "}
+                <span style={{ color: "#FBBF24" }}>decentralized communication-driven learning framework</span>{" "}
+                for <span style={{ color: "#FBBF24" }}>autonomous vehicle coordination</span> at intersections.
+              </>,
+              <>
+                Validated through{" "}
+                <span style={{ color: "#A78BFA" }}>Python Gym</span> and{" "}
+                <span style={{ color: "#A78BFA" }}>PyTorch</span>-based training pipelines, achieving{" "}
+                <span style={{ color: "#FBBF24" }}>collision-free and efficient multi-agent behavior</span>.
+              </>
+            ]}
+          />
+
+          {/* LAB & EXPERIENCE */}
+          <ProjectGroup
+            emoji="🧪"
+            title="NAMERIKAWA TORU LAB EXPERIENCE"
+            color="#34D399"
+            badges={["Control Theory", "Distributed Systems", "Research Collaboration"]}
+            content={[
+              <>
+                Conducted research within{" "}
+                <span style={{ color: "#34D399" }}>Namerikawa Toru’s Lab</span>,{" "}
+                a hub for control and systems engineering research at Keio University.
+              </>,
+              <>
+                Collaborated with researchers on{" "}
+                <span style={{ color: "#34D399" }}>multi-agent control</span>,{" "}
+                <span style={{ color: "#34D399" }}>consensus algorithms</span>, and{" "}
+                <span style={{ color: "#34D399" }}>autonomous systems</span>, gaining hands-on academic and experimental experience.
+              </>
+            ]}
+          />
+
+          {/* CULTURAL IMMERSION */}
+          <ProjectGroup
+            emoji="🎎"
+            title="CULTURAL & ACADEMIC IMMERSION"
+            color="#F472B6"
+            content={[
+              <>
+                Immersed in Japan’s{" "}
+                <span style={{ color: "#F472B6" }}>engineering innovation culture</span>{" "}
+                and cross-disciplinary academic environment.
+              </>,
+              <>
+                Engaged with an international cohort of{" "}
+                <span style={{ color: "#F472B6" }}>robotics researchers</span> under the{" "}
+                <span style={{ color: "#F472B6" }}>JEMARO program</span>, fostering{" "}
+                <span style={{ color: "#F472B6" }}>cultural exchange</span> and{" "}
+                <span style={{ color: "#F472B6" }}>collaborative research</span>.
+              </>
+            ]}
+          />
+
+          {/* REFLECTION */}
+          <ProjectGroup
+            emoji="🌱"
+            title="REFLECTION"
+            color="#6EE7B7"
+            content={[
+              <>
+                The Keio experience expanded my technical and cultural horizons, uniting{" "}
+                <span style={{ color: "#6EE7B7" }}>robotics</span>,{" "}
+                <span style={{ color: "#6EE7B7" }}>AI research</span>, and{" "}
+                <span style={{ color: "#6EE7B7" }}>Japanese engineering philosophy</span>.
+              </>,
+              <>
+                It strengthened my ability to conduct{" "}
+                <span style={{ color: "#6EE7B7" }}>independent, high-impact research</span>{" "}
+                within global academic environments.
               </>
             ]}
           />
         </>
+
       }
     >
       <Scroll>
