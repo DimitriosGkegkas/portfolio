@@ -10,54 +10,92 @@ export const RoboticArm: FC = () => {
 
   return (
     <ScrollableContent
+      damping={0.1}
+      zIndex={100000000}
       htmlContent={
         <>
           {/* HEADER */}
-          <ProjectGroup emoji="🤖" title="Robotic Arm Pick & Place" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              Hackathon Project - 2nd Place
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                Autonomous pick and place system with computer vision and path planning.
-              </span>
-            </div>
-          </ProjectGroup>
-
-          {/* IMPLEMENTATION */}
           <ProjectGroup 
-            emoji="🎯" 
-            title="SYSTEM DESIGN" 
-            color="#FBBF24"
-            badges={["Computer Vision", "Path Planning", "Manipulation"]}
+            emoji="🤖" 
+            title="Robotic Arm Pick & Place" 
+            color="#60A5FA"
             content={[
               <>
-                Developed an <span style={{ color: "#FBBF24" }}>autonomous pick and place system</span> with integrated computer vision.
+                Hackathon Project,{" "}
+                <span style={{ color: "#60A5FA" }}>2nd Place at JEMARO DAYS 2024</span>{" "}
+                (Warsaw, Poland)
               </>,
               <>
-                Implemented <span style={{ color: "#F472B6" }}>real-time object detection</span> and precise localization.
-              </>,
-              <>
-                Created <span style={{ color: "#34D399" }}>path planning algorithms</span> with obstacle avoidance capabilities.
+                An autonomous{" "}
+                <span style={{ color: "#60A5FA" }}>pick-and-place robotic system</span>{" "}
+                built using{" "}
+                <span style={{ color: "#60A5FA" }}>ROS2</span>, featuring perception, 
+                control, state management, and decision-making components.
               </>
             ]}
           />
 
-          {/* TECH STACK */}
+          {/* SYSTEM DESIGN */}
+          <ProjectGroup 
+            emoji="🎯" 
+            title="SYSTEM DESIGN" 
+            color="#FBBF24"
+            badges={["Perception", "Control", "State Management", "ROS2"]}
+            content={[
+              <>
+                Designed and implemented a complete{" "}
+                <span style={{ color: "#FBBF24" }}>ROS2-based architecture</span>{" "}
+                spanning from sensor-driven perception to low-level motion control.
+              </>,
+              <>
+                Developed{" "}
+                <span style={{ color: "#F472B6" }}>real-time object detection</span>{" "}
+                and localization pipelines using computer vision.
+              </>,
+              <>
+                Created{" "}
+                <span style={{ color: "#34D399" }}>path planning algorithms</span>{" "}
+                with obstacle avoidance and smooth trajectory generation.
+              </>,
+              <>
+                Integrated{" "}
+                <span style={{ color: "#A78BFA" }}>finite-state management</span>{" "}
+                for autonomous task sequencing and system coordination.
+              </>
+            ]}
+          />
+
+          {/* TECHNOLOGY */}
           <ProjectGroup 
             emoji="🛠️" 
             title="TECHNOLOGY" 
             color="#A78BFA"
             badges={[
-              { courses: ["ROS", "Python", "OpenCV"], color: "#A78BFA" },
-              { courses: ["Sensor Integration", "Motion Control"], color: "#34D399" }
+              "ROS2", 
+              "Python", 
+              "OpenCV", 
+              "Sensor Fusion", 
+              "Motion Control"
             ]}
             content={[
               <>
-                Built with <span style={{ color: "#A78BFA" }}>ROS</span>, <span style={{ color: "#A78BFA" }}>Python</span>, and <span style={{ color: "#A78BFA" }}>OpenCV</span> for vision processing.
+                Built with{" "}
+                <span style={{ color: "#A78BFA" }}>ROS2</span> for modular 
+                robotics communication and{" "}
+                <span style={{ color: "#A78BFA" }}>Python</span> for control 
+                and perception nodes.
               </>,
               <>
-                Integrated <span style={{ color: "#EC4899" }}>multiple sensors</span> for robust operation in dynamic environments.
+                Used{" "}
+                <span style={{ color: "#A78BFA" }}>OpenCV</span> for 
+                computer vision and{" "}
+                <span style={{ color: "#34D399" }}>sensor integration</span>{" "}
+                to enable reliable real-time detection under varying lighting conditions.
+              </>,
+              <>
+                Implemented{" "}
+                <span style={{ color: "#A78BFA" }}>PID motion control</span>{" "}
+                and trajectory smoothing for precise manipulation and stability.
               </>
             ]}
           />
@@ -65,53 +103,62 @@ export const RoboticArm: FC = () => {
           {/* ACHIEVEMENT */}
           <ProjectGroup 
             emoji="🏆" 
-            title="ACHIEVEMENT" 
+            title="COMPETITION RESULT" 
             color="#6EE7B7"
             content={[
               <>
-                Secured <span style={{ color: "#6EE7B7" }}>2nd place</span> in robotics hackathon competition.
+                Awarded{" "}
+                <span style={{ color: "#6EE7B7" }}>2nd Place</span>{" "}
+                at{" "}
+                <span style={{ color: "#6EE7B7" }}>JEMARO DAYS 2024</span>{" "}
+                in Warsaw, Poland.
               </>,
               <>
-                Achieved <span style={{ color: "#F59E0B" }}>high precision</span> in manipulation tasks under time constraints.
+                Recognized for{" "}
+                <span style={{ color: "#F59E0B" }}>system robustness</span>,{" "}
+                <span style={{ color: "#F59E0B" }}>integration depth</span>, 
+                and{" "}
+                <span style={{ color: "#F59E0B" }}>precision in task execution</span>.
               </>
             ]}
           />
         </>
       }
     >
-      <StaticItemDiv
-        top="-40%"
-        left="-30%"
-        threshold={0.1}
-      >
+      <StaticItemDiv top="-40%" left="-30%" threshold={0.1}>
         <Window>
-          <img src={asset('/projects/roboHack/robot.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
-        </Window>
-      </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-48%"
-        threshold={0.2}
-      >
-        <Window>
-          <img src={asset('/projects/roboHack/code.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/roboHack/robot.jpeg")} 
+            alt="Robotic Arm Pick & Place" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
 
-      <StaticItemDiv
-        top="-25%"
-        left="-20%"
-        threshold={0.3}
-      >
+      <StaticItemDiv top="-30%" left="-48%" threshold={0.2}>
+        <Window>
+          <img 
+            src={asset("/projects/roboHack/code.jpeg")} 
+            alt="Robotic Arm Code" 
+            className="mockup-image" 
+            width={300} 
+          />
+        </Window>
+      </StaticItemDiv>
+
+      <StaticItemDiv top="-25%" left="-20%" threshold={0.3}>
         <VimeoVideo videoId="1124883419" ratio={1.5} height={60} />
       </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-40%"
-        threshold={0.4}
-      >
+
+      <StaticItemDiv top="-30%" left="-40%" threshold={0.4}>
         <Window>
-          <img src={asset('/projects/roboHack/place.jpeg')} alt='Robotic Arm Pick & Place' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/roboHack/place.jpeg")} 
+            alt="Robotic Arm Manipulation" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
     </ScrollableContent>

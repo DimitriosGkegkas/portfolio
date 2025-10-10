@@ -9,54 +9,118 @@ export const MultiDroneSLAM: FC = () => {
 
   return (
     <ScrollableContent
+      damping={0.1}
+      zIndex={100000000}
       htmlContent={
         <>
           {/* HEADER */}
-          <ProjectGroup emoji="🚁" title="Multi-Drone Collaborative SLAM" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              JEMARO Master's Project at ECN
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                Real-time mapping and sensor fusion for distributed drone systems.
-              </span>
-            </div>
-          </ProjectGroup>
+          <ProjectGroup 
+            emoji="🚁" 
+            title="Multi-Drone Collaborative SLAM" 
+            color="#60A5FA"
+            content={[
+              <>
+                JEMARO Master’s Project,{" "}
+                <span style={{ color: "#60A5FA" }}>École Centrale de Nantes</span>
+              </>,
+              <>
+                Research on{" "}
+                <span style={{ color: "#60A5FA" }}>real-time multi-agent mapping</span>{" "}
+                using distributed SLAM and{" "}
+                <span style={{ color: "#60A5FA" }}>ROS2–AirSim integration</span>{" "}
+                for drone swarms in simulated rescue scenarios.
+              </>
+            ]}
+          />
 
           {/* IMPLEMENTATION */}
           <ProjectGroup 
             emoji="🎯" 
             title="IMPLEMENTATION" 
             color="#FBBF24"
-            badges={["SLAM", "Kimera-Multi", "Sensor Fusion", "Multi-Agent"]}
+            badges={["Kimera-Multi", "ROS2", "AirSim", "Sensor Fusion", "Multi-Agent"]}
             content={[
               <>
-                Implemented a <span style={{ color: "#FBBF24" }}>distributed SLAM system</span> using the Kimera-Multi framework.
+                Implemented a{" "}
+                <span style={{ color: "#FBBF24" }}>distributed SLAM pipeline</span>{" "}
+                based on{" "}
+                <span style={{ color: "#FBBF24" }}>Kimera-Multi</span>, enabling 
+                collaborative mapping between multiple UAVs.
               </>,
               <>
-                Achieved <span style={{ color: "#F472B6" }}>real-time performance</span> in AirSim/Unreal Engine simulation environments.
+                Extended the framework to operate with{" "}
+                <span style={{ color: "#FBBF24" }}>live sensor data</span>{" "} 
+                streamed from{" "} 
+                <span style={{ color: "#FBBF24" }}>AirSim in Unreal Engine</span>{" "} 
+                via{" "} 
+                <span style={{ color: "#FBBF24" }}>ROS2 middleware</span>, 
+                rather than offline rosbag playback.
               </>,
               <>
-                Developed <span style={{ color: "#34D399" }}>multi-agent coordination</span> protocols for autonomous operations.
+                Developed{" "} 
+                <span style={{ color: "#34D399" }}>synchronization and validation modules</span>{" "} 
+                to verify map consistency and inter-drone localization accuracy in real time.
               </>
             ]}
           />
 
-          {/* TECH STACK */}
+          {/* TECHNOLOGY */}
           <ProjectGroup 
             emoji="🛠️" 
             title="TECHNOLOGY" 
             color="#A78BFA"
             badges={[
-              { courses: ["ROS2", "AirSim", "Unreal Engine"], color: "#A78BFA" },
-              { courses: ["Python", "C++"], color: "#34D399" }
+              "ROS2", 
+              "Kimera-Multi", 
+              "AirSim", 
+              "Unreal Engine", 
+              "Python", 
+              "C++"
             ]}
             content={[
               <>
-                Built with <span style={{ color: "#A78BFA" }}>ROS2</span> for middleware, <span style={{ color: "#A78BFA" }}>Python</span> and <span style={{ color: "#A78BFA" }}>C++</span> for algorithms.
+                Built with{" "} 
+                <span style={{ color: "#A78BFA" }}>ROS2</span> for 
+                inter-process communication and distributed control, using{" "} 
+                <span style={{ color: "#A78BFA" }}>Kimera-Multi</span> as the 
+                core SLAM back-end for pose graph optimization and loop closure.
               </>,
               <>
-                Created <span style={{ color: "#EC4899" }}>scalable communication protocols</span> for multi-drone coordination.
+                Integrated{" "} 
+                <span style={{ color: "#A78BFA" }}>AirSim (Unreal Engine)</span>{" "} 
+                as a photorealistic simulator for drone flight and perception, 
+                achieving{" "} 
+                <span style={{ color: "#A78BFA" }}>real-time data streaming</span>{" "} 
+                between simulated agents and ROS2 nodes.
+              </>,
+              <>
+                Algorithms implemented in{" "} 
+                <span style={{ color: "#A78BFA" }}>C++</span>{" "} 
+                for performance-critical SLAM tasks, with{" "} 
+                <span style={{ color: "#A78BFA" }}>Python</span>{" "} 
+                scripts for system orchestration and evaluation.
+              </>
+            ]}
+          />
+
+          {/* APPLICATION */}
+          <ProjectGroup 
+            emoji="🚨" 
+            title="APPLICATION CONTEXT" 
+            color="#F59E0B"
+            content={[
+              <>
+                Designed for{" "} 
+                <span style={{ color: "#F59E0B" }}>rapid-response scenarios</span>{" "} 
+                such as{" "} 
+                <span style={{ color: "#F59E0B" }}>search and rescue missions</span>, 
+                where multiple drones collaboratively map unknown environments 
+                to locate targets quickly.
+              </>,
+              <>
+                Demonstrates the potential of{" "} 
+                <span style={{ color: "#F59E0B" }}>multi-agent autonomy</span>{" "} 
+                for large-scale deployment in dynamic or hazardous environments.
               </>
             ]}
           />
@@ -68,50 +132,64 @@ export const MultiDroneSLAM: FC = () => {
             color="#6EE7B7"
             content={[
               <>
-                Part of <span style={{ color: "#6EE7B7" }}>JEMARO Master's program</span> at École Centrale de Nantes.
+                Conducted as part of the{" "} 
+                <span style={{ color: "#6EE7B7" }}>JEMARO Master’s program</span>{" "} 
+                at{" "} 
+                <span style={{ color: "#6EE7B7" }}>École Centrale de Nantes</span>.
               </>,
               <>
-                Advanced research in <span style={{ color: "#F59E0B" }}>sensor fusion</span> and <span style={{ color: "#F59E0B" }}>distributed autonomy</span> for aerial robotics.
+                Advanced state-of-the-art methodologies in{" "} 
+                <span style={{ color: "#6EE7B7" }}>sensor fusion</span>{" "} 
+                and{" "} 
+                <span style={{ color: "#6EE7B7" }}>distributed SLAM</span>{" "}
+                for collaborative aerial robotics.
               </>
             ]}
           />
         </>
       }
     >
-      <StaticItemDiv
-        top="-30%"
-        left="-40%"
-        threshold={0.05}
-      >
+      <StaticItemDiv top="-30%" left="-40%" threshold={0.05}>
         <Window>
-          <img src={asset('/projects/slam/slam_1 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={500} />
+          <img 
+            src={asset("/projects/slam/slam_1 Large.jpeg")} 
+            alt="Multi-Drone SLAM" 
+            className="mockup-image" 
+            width={500} 
+          />
         </Window>
       </StaticItemDiv>
-      <StaticItemDiv
-        top="0%"
-        left="-35%"
-        threshold={0.2}
-      >
+
+      <StaticItemDiv top="0%" left="-35%" threshold={0.2}>
         <Window>
-          <img src={asset('/projects/slam/slam_2 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/slam/slam_2 Large.jpeg")} 
+            alt="Multi-Drone SLAM Visualization" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
-      <StaticItemDiv
-        top="4%"
-        left="-20%"
-        threshold={0.3}
-      >
+
+      <StaticItemDiv top="4%" left="-20%" threshold={0.3}>
         <Window>
-          <img src={asset('/projects/slam/slam_3 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/slam/slam_3 Large.jpeg")} 
+            alt="Multi-Drone Mapping System" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
-      <StaticItemDiv
-        top="-25%"
-        left="-10%"
-        threshold={0.5}
-      >
+
+      <StaticItemDiv top="-25%" left="-10%" threshold={0.5}>
         <Window>
-          <img src={asset('/projects/slam/slam_5 Large.jpeg')} alt='Multi-Drone SLAM' className='mockup-image' width={400} />
+          <img 
+            src={asset("/projects/slam/slam_5 Large.jpeg")} 
+            alt="Multi-Drone SLAM Architecture" 
+            className="mockup-image" 
+            width={400} 
+          />
         </Window>
       </StaticItemDiv>
     </ScrollableContent>

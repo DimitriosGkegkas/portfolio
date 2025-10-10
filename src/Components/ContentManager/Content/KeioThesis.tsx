@@ -8,54 +8,125 @@ import { ScrollableContent } from "../ScrollableContent";
 export const KeioThesis: FC = () => {
   return (
     <ScrollableContent
+      damping={0.1}
+      zIndex={100000000}
       htmlContent={
         <>
           {/* HEADER */}
-          <ProjectGroup emoji="🚗" title="Decentralized Multi-Agent RL with Communication" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              Master's Thesis at Keio University
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                JEMARO Program - Autonomous driving research with multi-agent reinforcement learning.
-              </span>
-            </div>
-          </ProjectGroup>
-
-          {/* RESEARCH */}
           <ProjectGroup 
-            emoji="🤖" 
-            title="RESEARCH FOCUS" 
-            color="#F472B6"
-            badges={["Multi-Agent RL", "V2V Communication", "Autonomous Driving"]}
+            emoji="🚗" 
+            title="Decentralized Multi-Agent Reinforcement Learning with Communication" 
+            color="#60A5FA"
             content={[
               <>
-                Developed <span style={{ color: "#F472B6" }}>multi-agent RL algorithms</span> with V2V communication protocols for coordinated autonomous driving.
+                Master’s Thesis at{" "}
+                <span style={{ color: "#60A5FA" }}>Keio University</span>{" "} 
+                part of the{" "} 
+                <span style={{ color: "#60A5FA" }}>JEMARO international robotics program</span>.
               </>,
               <>
-                Created <span style={{ color: "#34D399" }}>safe decision-making frameworks</span> for dynamic traffic environments.
-              </>,
-              <>
-                Advanced research in <span style={{ color: "#6EE7B7" }}>policy exchange</span> and <span style={{ color: "#6EE7B7" }}>coordinated learning</span> strategies.
+                Research on{" "} 
+                <span style={{ color: "#60A5FA" }}>multi-agent reinforcement learning (MARL)</span>{" "} 
+                for{" "} 
+                <span style={{ color: "#60A5FA" }}>autonomous vehicle coordination</span>,{" "} 
+                focusing on{" "} 
+                <span style={{ color: "#60A5FA" }}>learned inter-agent communication</span>{" "} 
+                and decentralized control at intersections.
               </>
             ]}
           />
 
-          {/* TECH STACK */}
+          {/* RESEARCH FOCUS */}
+          <ProjectGroup 
+            emoji="🤖" 
+            title="RESEARCH FRAMEWORK" 
+            color="#F472B6"
+            badges={["Multi-Agent RL", "SMARTS", "V2V Communication", "Autonomous Driving"]}
+            content={[
+              <>
+                Implemented and trained agents in{" "} 
+                <span style={{ color: "#F472B6" }}>Python Gym</span>{" "} 
+                using the{" "} 
+                <span style={{ color: "#F472B6" }}>SMARTS traffic simulation environment</span>, 
+                enabling scalable experimentation for intersection management tasks.
+              </>,
+              <>
+                Proposed a{" "} 
+                <span style={{ color: "#F472B6" }}>decentralized MARL framework</span>{" "} 
+                where autonomous vehicles communicate locally, exchanging compact 
+                representations of intent, state, and policy embeddings.
+              </>,
+              <>
+                Combined{" "} 
+                <span style={{ color: "#34D399" }}>continuous control</span>,{" "} 
+                <span style={{ color: "#34D399" }}>multi-objective reward shaping</span>,{" "} 
+                and{" "} 
+                <span style={{ color: "#34D399" }}>learned communication</span>{" "} 
+                to achieve cooperative and collision-free navigation without centralized coordination.
+              </>
+            ]}
+          />
+
+          {/* TECHNOLOGY */}
           <ProjectGroup 
             emoji="🛠️" 
-            title="TECHNOLOGY" 
+            title="TECHNOLOGY & IMPLEMENTATION" 
             color="#A78BFA"
             badges={[
-              { courses: ["ROS2", "SUMO", "PyTorch"], color: "#A78BFA" },
-              { courses: ["Python", "Traffic Simulation"], color: "#F59E0B" }
+              "Python", 
+              "PyTorch", 
+              "Gym", 
+              "SMARTS", 
+              "Distributed RL"
             ]}
             content={[
               <>
-                Built with <span style={{ color: "#A78BFA" }}>ROS2</span> for robotics middleware, <span style={{ color: "#A78BFA" }}>SUMO</span> for traffic simulation, and <span style={{ color: "#A78BFA" }}>PyTorch</span> for deep learning.
+                Built in{" "} 
+                <span style={{ color: "#A78BFA" }}>Python</span>{" "} 
+                using{" "} 
+                <span style={{ color: "#A78BFA" }}>PyTorch</span>{" "} 
+                for training actor-critic models with{" "} 
+                <span style={{ color: "#A78BFA" }}>parameter sharing</span>{" "}
+                and decentralized communication modules.
               </>,
               <>
-                Validated in <span style={{ color: "#F59E0B" }}>realistic traffic simulation</span> environments with complex scenarios.
+                Integrated with the{" "} 
+                <span style={{ color: "#A78BFA" }}>SMARTS simulator</span>{" "} 
+                for high-fidelity multi-vehicle interaction and complex intersection dynamics.
+              </>,
+              <>
+                Designed a{" "} 
+                <span style={{ color: "#A78BFA" }}>multi-agent training pipeline</span>{" "} 
+                capable of coordinating multiple environments, enabling large-scale distributed experiments.
+              </>
+            ]}
+          />
+
+          {/* RESULTS */}
+          <ProjectGroup 
+            emoji="📈" 
+            title="RESULTS & PERFORMANCE" 
+            color="#6EE7B7"
+            content={[
+              <>
+                The proposed{" "} 
+                <span style={{ color: "#6EE7B7" }}>decentralized MARL framework</span>{" "} 
+                achieved{" "} 
+                <span style={{ color: "#6EE7B7" }}>strong performance</span>{" "} 
+                in managing autonomous vehicle coordination at unsignalized intersections.
+              </>,
+              <>
+                The final model demonstrated{" "} 
+                <span style={{ color: "#6EE7B7" }}>100% success rate with zero collisions</span>,{" "} 
+                low travel and waiting times, smooth speed profiles, and{" "} 
+                <span style={{ color: "#6EE7B7" }}>energy-efficient trajectories</span>.
+              </>,
+              <>
+                Results matched or surpassed baseline learning and rule-based approaches, 
+                confirming that{" "} 
+                <span style={{ color: "#6EE7B7" }}>learned inter-agent communication</span>{" "} 
+                enables safe, efficient, and scalable intersection management 
+                without global coordination.
               </>
             ]}
           />
@@ -63,67 +134,77 @@ export const KeioThesis: FC = () => {
           {/* IMPACT */}
           <ProjectGroup 
             emoji="🚀" 
-            title="IMPACT" 
-            color="#6EE7B7"
+            title="RESEARCH IMPACT" 
+            color="#F59E0B"
             content={[
               <>
-                Contributed to <span style={{ color: "#EC4899" }}>decentralized autonomous systems</span> research and methodology.
+                Demonstrated that{" "} 
+                <span style={{ color: "#F59E0B" }}>decentralized cooperation</span>{" "} 
+                can rival centralized systems while maintaining scalability, 
+                robustness, and autonomy.
               </>,
               <>
-                Advancing the field of <span style={{ color: "#6EE7B7" }}>multi-agent coordination</span> for future autonomous mobility.
+                Represents a{" "} 
+                <span style={{ color: "#F59E0B" }}>significant step toward fully autonomous, cooperative traffic systems</span>{" "} 
+                for future smart mobility infrastructures.
               </>
             ]}
           />
         </>
       }
     >
-      <StaticItemDiv
-        top="-40%"
-        left="-45%"
-        threshold={0.15}
-      >
+      <StaticItemDiv top="-40%" left="-45%" threshold={0.15}>
         <Window>
-          <img src={asset('/projects/rl/2.jpg')} alt='Keio Thesis' className='mockup-image' width={450} />
+          <img 
+            src={asset("/projects/rl/2.jpg")} 
+            alt="Multi-Agent RL Overview" 
+            className="mockup-image" 
+            width={450} 
+          />
         </Window>
       </StaticItemDiv>
 
-      <StaticItemDiv
-        top="-10%"
-        left="-40%"
-        threshold={0.2}
-      >
+      <StaticItemDiv top="-10%" left="-40%" threshold={0.2}>
         <Window>
-          <img src={asset('/projects/rl/3.jpg')} alt='Keio Thesis' className='mockup-image' width={500} />
+          <img 
+            src={asset("/projects/rl/3.jpg")} 
+            alt="Intersection Simulation" 
+            className="mockup-image" 
+            width={500} 
+          />
         </Window>
       </StaticItemDiv>
 
-      <StaticItemDiv
-        top="-30%"
-        left="-48%"
-        threshold={0.5}
-      >
+      <StaticItemDiv top="-30%" left="-48%" threshold={0.7}>
         <Window>
-          <img src={asset('/projects/rl/2 copy.jpg')} alt='Keio Thesis' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/rl/2 copy.jpg")} 
+            alt="Agent Coordination Visualization" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
 
-      <StaticItemDiv
-        top="-38%"
-        left="-24%"
-        threshold={0.6}
-      >
+      <StaticItemDiv top="-38%" left="-24%" threshold={0.7}>
         <Window>
-          <img src={asset('/projects/rl/1.jpg')} alt='Keio Thesis' className='mockup-image' width={300} />
+          <img 
+            src={asset("/projects/rl/1.jpg")} 
+            alt="Policy Visualization" 
+            className="mockup-image" 
+            width={300} 
+          />
         </Window>
       </StaticItemDiv>
 
-      <StaticItemDiv
-        top="-30%"
-        left="-10%"
-        threshold={0.05}
-      >
+      <StaticItemDiv top="-30%" left="-10%" threshold={0.05}>
         <Window>
-          <video src={asset('/projects/rl/1.mp4')} autoPlay loop muted />
+          <video 
+            src={asset("/projects/rl/1.mp4")} 
+            autoPlay 
+            loop 
+            muted 
+          />
         </Window>
       </StaticItemDiv>
     </ScrollableContent>
