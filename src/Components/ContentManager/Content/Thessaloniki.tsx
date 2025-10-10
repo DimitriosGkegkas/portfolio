@@ -13,67 +13,90 @@ export const Thessaloniki: FC = () => {
         htmlContent={
           <>
             {/* HEADER */}
-            <ProjectGroup emoji="🗺️" title="3D Historical Map of Prewar Thessaloniki" color="#60A5FA">
-              <div className="project-text" style={{ fontSize: "1.8em" }}>
-                Digital Reconstruction of Jewish Neighborhoods
-              </div>
-              <div className="project-text">
-                <span style={{ color: "#60A5FA" }}>
-                  An immersive 3D map digitally reconstructing Jewish neighborhoods before WWII.
-                </span>
-              </div>
-            </ProjectGroup>
-
-            {/* CONTENT */}
-            <ProjectGroup 
-              emoji="🏛️" 
-              title="HISTORICAL CONTENT" 
-              color="#FBBF24"
-              badges={["11 Neighborhoods", "Historical Documents", "Cultural Heritage"]}
+            <ProjectGroup
+              emoji="🗺️"
+              title="3D Historical Map of Prewar Thessaloniki"
+              color="#60A5FA"
               content={[
                 <>
-                  Users can explore <span style={{ color: "#FBBF24" }}>11 historical neighborhoods</span> with <span style={{ color: "#FBBF24" }}>interactive information points</span> and cultural artifacts.
+                  Digital Reconstruction of Prewar Neighborhoods
                 </>,
                 <>
-                  Each neighborhood contains <span style={{ color: "#34D399" }}>historical documents</span>, <span style={{ color: "#34D399" }}>family photographs</span>, and <span style={{ color: "#34D399" }}>synagogue records</span>.
+                  A 3D interactive map built with <span style={{ color: "#60A5FA" }}>React Three Fiber</span>,
+                  digitally reconstructing the <span style={{ color: "#60A5FA" }}>historic neighborhoods of Thessaloniki </span>
+                  before WWII, rendered in a distinctive <span style={{ color: "#60A5FA" }}>hand-drawn visual style </span>
+                  through a custom post-processing shader.
                 </>
               ]}
             />
 
-            {/* TECH STACK */}
-            <ProjectGroup 
-              emoji="🛠️" 
-              title="TECHNOLOGY" 
-              color="#A78BFA"
-              badges={[
-                { courses: ["React Three Fiber", "GLSL Shaders", "Draco"], color: "#A78BFA" },
-                { courses: ["3D Graphics", "Web Optimization"], color: "#6EE7B7" }
-              ]}
-              content={[
-                <>
-                  Built with <span style={{ color: "#A78BFA" }}>React Three Fiber</span>, <span style={{ color: "#A78BFA" }}>custom GLSL shaders</span>, and <span style={{ color: "#A78BFA" }}>Draco compression</span> for optimized 3D models.
-                </>,
-                <>
-                  Features <span style={{ color: "#6EE7B7" }}>paper texture simulation</span> and <span style={{ color: "#6EE7B7" }}>ink-based rendering effects</span> for stylized historical visualization.
-                </>
-              ]}
-            />
-
-            {/* IMPACT */}
-            <ProjectGroup 
-              emoji="✨" 
-              title="CULTURAL PRESERVATION" 
-              color="#FCD34D"
-              content={[
-                <>
-                  A <span style={{ color: "#FCD34D" }}>cultural preservation tool</span> combining <span style={{ color: "#FCD34D" }}>cutting-edge web technologies</span> with <span style={{ color: "#FCD34D" }}>historical research</span>.
-                </>,
-                <>
-                  Preserving the memory of <span style={{ color: "#60A5FA" }}>Jewish Thessaloniki</span> through immersive digital storytelling.
-                </>
-              ]}
-            />
+      {/* CONTENT */}
+      <ProjectGroup
+        emoji="🏛️"
+        title="HISTORICAL CONTENT"
+        color="#FBBF24"
+        badges={["11 Neighborhoods", "Historical Documents", "Cultural Heritage"]}
+        content={[
+          <>
+            Users can explore <span style={{ color: "#FBBF24" }}>11 reconstructed neighborhoods </span>
+            featuring <span style={{ color: "#FBBF24" }}>interactive information points</span> and archival materials.
+          </>,
+          <>
+            Each area presents <span style={{ color: "#34D399" }}>historical documents</span>, <span style={{ color: "#34D399" }}>family photographs</span>, and <span style={{ color: "#34D399" }}>archival records </span> sourced from cultural institutions and researchers.
           </>
+        ]}
+      />
+
+      {/* TECH STACK */}
+      <ProjectGroup
+        emoji="🛠️"
+        title="TECHNOLOGY"
+        color="#A78BFA"
+        badges={[
+          "React Three Fiber",
+          "GLSL Shaders",
+          "Postprocessing Pipeline",
+          "Draco Compression"
+        ]}
+        content={[
+          <>
+            Developed using <span style={{ color: "#A78BFA" }}>React Three Fiber</span> and
+            <span style={{ color: "#A78BFA" }}>Three.js</span>, with
+            <span style={{ color: "#A78BFA" }}>Draco compression</span> for lightweight 3D models and efficient streaming.
+          </>,
+          <>
+            Implemented a <span style={{ color: "#A78BFA" }}>custom post-processing shader </span>
+            that takes the rendered frame and applies a <span style={{ color: "#A78BFA" }}>hand-drawn effect </span>
+            dynamically tracing outlines with variable thickness, randomness, and subtle color variation to emulate ink on paper.
+          </>,
+          <>
+            Combined with <span style={{ color: "#6EE7B7" }}>paper-texture overlays</span> and
+            <span style={{ color: "#6EE7B7" }}> lighting adjustments</span>, this achieves a stylized
+            aesthetic inspired by vintage cartography.
+          </>
+        ]}
+      />
+
+      {/* IMPACT */}
+      <ProjectGroup
+        emoji="✨"
+        title="CULTURAL PRESERVATION"
+        color="#FCD34D"
+        content={[
+          <>
+            A <span style={{ color: "#FCD34D" }}>digital preservation initiative</span>
+            merging <span style={{ color: "#FCD34D" }}>web-based 3D visualization</span> with
+            <span style={{ color: "#FCD34D" }}>historical storytelling</span>.
+          </>,
+          <>
+            Developed in collaboration with historians and cultural researchers to preserve
+            the memory and urban fabric of <span style={{ color: "#60A5FA" }}>prewar Thessaloniki </span>
+            through immersive digital media and creative rendering.
+          </>
+        ]}
+      />
+    </>
+
         }
       >
         <StaticItemDiv
@@ -97,7 +120,7 @@ export const Thessaloniki: FC = () => {
         >
           <VimeoVideo videoId="1125190994" width={40} />
         </StaticItemDiv>
-      </ScrollableContent>
+      </ScrollableContent >
     </>
   );
 };

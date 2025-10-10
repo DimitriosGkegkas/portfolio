@@ -12,90 +12,99 @@ export const Zagorisia: FC = () => {
       htmlContent={
         <>
           {/* HEADER */}
-          <ProjectGroup emoji="🏛️" title="Zagorian Architectural Heritage Archive" color="#60A5FA">
-            <div className="project-text" style={{ fontSize: "1.8em" }}>
-              Rizarios Foundation Digital Archive
-            </div>
-            <div className="project-text">
-              <span style={{ color: "#60A5FA" }}>
-                A digital archive celebrating Zagorian architectural heritage in collaboration with the Rizarios Foundation.
-              </span>
-            </div>
-          </ProjectGroup>
-
-          {/* CONTENT */}
-          <ProjectGroup 
-            emoji="🧱" 
-            title="IMMERSIVE EXPLORATION" 
-            color="#FBBF24"
-            badges={["3D Architecture", "Cultural Heritage", "Virtual Tours"]}
+          <ProjectGroup
+            emoji="🏛️"
+            title="Zagorian Architectural Heritage Archive"
+            color="#60A5FA"
             content={[
-              <>
-                Users can explore <span style={{ color: "#FBBF24" }}>3D-rendered traditional buildings</span> from the Zagori region in <span style={{ color: "#FBBF24" }}>immersive detail</span>.
+
+              < >
+                Rizarios Foundation Digital Archive
               </>,
               <>
-                Built as an interactive platform to <span style={{ color: "#34D399" }}>preserve and promote cultural identity</span> through digital means.
+                A digital archive created in collaboration with the{" "}
+                <span style={{ color: "#60A5FA" }}>Rizarios Foundation</span>,
+                presenting the architectural heritage of{" "}
+                <span style={{ color: "#60A5FA" }}>Zagori</span> through curated video narratives
+                and an accessible web interface.
+              </>
+
+            ]}
+          />
+
+          {/* USER EXPERIENCE */}
+          <ProjectGroup
+            emoji="🎬"
+            title="VIDEO EXPERIENCE"
+            color="#FBBF24"
+            badges={["Video Playback", "Subtitles", "Responsive UI"]}
+            content={[
+              <>
+                Focused on <span style={{ color: "#FBBF24" }}>immersive storytelling</span> through high-resolution
+                video content and clean, minimal interface design.
+              </>,
+              <>
+                Features <span style={{ color: "#FBBF24" }}>subtitle synchronization</span>
+                with narration, providing{" "}
+                <span style={{ color: "#34D399" }}>accessibility and multilingual support</span>.
               </>
             ]}
           />
 
-          {/* TECH STACK */}
-          <ProjectGroup 
-            emoji="🛠️" 
-            title="TECHNOLOGY" 
+          {/* TECHNOLOGY */}
+          <ProjectGroup
+            emoji="🛠️"
+            title="TECHNOLOGY"
             color="#A78BFA"
             badges={[
-              { courses: ["React Three Fiber", "GLSL Shaders"], color: "#A78BFA" },
-              { courses: ["3D Graphics", "Geospatial"], color: "#6EE7B7" }
+              "React",
+              "TypeScript",
+              "Custom Subtitle Engine"
             ]}
             content={[
               <>
-                Developed with <span style={{ color: "#A78BFA" }}>React Three Fiber</span> and <span style={{ color: "#A78BFA" }}>custom shaders</span> for dynamic architectural visualization.
+                Developed with <span style={{ color: "#A78BFA" }}>React</span> and{" "}
+                <span style={{ color: "#A78BFA" }}>TypeScript</span>.
               </>,
               <>
-                Integrates <span style={{ color: "#6EE7B7" }}>visual storytelling</span> and <span style={{ color: "#6EE7B7" }}>geospatial exploration</span> of historical sites.
+                Built a <span style={{ color: "#A78BFA" }}>custom subtitle renderer</span> that synchronizes
+                with the video’s voiceover timing for an inclusive viewing experience.
               </>
             ]}
           />
 
-          {/* IMPACT */}
-          <ProjectGroup 
-            emoji="✨" 
-            title="CULTURAL IMPACT" 
+          {/* PURPOSE */}
+          <ProjectGroup
+            emoji="✨"
+            title="CULTURAL IMPACT"
             color="#FCD34D"
             content={[
               <>
-                A project bridging <span style={{ color: "#FCD34D" }}>technology</span> and <span style={{ color: "#FCD34D" }}>cultural preservation</span> through architectural immersion.
+                Designed as an <span style={{ color: "#FCD34D" }}>accessible cultural archive</span>,
+                combining <span style={{ color: "#FCD34D" }}>visual storytelling</span> with
+                modern web technologies.
               </>,
               <>
-                Preserving the unique architectural heritage of <span style={{ color: "#60A5FA" }}>Zagori</span> for future generations.
+                Highlights the traditional architecture and history of{" "}
+                <span style={{ color: "#60A5FA" }}>Zagori</span>, preserving it digitally
+                for educational and cultural use.
               </>
             ]}
           />
         </>
       }
     >
-      <StaticItemDiv
-        top="-40%"
-        left="-40%"
-        threshold={0.1}
-      >
+      <StaticItemDiv top="-40%" left="-40%" threshold={0.1}>
         <VimeoVideo videoId="1124791001" />
       </StaticItemDiv>
-      <StaticItemDiv
-        top="-20%"
-        left="-45%"
-        threshold={0.4}
-      >
+
+      <StaticItemDiv top="-20%" left="-45%" threshold={0.4}>
         <VimeoVideo videoId="1124791196" />
       </StaticItemDiv>
-      <StaticItemDiv
-        top="-30%"
-        left="-35%"
-        threshold={0.7}
-      >
+
+      <StaticItemDiv top="-30%" left="-35%" threshold={0.7}>
         <VimeoVideo videoId="1124790861" />
       </StaticItemDiv>
-    </ScrollableContent>
+    </ScrollableContent >
   );
 };
