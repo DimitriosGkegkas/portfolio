@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SpringValue, useSpring, a as web } from "@react-spring/web";
 import "./UIManager.css";
 import Menu from "../Menu";
+import DimitriosName from "./DimitriosName";
 
 interface UIManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
@@ -45,7 +46,7 @@ export default function UIManager({ props, state, setState, loaded }: UIManagerP
           opacity: props.open.to([0, 1], [1, 0]),
           transform: props.open.to((o: number) => `translate3d(-50%,${o * 100 - 200}px,0)`),
         }}>
-        👋 Welcome <br />I am <span className='highlight-name'>Dimitrios</span>
+        👋 Welcome <br />I am <DimitriosName />
       </web.h1>
     </web.main>
   );
