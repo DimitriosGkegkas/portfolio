@@ -1,64 +1,20 @@
 // components/Education.tsx
 
-import { Scroll, ScrollControls } from "@react-three/drei";
+import { Scroll } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { type FC } from "react";
 import { ItemText } from "../ItemText";
 import { ItemDiv } from "../ItemDiv";
+import { ScrollableContent } from "../ScrollableContent";
 
 export const Education: FC = () => {
   const { width: w, height: h } = useThree((state) => state.viewport);
 
   return (
-    <ScrollControls damping={0.1} pages={10.5}>
-      {/* Adjust pages based on total scroll height */}
-      <Scroll>
-        {/* Keio University */}
-        <group position={[0, -h * 0.14, 0]}>
-          <ItemText text='KEIO' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
-          <ItemText text='2024-2025' scale={3.5} position={[-w / 2 + w / 5, h / 1, 100]} color='#9CA3AF' />
-          <ItemText text='TOKYO' scale={2} position={[-w / 2 + w / 5, h / 1.3, 100]} color='#6B7280' />
-
-          <ItemText text='JEMARO' scale={1.5} position={[-w / 2 + w / 2.3, h / 5, 20]} color='#60A5FA' />
-          <ItemText text='RL' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#FBBF24' />
-          <ItemText text='ROS2' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#A78BFA' />
-          <ItemText text='SUMO' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#F472B6' />
-          <ItemText text='PyTorch' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#34D399' />
-        </group>
-
-        {/* ECN */}
-        <group position={[0, -h * 2.8, 0]}>
-          <ItemText text='ECN' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
-          <ItemText text='2023-2024' scale={3.5} position={[-w / 2 + w / 5, h / 0.8, 100]} color='#9CA3AF' />
-          <ItemText text='NANTES' scale={2} position={[-w / 2 + w / 5, h / 1.1, 100]} color='#6B7280' />
-
-          <ItemText text='JEMARO' scale={1.5} position={[-w / 2 + w / 2.3, h / 5, 20]} color='#60A5FA' />
-          <ItemText text='SLAM' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#FBBF24' />
-          <ItemText text='AirSim' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#A78BFA' />
-          <ItemText text='ROS2' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#F472B6' />
-          <ItemText text='Control' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#34D399' />
-        </group>
-
-        {/* NTUA */}
-        <group position={[0, -5.5 * h, 0]}>
-          <ItemText text='NTUA' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
-          <ItemText text='2016-2022' scale={3.5} position={[-w / 2 + w / 5, h / 0.8, 100]} color='#9CA3AF' />
-          <ItemText text='ATHENS' scale={2} position={[-w / 2 + w / 5, h / 1.1, 100]} color='#6B7280' />
-
-          <ItemText
-            text='integrated
-meng'
-            scale={1.5}
-            position={[-w / 2 + w / 2.3, h / 5, 20]}
-            color='#60A5FA'
-          />
-          <ItemText text='embedded' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#34D399' />
-          <ItemText text='robotics' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#F472B6' />
-          <ItemText text='GAN' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#FBBF24' />
-          <ItemText text='control' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#A78BFA' />
-        </group>
-      </Scroll>
-      <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
+    <ScrollableContent
+      damping={0.1}
+      htmlContent={
+        <>
         {/* ===== KEIO UNIVERSITY SECTION ===== */}
         <ItemDiv offset={50}>
           <div style={{ fontSize: '1.8em', fontWeight: 'bold', marginBottom: '20px', borderBottom: '2px solid #60A5FA', paddingBottom: '10px' }}>
@@ -199,7 +155,56 @@ meng'
             <span style={{ color: "#F472B6" }}>Focus Areas:</span> Signal Processing, Circuit Design, AI/ML, Real-time Systems
           </div>
         </ItemDiv>
+        </>
+      }
+    >
+      {/* Adjust pages based on total scroll height */}
+      <Scroll>
+        {/* Keio University */}
+        <group position={[0, -h * 0.14, 0]}>
+          <ItemText text='KEIO' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
+          <ItemText text='2024-2025' scale={3.5} position={[-w / 2 + w / 5, h / 1, 100]} color='#9CA3AF' />
+          <ItemText text='TOKYO' scale={2} position={[-w / 2 + w / 5, h / 1.3, 100]} color='#6B7280' />
+
+          <ItemText text='JEMARO' scale={1.5} position={[-w / 2 + w / 2.3, h / 5, 20]} color='#60A5FA' />
+          <ItemText text='RL' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#FBBF24' />
+          <ItemText text='ROS2' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#A78BFA' />
+          <ItemText text='SUMO' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#F472B6' />
+          <ItemText text='PyTorch' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#34D399' />
+        </group>
+
+        {/* ECN */}
+        <group position={[0, -h * 2.8, 0]}>
+          <ItemText text='ECN' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
+          <ItemText text='2023-2024' scale={3.5} position={[-w / 2 + w / 5, h / 0.8, 100]} color='#9CA3AF' />
+          <ItemText text='NANTES' scale={2} position={[-w / 2 + w / 5, h / 1.1, 100]} color='#6B7280' />
+
+          <ItemText text='JEMARO' scale={1.5} position={[-w / 2 + w / 2.3, h / 5, 20]} color='#60A5FA' />
+          <ItemText text='SLAM' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#FBBF24' />
+          <ItemText text='AirSim' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#A78BFA' />
+          <ItemText text='ROS2' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#F472B6' />
+          <ItemText text='Control' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#34D399' />
+        </group>
+
+        {/* NTUA */}
+        <group position={[0, -5.5 * h, 0]}>
+          <ItemText text='NTUA' scale={3} position={[-w / 2 + w / 4.4, h / 2, 10]} />
+          <ItemText text='2016-2022' scale={3.5} position={[-w / 2 + w / 5, h / 0.8, 100]} color='#9CA3AF' />
+          <ItemText text='ATHENS' scale={2} position={[-w / 2 + w / 5, h / 1.1, 100]} color='#6B7280' />
+
+          <ItemText
+            text='integrated
+meng'
+            scale={1.5}
+            position={[-w / 2 + w / 2.3, h / 5, 20]}
+            color='#60A5FA'
+          />
+          <ItemText text='embedded' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.4, 20]} color='#34D399' />
+          <ItemText text='robotics' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 0.8, 20]} color='#F472B6' />
+          <ItemText text='GAN' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.2, 20]} color='#FBBF24' />
+          <ItemText text='control' scale={2} position={[-w / 2 + w / 2.3, h / 5 - h * 1.6, 20]} color='#A78BFA' />
+        </group>
       </Scroll>
-    </ScrollControls>
+    </ScrollableContent>
   );
 };

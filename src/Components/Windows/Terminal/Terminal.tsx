@@ -68,13 +68,6 @@ const Terminal3D = ({
         fitAddon.fit();
       });
       instance.options.fontSize = args.contentRect.width / 60; // Adjust font size based on width
-      // if (args.contentRect.width < 350 || args.contentRect.height < 200) {
-      //   instance.options.fontSize = 10; // Set font size
-      // } else if (args.contentRect.width < 600) {
-      //   instance.options.fontSize = 12; // Reset to default font size
-      // } else {
-      //   instance.options.fontSize = 14; // Set larger font size
-      // }
     });
 
     observer.observe(terminalElement);

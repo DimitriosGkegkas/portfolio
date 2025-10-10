@@ -1,17 +1,8 @@
 import { type FC, useEffect, useState, useRef } from "react";
 import "./ProjectTooltip.css";
 import { asset } from "../../../utils/asset";
+import type { Project } from "../../../Data/portfolioData";
 
-interface Project {
-    id: string;
-    name: string;
-    icon: string;
-    description: string;
-    techStack?: string;
-    tags?: string[];
-    title?: string;
-    thumbnails?: string[];
-}
 
 interface ProjectTooltipProps {
     project: Project | null;
@@ -107,7 +98,14 @@ export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) =
                 <span className="tooltip-icon">{project.icon}</span>
                 <div className="tooltip-title-section">
                     <h3 className="tooltip-title">{project.title || project.name}</h3>
-                    <p className="tooltip-subtitle">{project.name}</p>
+                    {
+                        project.university ? (
+                            <p className="tooltip-subtitle">{project.university} - {project.location}</p>
+                        ) 
+                        :
+                        <p className="tooltip-subtitle">{project.name}</p>
+                        
+                    }
                 </div>
             </div>
             <div className="tooltip-content">
@@ -146,7 +144,7 @@ export const ProjectTooltip: FC<ProjectTooltipProps> = ({ project, position }) =
                 
                 {project.techStack && (
                     <div className="tooltip-tech">
-                        <strong>Tech Stack:</strong> {project.techStack}
+                        <strong>Tech Stack:</strong> {project.techStack?.join(', ')}
                     </div>
                 )}
                 {project.tags && project.tags.length > 0 && (

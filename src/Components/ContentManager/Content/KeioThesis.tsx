@@ -1,16 +1,82 @@
-import { Scroll, ScrollControls } from "@react-three/drei";
 import { type FC } from "react";
-import { ItemDiv } from "../ItemDiv";
 import { StaticItemDiv } from "../StaticItemDiv";
 import Window from "../../Windows/DraggableWindow/Window";
 import { asset } from "../../../utils/asset";
+import { ProjectGroup } from "../ProjectGroup";
+import { ScrollableContent } from "../ScrollableContent";
 
 export const KeioThesis: FC = () => {
-
   return (
-    <ScrollControls damping={0.1} pages={3.2} style={{ zIndex: 1000000000 }}>
+    <ScrollableContent
+      htmlContent={
+        <>
+          {/* HEADER */}
+          <ProjectGroup emoji="🚗" title="Decentralized Multi-Agent RL with Communication" color="#60A5FA">
+            <div className="project-text" style={{ fontSize: "1.8em" }}>
+              Master's Thesis at Keio University
+            </div>
+            <div className="project-text">
+              <span style={{ color: "#60A5FA" }}>
+                JEMARO Program - Autonomous driving research with multi-agent reinforcement learning.
+              </span>
+            </div>
+          </ProjectGroup>
 
+          {/* RESEARCH */}
+          <ProjectGroup 
+            emoji="🤖" 
+            title="RESEARCH FOCUS" 
+            color="#F472B6"
+            badges={["Multi-Agent RL", "V2V Communication", "Autonomous Driving"]}
+            content={[
+              <>
+                Developed <span style={{ color: "#F472B6" }}>multi-agent RL algorithms</span> with V2V communication protocols for coordinated autonomous driving.
+              </>,
+              <>
+                Created <span style={{ color: "#34D399" }}>safe decision-making frameworks</span> for dynamic traffic environments.
+              </>,
+              <>
+                Advanced research in <span style={{ color: "#6EE7B7" }}>policy exchange</span> and <span style={{ color: "#6EE7B7" }}>coordinated learning</span> strategies.
+              </>
+            ]}
+          />
 
+          {/* TECH STACK */}
+          <ProjectGroup 
+            emoji="🛠️" 
+            title="TECHNOLOGY" 
+            color="#A78BFA"
+            badges={[
+              { courses: ["ROS2", "SUMO", "PyTorch"], color: "#A78BFA" },
+              { courses: ["Python", "Traffic Simulation"], color: "#F59E0B" }
+            ]}
+            content={[
+              <>
+                Built with <span style={{ color: "#A78BFA" }}>ROS2</span> for robotics middleware, <span style={{ color: "#A78BFA" }}>SUMO</span> for traffic simulation, and <span style={{ color: "#A78BFA" }}>PyTorch</span> for deep learning.
+              </>,
+              <>
+                Validated in <span style={{ color: "#F59E0B" }}>realistic traffic simulation</span> environments with complex scenarios.
+              </>
+            ]}
+          />
+
+          {/* IMPACT */}
+          <ProjectGroup 
+            emoji="🚀" 
+            title="IMPACT" 
+            color="#6EE7B7"
+            content={[
+              <>
+                Contributed to <span style={{ color: "#EC4899" }}>decentralized autonomous systems</span> research and methodology.
+              </>,
+              <>
+                Advancing the field of <span style={{ color: "#6EE7B7" }}>multi-agent coordination</span> for future autonomous mobility.
+              </>
+            ]}
+          />
+        </>
+      }
+    >
       <StaticItemDiv
         top="-40%"
         left="-45%"
@@ -60,34 +126,6 @@ export const KeioThesis: FC = () => {
           <video src={asset('/projects/rl/1.mp4')} autoPlay loop muted />
         </Window>
       </StaticItemDiv>
-
-
-      <Scroll html style={{ width: "100%", height: "100%", zIndex: 10000000 }}>
-        <ItemDiv offset={10}>
-          🚗 <span style={{ color: "#60A5FA" }}>Decentralized Multi-Agent RL with Communication</span> for autonomous driving
-        </ItemDiv>
-        <ItemDiv offset={55}>
-          🎓 <span style={{ color: "#FBBF24" }}>Master's Thesis</span> at Keio University, Tokyo (JEMARO Program)
-        </ItemDiv>
-        <ItemDiv offset={95}>
-          🤖 Developed <span style={{ color: "#F472B6" }}>multi-agent RL algorithms</span> with V2V communication protocols
-        </ItemDiv>
-        <ItemDiv offset={135}>
-          🛡️ Created <span style={{ color: "#34D399" }}>safe decision-making frameworks</span> for dynamic environments
-        </ItemDiv>
-        <ItemDiv offset={175}>
-          🛠️ Built with <span style={{ color: "#A78BFA" }}>ROS2</span>, <span style={{ color: "#A78BFA" }}>SUMO</span>, and <span style={{ color: "#A78BFA" }}>PyTorch</span>
-        </ItemDiv>
-        <ItemDiv offset={215}>
-          🔬 Advanced research in <span style={{ color: "#6EE7B7" }}>policy exchange</span> and <span style={{ color: "#6EE7B7" }}>coordinated learning</span>
-        </ItemDiv>
-        <ItemDiv offset={255}>
-          🌐 Validated in <span style={{ color: "#F59E0B" }}>realistic traffic simulation</span> environments
-        </ItemDiv>
-        <ItemDiv offset={295}>
-          🚀 Contributed to <span style={{ color: "#EC4899" }}>decentralized autonomous systems</span> research
-        </ItemDiv>
-      </Scroll>
-    </ScrollControls>
+    </ScrollableContent>
   );
 };

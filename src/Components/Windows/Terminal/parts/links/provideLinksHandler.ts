@@ -38,12 +38,13 @@ export const provideLinksHandler = (instance: Terminal, currentPath: RefObject<s
   Object.keys(commits).forEach((branchName) => {
     const branchProjects = getBranchProjects(branchName);
     branchProjects.forEach((project: Project) => {
-      addLink(project.hash, () => {
-        instance?.writeln(`git checkout ${project.hash}`);
-        onCommand(`git checkout ${project.hash}`);
-        instance.scrollToBottom();
-        prompt(currentPath, currentBranch, instance);
-      });
+      if (text.includes(project.hash))
+        addLink(text.slice(text.indexOf(project.hash)), () => {
+          instance?.writeln(`git checkout ${project.hash}`);
+          onCommand(`git checkout ${project.hash}`);
+          instance.scrollToBottom();
+          prompt(currentPath, currentBranch, instance);
+        });
     });
   });
 

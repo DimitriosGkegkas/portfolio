@@ -25,7 +25,6 @@ export const gitHelper = (
           
           if (project.university) {
             instance?.writeln(`${COLOR.green}| └──  ${project.university} - ${project.location}${COLOR.reset}`);
-            instance?.writeln(`${COLOR.green}|   ${COLOR.yellow}🎯 ${project.name}${COLOR.reset}`);
             instance?.writeln(`${COLOR.green}|   ${COLOR.cyan}• ${project.description}${COLOR.reset}`);
             instance?.writeln(`${COLOR.green}|   ${COLOR.magenta}🛠️ Tech: ${project.techStack.join(', ')}${COLOR.reset}`);
           } else {
@@ -75,7 +74,6 @@ export const gitHelper = (
         
         if (project.university) {
           instance?.writeln(`${COLOR.green}| └──  ${project.university} - ${project.location}${COLOR.reset}`);
-          instance?.writeln(`${COLOR.green}|   ${COLOR.yellow}🎯 ${project.name}${COLOR.reset}`);
           instance?.writeln(`${COLOR.green}|   ${COLOR.cyan}• ${project.description}${COLOR.reset}`);
           instance?.writeln(`${COLOR.green}|   ${COLOR.magenta}🛠️ Tech: ${project.techStack.join(', ')}${COLOR.reset}`);
         } else {

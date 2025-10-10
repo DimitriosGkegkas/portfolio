@@ -22,6 +22,14 @@ export default function UIManager({ props, state, setState, loaded }: UIManagerP
     setShow(true); // Triggers appear to go from 0 -> 1 once on mount
   }, []);
 
+  useEffect(() => {
+    if (state.open && !state.project) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [state.open, state.project]);
+
   return (
     <web.main
       className='main-container'

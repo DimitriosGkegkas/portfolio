@@ -1,18 +1,8 @@
 import { type FC } from "react";
 import DraggableWindow from "../DraggableWindow/DraggableWindow";
-import { commits, projects as allProjects } from "../Terminal/parts/constants";
 import "./FinderWindow.css";
+import { getProjectsByCategory, type Project } from "../../../Data/portfolioData";
 
-interface Project {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  techStack?: string;
-  tags?: string[];
-  title?: string;
-  thumbnails?: string[];
-}
 
 interface FinderWindowProps {
   onProjectClick: (projectId: string) => void;
@@ -22,33 +12,6 @@ interface FinderWindowProps {
   onProjectHover?: (project: Project | null, position: { x: number; y: number }) => void;
 }
 
-// Function to get projects based on category
-const getProjectsByCategory = (category?: 'web-development' | 'robotics-ai' | 'education'): Project[] => {
-  if (!category) return [];
-
-  const branch = commits[category];
-  if (!branch || !branch.projectIds) return [];
-
-  return branch.projectIds
-    .map((projectId: string) => {
-      const project = allProjects[projectId];
-      if (!project) return null;
-      
-      const mappedProject: Project = {
-        id: project.id,
-        name: project.name || project.title || 'Untitled Project',
-        icon: project.icon || '📁',
-        description: project.description || project.title || '',
-        techStack: project.techStack?.join(', '),
-        tags: project.tags,
-        title: project.title,
-        thumbnails: project.thumbnails?.slice(0, 3) || []
-      };
-      
-      return mappedProject;
-    })
-    .filter((p): p is Project => p !== null);
-};
 
 
 export const FinderWindow: FC<FinderWindowProps> = ({
@@ -97,7 +60,7 @@ export const FinderWindow: FC<FinderWindowProps> = ({
   };
 
   // Get projects based on category
-  const projects = getProjectsByCategory(category);
+  const projects = getProjectsByCategory(category || '');
 
   return (
     <DraggableWindow
@@ -172,7 +135,7 @@ export const FinderWindow: FC<FinderWindowProps> = ({
               >
                 <div className="project-icon">{project.icon}</div>
                 <div className="project-name">{project.name}</div>
-                <div className="project-description">{project.description}</div>
+                {/* <div className="project-description">{project.description}</div> */}
               </div>
             ))}
           </div>

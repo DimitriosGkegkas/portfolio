@@ -32,7 +32,6 @@ const DraggableWindow = ({
   const isVisible = isWindowVisible(windowId);
 
   useEffect(() => {
-    console.log('expanded', expanded);
     api.start({ x: 0, y: 0 });
     setIsDragging(false);
   }, [expanded, api]);

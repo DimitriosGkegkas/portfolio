@@ -25,6 +25,11 @@ body {
   color: black;
   background: #f0f0f0;
   overflow: hidden;
+  transition: background 1s ease-in-out;
+}
+
+body.dark-mode {
+  background: linear-gradient(-30deg, rgb(4, 8, 46), rgb(25, 12, 2));
 }
 
 h1 {

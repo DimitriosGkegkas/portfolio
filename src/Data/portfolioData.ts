@@ -234,12 +234,12 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     "web-development": {
       name: "web-development",
       description: "Web development projects and applications",
-      projectIds: ["meteoBot", "alexanderMap", "zagorisiaApp", "digitalMuseums", "rotunda", "thessalonikiMap"],
+      projectIds: [ "alexanderMap", "thessalonikiMap", "zagorisiaApp", "meteoBot", "digitalMuseums", "rotunda"],
     },
     "robotics-ai": {
       name: "robotics-ai",
       description: "Robotics and AI research projects",
-      projectIds: ["keioThesis", "multiDroneSLAM", "ganMetrics", "roboticArm"],
+      projectIds: ["multiDroneSLAM", "roboticArm" , "keioThesis", "ganMetrics"],
     },
   },
 
@@ -247,8 +247,8 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     // Education projects
     keio: {
       id: "keio",
-      name: "Keio University",
-      title: "Master of Science in Engineering (JEMARO Double Degree)",
+      name: "MSc in Robotics Engineering",
+      title: "MSc in Robotics Engineering (JEMARO Double Degree)",
       description: "Master thesis: Decentralized Multi-Agent Reinforcement Learning with Communication for autonomous driving",
       techStack: ["ROS2", "SUMO", "PyTorch", "Multi-Agent RL", "Simulation"],
       tags: ["Autonomous Driving", "Multi-Agent RL", "V2X Communication"],
@@ -258,7 +258,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       university: "Keio University",
       location: "Tokyo, Japan",
       component: "Keio",
-      icon: "🎓",
+      icon: "🇯🇵",
       thumbnails: [
         "/projects/degrees/KEIO_1.jpeg",
         "/projects/degrees/KEIO_2.jpeg",
@@ -267,9 +267,9 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     },
     ecn: {
       id: "ecn",
-      name: "École Centrale de Nantes",
-      title: "MSc in Control and Robotics – Advanced Robotics (JEMARO)",
-      description: "Multi-Drone Collaborative SLAM with Kimera-Multi - Real-time mapping, sensor fusion, and distributed autonomy",
+      name: "MSc in Control and Advanced Robotics",
+      title: "MSc in Control and Advanced Robotics (JEMARO Double Degree)",
+      description: "Research: Multi-Agent SLAM for SWARM Robotics - Real-time mapping, sensor fusion, and distributed autonomy",
       techStack: ["ROS2", "Python", "C++", "AirSim", "Unreal Engine"],
       tags: ["SLAM", "Multi-Agent", "Robotics"],
       category: "education",
@@ -287,9 +287,9 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     },
     ntua: {
       id: "ntua",
-      name: "National Technical University of Athens",
+      name: "MEng in Electrical & Computer Engineering",
       title: "MEng in Electrical & Computer Engineering",
-      description: "GAN Metrics for Image Quality Evaluation - Interactive AI validation framework with user feedback",
+      description: "Master thesis: GAN Metrics for Image Quality Evaluation - Interactive AI validation framework with user feedback",
       techStack: ["C++", "Python", "Javascript", "Embedded Systems"],
       tags: ["AI", "Computer Vision", "GAN"],
       category: "education",
@@ -298,7 +298,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       university: "National Technical University of Athens",
       location: "Athens, Greece",
       component: "Ntua",
-      icon: "🏛️",
+      icon: "🇬🇷",
       thumbnails: [
         "/projects/degrees/NTUA_1.jpeg",
         "/projects/degrees/NTUA_2.jpeg",
@@ -350,7 +350,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       category: "web-development",
       hash: "zago789",
       component: "Zagorisia",
-      icon: "🏛️",
+      icon: "🏠",
       thumbnails: [
         "/projects/arch/3_thumb.jpg",
         "/projects/arch/1_thumb.jpg",
@@ -367,7 +367,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       category: "web-development",
       hash: "museum321",
       component: "DigitalMuseum",
-      icon: "🏛️",
+      icon: "🖼️",
       thumbnails: [
         "/projects/museum/2_thumb.jpg",
         "/projects/museum/1_thumb.jpg",
@@ -401,7 +401,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       category: "web-development",
       hash: "thessaloniki3d",
       component: "Thessaloniki",
-      icon: "🏛️",
+      icon: "🗺️",
       thumbnails: [
         "/projects/thes/thumb_1_thumb.jpg",
         "/projects/thes/thumb_2_thumb.jpg",
@@ -500,8 +500,10 @@ export const getFileSystem = () => portfolioData.fileSystem;
 export const getBranches = () => portfolioData.branches;
 export const getProjects = () => portfolioData.projects;
 export const getProjectById = (id: string) => portfolioData.projects[id];
-export const getProjectsByCategory = (category: string) => 
-  Object.values(portfolioData.projects).filter(project => project.category === category);
+export const getProjectsByCategory = (category: string) => {
+  if (!portfolioData.branches[category]) return [];
+  return portfolioData.branches[category].projectIds.map(id => portfolioData.projects[id]);
+}
 export const getBranchProjects = (branchName: string) => {
   const branch = portfolioData.branches[branchName];
   if (!branch) return [];
