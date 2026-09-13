@@ -14,6 +14,14 @@ export default defineConfig(({ mode }) => {
     //   },
     // },
     base: isProduction ? "/portfolio/" : "/", // 👈 only set base for production
+    build: {
+      rollupOptions: {
+        input: {
+          main: "index.html",
+          robotics: "robotics/index.html",
+        },
+      },
+    },
     plugins: [
       react(),
       glsl(),
