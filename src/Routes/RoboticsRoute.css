@@ -1,0 +1,74 @@
+.robotics-route { background:#0b1014; }
+.robotics-page { position:relative; width:100%; height:100svh; overflow:hidden; color:#f1f1ed; background:#0b1014; font-family:inter,Arial,sans-serif; }
+.robotics-page--embedded { position:absolute; inset:0; z-index:1002; }
+.robotics-page__canvas { position:absolute!important; inset:0; }
+.robotics-page__scroll { position:absolute; inset:0; z-index:2; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; overscroll-behavior-y:contain; touch-action:pan-y; }
+.robotics-page__scroll::-webkit-scrollbar { display:none; }
+.robotics-page__scroll:focus-visible { outline:1px solid #b6ccce; outline-offset:-3px; }
+.robotics-page__step { height:125svh; }
+.mission-shade { position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(90deg,rgba(7,11,14,.9),rgba(7,11,14,.68) 31%,rgba(7,11,14,.12) 66%,transparent 82%),linear-gradient(0deg,rgba(7,11,14,.86),transparent 29%,transparent 84%,rgba(7,11,14,.42)); }
+.mission-ui { position:absolute; inset:0; z-index:3; pointer-events:none; }
+.mission-header { position:absolute; top:32px; left:5vw; right:5vw; display:flex; align-items:center; justify-content:space-between; }
+.mission-back { pointer-events:auto; background:none; border:0; padding:8px 0; font:500 15px inter,Arial,sans-serif; text-decoration:none; color:#f1f1ed; letter-spacing:-.02em; text-transform:none; cursor:pointer; }
+.mission-brand { font-size:14px; font-weight:700; letter-spacing:.14em; }
+.mission-brand span { font-weight:400; color:#aab4b6; font-size:12px; letter-spacing:.02em; margin-left:10px; }
+.mission-copy { position:absolute; left:7%; top:50%; width:min(34%,500px); transform:translateY(-46%); }
+.mission-copy__content { transform-origin:left center;animation:mission-copy-enter .62s cubic-bezier(.16,1,.3,1) both; }
+@keyframes mission-copy-enter { from { opacity:0;transform:translateY(28px) scale(.965);filter:blur(5px); } to { opacity:1;transform:none;filter:blur(0); } }
+.mission-eyebrow { color:#e2b98f; font-size:13px; font-weight:500; text-transform:none; letter-spacing:-.01em; line-height:1.5; margin:0 0 20px; }
+.mission-copy h1 { position:static; transform:none; color:#f1f1ed; font-size:48px; font-weight:400; line-height:.98; text-align:left; letter-spacing:-.075em; white-space:pre-line; margin:0 0 25px; }
+.mission-body { font-size:clamp(16px,1.25vw,20px); line-height:1.45; color:#d0d6d6; margin:0; max-width:470px; }
+.mission-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:28px; max-width:470px; }
+.mission-tags span { color:#e0e4e2; font-size:13px; line-height:1.4; border:1px solid #536166; border-radius:999px; padding:7px 12px; }
+.mission-detail { font-size:13px; color:#a0abad; line-height:1.5; margin:20px 0 0; max-width:430px; }
+.mission-footer { position:absolute; bottom:28px; left:40px; right:40px; display:flex; gap:20px; justify-content:space-between; align-items:center; }
+.mission-scroll-label { color:#aeb8b9; font-size:13px; letter-spacing:-.01em; width:185px; }
+.mission-scroll-label span { color:#e0c1a5; margin-left:8px; font-size:14px; }
+.mission-chapters { display:flex; gap:22px; pointer-events:auto; }
+.mission-chapters button { cursor:pointer; background:none; border:0; border-bottom:1px solid #536166; padding-bottom:6px 0 0; color:#9aa6a8; font:400 13px inter,Arial,sans-serif; text-align:left; transition:color .2s,border-color .2s; }
+.mission-chapters button[aria-current],.mission-chapters button:hover { color:#eee9de; border-color:#d3a983; }
+.mission-chapters button:focus-visible,.mission-back:focus-visible { outline:1px solid #d3a983; outline-offset:5px; }
+.mission-chapter-label { display:block; margin-top:0px; font-size:12px; }
+.mission-count { font-size:18px; color:#e9e5dd; font-variant-numeric:tabular-nums; }
+.mission-count span { color:#54626a; margin-left:5px; }
+.mission-progress { position:absolute; left:0; right:0; bottom:0; height:2px; background:#253039; }
+.mission-progress i { display:block; width:100%; height:100%; transform-origin:left; background:#bf926d; }
+.mission-sensors { position:absolute; right:7%; bottom:20%; width:260px; background:#0b1015cc; border:1px solid #39464d; padding:11px;animation:mission-panel-enter .48s .12s cubic-bezier(.16,1,.3,1) both; }
+@keyframes mission-panel-enter { from { opacity:0;transform:translateY(16px) scale(.96); } to { opacity:1;transform:none; } }
+.mission-sensors__heading { font-size:11px; letter-spacing:.02em; color:#d7dddd; display:flex; justify-content:space-between; margin-bottom:12px; }
+.mission-sensors__heading span { font-size:10px; color:#9eabad; }
+.mission-sensors__views { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.mission-sensor { position:relative; height:74px; background:#26323a; overflow:hidden; }
+.mission-sensor__scene { position:absolute; inset:0; background:linear-gradient(155deg,#1b262d 50%,#364049 51%); }
+.mission-sensor__scene i { position:absolute; width:23%; height:50%; background:#45515a; bottom:17%; left:9%; box-shadow:inset -4px 0 #303c44; }
+.mission-sensor__scene i:nth-child(2) { left:34%;height:35%; }.mission-sensor__scene i:nth-child(3) { left:77%;height:68%; }
+.mission-sensor__fire { position:absolute; bottom:20%; left:53%; width:18%; height:36%; background:#ee9746; clip-path:polygon(0 100%,10% 48%,34% 68%,49% 0,73% 52%,85% 30%,100% 100%); }
+.mission-sensor__box { position:absolute; bottom:18%; left:50%; width:25%; height:46%; border:1px solid #d3b284; }
+.mission-sensor__label { position:absolute; bottom:5px; left:6px; font-size:8px; letter-spacing:.01em; color:#e0e7e9; }
+.mission-sensor--thermal .mission-sensor__scene { background:radial-gradient(ellipse at 63% 62%,#e5c533 0%,#a42660 23%,#28153e 52%); }
+.mission-sensor--thermal .mission-sensor__scene i { background:#42204e;box-shadow:none;opacity:.7; }
+.mission-sensor--thermal .mission-sensor__fire { background:#fffbc5; }
+.mission-sensors__result { color:#aab7b9; margin-top:12px; font-size:11px; }.mission-sensors__result span { display:block; margin-top:7px; color:#c2ded4;letter-spacing:.02em; }
+.mission-event { position:absolute; right:17%; bottom:28%; display:flex; align-items:center; gap:9px; font-size:9px;letter-spacing:.1em;color:#b7cfca; }
+.mission-event small { display:block; color:#869ca2;letter-spacing:0;font-size:8px;margin-top:4px; }.mission-event__cross { font-size:24px; font-weight:200; }
+.mission-loading { color:#b8c7cf; background:#0a1015; font:11px Inter,Arial,sans-serif; white-space:nowrap; padding:16px 22px; }
+.mission-fallback { position:absolute; top:25%; right:8%; max-width:260px; color:#8f9ea6; font-size:13px; line-height:1.7; }
+@media (max-width:1000px) { .mission-chapters { gap:16px; }.mission-scroll-label { display:none; }.mission-copy { width:39%; }.mission-brand span { display:none; }.mission-sensors { width:260px; } }
+@media (max-width:700px) {
+ .mission-header { top:17px;left:24px;right:24px; }.mission-header__meta { display:none; }.mission-brand {font-size:12px;}
+ .mission-shade { background:linear-gradient(0deg,#080d12 0%,rgba(8,13,18,.97) 26%,rgba(8,13,18,.74) 45%,transparent 68%,rgba(8,13,18,.45)); }
+ .mission-copy { left:24px;right:24px;top:auto;bottom:99px;width:auto;transform:none; }
+ .mission-copy h1 { font-size:clamp(40px,11vw,60px);margin-bottom:16px;line-height:1; }.mission-eyebrow { font-size:12px;margin-bottom:14px; }.mission-body { font-size:15px;line-height:1.45; max-width:100%; }
+ .mission-tags { margin-top:18px;gap:7px; }.mission-tags span {font-size:11px;padding:6px 10px;}.mission-detail {font-size:11px;margin-top:14px;}
+ .mission-footer { left:24px;right:24px;bottom:23px; }.mission-chapters { flex:1;justify-content:space-between;gap:7px; }.mission-chapters button { min-width:28px;font-size:12px;padding-top:10px; }.mission-chapter-label { display:none; }.mission-count {font-size:16px;}
+ .mission-sensors { top:115px;right:22px;bottom:auto;width:198px;padding:9px; }.mission-sensors__heading { font-size:7px;margin-bottom:8px; }.mission-sensors__heading span {font-size:6px;}.mission-sensor { height:57px; }.mission-sensors__result { font-size:7px;margin-top:7px; }.mission-sensors__result span {margin-top:5px;}
+ .mission-event { top:28%;bottom:auto;right:10%;font-size:8px; }.mission-handoff { top:26%;bottom:auto;right:22px;font-size:7px; }
+}
+@media (max-height:700px) and (min-width:701px) { .mission-copy h1 {font-size:48px;}.mission-copy {top:48%;}.mission-eyebrow {margin-bottom:14px;}.mission-tags {margin-top:16px;}.mission-detail {margin-top:16px;} }
+@media (max-height:720px) and (max-width:700px) { .mission-copy {bottom:76px;}.mission-copy h1 {font-size:30px;}.mission-body {font-size:10px;}.mission-detail {display:none;}.mission-tags {margin-top:10px;}.mission-sensors {top:100px;}.mission-sensor {height:43px;} }
+@media (prefers-reduced-motion:reduce) { .mission-chapters button {transition:none;}.mission-copy__content,.mission-sensors {animation:none;} }
+
+.mission-height-legend { position:absolute;right:40px;top:174px;width:145px;color:#9aabb4;font-size:8px;letter-spacing:.12em; }
+.mission-height-legend__bar { height:3px;margin-top:10px;background:linear-gradient(90deg,#426eff,#29d9ef 23%,#4be597 47%,#ffd052 73%,#fa598e); }
+.mission-height-legend__ticks { display:flex;justify-content:space-between;margin-top:6px;font-size:8px;letter-spacing:0;color:#748992; }
+@media (max-width:700px) { .mission-height-legend {top:116px;right:22px;width:104px;font-size:7px;}.mission-height-legend__bar {margin-top:7px;height:2px;} }

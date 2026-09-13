@@ -33,6 +33,7 @@ export interface Project {
   component?: string;
   icon?: string;
   thumbnails?: string[];
+  experience?: 'robotics-immersive';
 }
 
 export interface Branch {
@@ -199,6 +200,12 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     ],
     "~/portfolio/robotics-ai/": [
       {
+        name: "hazardRobotics.md",
+        isDir: false,
+        created: "Oct 1 2025",
+        content: "# 🔥 Autonomous Firefighting Quadruped\nRole: Robotics Engineer at Pavlou Company, Athens, Greece.\n\n- Dates: October 2025 - Present\n- Focus: ROS2 autonomy, localization, navigation, fire detection, and suppression support\n- Sensing: RGB, thermal, LiDAR\n- Integration: electronics assembly, CAN drivers, CAD mounts, protective casing, and operator interfaces",
+      },
+      {
         name: "keioThesis.md",
         isDir: false,
         created: "Aug 1 2024",
@@ -239,7 +246,7 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
     "robotics-ai": {
       name: "robotics-ai",
       description: "Robotics and AI research projects",
-      projectIds: ["multiDroneSLAM", "roboticArm" , "keioThesis", "ganMetrics"],
+      projectIds: ["hazardRobotics", "multiDroneSLAM", "roboticArm" , "keioThesis", "ganMetrics"],
     },
   },
 
@@ -424,6 +431,18 @@ ${COLOR.cyan}$ git checkout education${COLOR.reset}  `,
       ],
     },
     // Robotics & AI projects
+    hazardRobotics: {
+      id: "hazardRobotics",
+      name: "Autonomous Firefighting Quadruped",
+      title: "Robotics Engineer | Pavlou Company",
+      description: "Leading development of an autonomous firefighting robotic dog platform, integrating ROS2 autonomy, perception, localization, navigation, fire detection, payload hardware, and operator interfaces for deployment.",
+      techStack: ["ROS2", "Deep Robotics", "LiDAR", "RGB + Thermal", "CAN", "CAD"],
+      tags: ["Firefighting Robotics", "Quadruped Autonomy", "Payload Integration"],
+      category: "robotics-ai",
+      hash: "hazard-robotics",
+      icon: "🔥",
+      experience: "robotics-immersive",
+    },
     keioThesis: {
       id: "keioThesis",
       name: "Decentralized Multi-Agent RL with Communication",
@@ -500,6 +519,10 @@ export const getFileSystem = () => portfolioData.fileSystem;
 export const getBranches = () => portfolioData.branches;
 export const getProjects = () => portfolioData.projects;
 export const getProjectById = (id: string) => portfolioData.projects[id];
+export const isRoboticsImmersiveProject = (id: string | null) => {
+  if (!id) return false;
+  return portfolioData.projects[id]?.experience === "robotics-immersive";
+};
 export const getProjectsByCategory = (category: string) => {
   if (!portfolioData.branches[category]) return [];
   return portfolioData.branches[category].projectIds.map(id => portfolioData.projects[id]);

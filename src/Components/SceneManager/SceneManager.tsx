@@ -7,6 +7,8 @@ import Laptop from "../Laptop/Laptop";
 import { ContentManager } from "../ContentManager/ContentManager";
 import { PerspectiveCamera } from "@react-three/drei";
 import { ProjectTooltip } from "../Windows/ProjectTooltip/ProjectTooltip";
+import RoboticsRoute from "../../Routes/RoboticsRoute";
+import { isRoboticsImmersiveProject } from "../../Data/portfolioData";
 
 interface SceneManagerProps {
   props: { loaded: SpringValue<number>; position: SpringValue<number>; background: SpringValue<number>; open: SpringValue<number> };
@@ -16,8 +18,10 @@ interface SceneManagerProps {
 }
 
 export default function SceneManager({ props, state, setState, setLoaded }: SceneManagerProps) {
+  const isRoboticsExperience = isRoboticsImmersiveProject(state.project);
+  const showContent = Boolean(state.project) && !isRoboticsExperience;
   const { getContent } = useSpring({
-    getContent: state.project ? 1 : 0,
+    getContent: showContent ? 1 : 0,
     config: { mass: 1, tension: 25, friction: 10 },
   });
   const cancelProject = useCallback(() => {
@@ -87,13 +91,13 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           height: "100svh",
           overflow: "hidden",
           zIndex: 1001,
-          pointerEvents: "auto",
+          pointerEvents: showContent ? "auto" : "none",
           transform: getContent.to((o: number) => `translate3d(0,${(1 - o) * 100}svh,0)`),
         }}>
         <Canvas id='content' dpr={[1, 2]}>
           {/* <Perf position="top-left" /> */}
           <PerspectiveCamera makeDefault position={[0, 0, -30]} fov={35} rotation={[0, Math.PI, 0]}></PerspectiveCamera>
-          <ContentManager page={state.project} />
+          <ContentManager page={showContent ? state.project : null} />
           <ambientLight intensity={1} />
           <mesh rotation={[-0.2, Math.PI * 0.26, 0]} position={[10, -3, 0]} onClick={cancelProject} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
             <boxGeometry args={[20, 40, 0.5]} />
@@ -105,6 +109,8 @@ export default function SceneManager({ props, state, setState, setLoaded }: Scen
           </mesh>
         </Canvas>
       </web.div>
+
+      {isRoboticsExperience ? <RoboticsRoute onClose={cancelProject} /> : null}
       
       {/* Static Item Container for DigitalMuseum */}
       <div id="static-item-div"></div>

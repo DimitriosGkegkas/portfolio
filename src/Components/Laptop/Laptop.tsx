@@ -40,17 +40,19 @@ const screenOffset = 0.2;
 // Responsive positioning based on window width
 const getResponsivePositions = () => {
   // Adjust Z position based on screen width - move laptop further back for smaller screens
-  let baseZ, projectZ;
+  let baseZ, projectZ, immersiveZ;
 
   baseZ = -17;
   // baseZ = -17 + (Math.max(0.9 * height - width, 0) / height) * 30;
   // baseZ = -15;
   projectZ = baseZ;
+  immersiveZ = -26;
 
   return {
     positionA: new THREE.Vector3(0, -4.2, 2), // closed (same for all screen sizes)
     positionB: new THREE.Vector3(0, -2.5, baseZ), // open
     positionC: new THREE.Vector3(5, -3, projectZ), // project
+    positionD: new THREE.Vector3(17, -5.4, immersiveZ), // immersive project
   };
 };
 
@@ -67,6 +69,7 @@ const getDistanceFactor = (height: number) => {
 const rotationA = new THREE.Euler(0, Math.PI, 0);
 const rotationB = new THREE.Euler(-screenOffset, Math.PI, 0);
 const rotationC = new THREE.Euler(-0.1, (Math.PI * 2.5) / 2, 0, "YXZ");
+const rotationD = new THREE.Euler(-0.28, Math.PI * 0.08, -0.12, "YXZ");
 
 interface ModelProps {
   position: SpringValue<number>;
@@ -195,6 +198,27 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
   // Get responsive positions based on current window width
   const positions = getResponsivePositions();
 
+  const interpolateVector = (value: number) => {
+    if (value < 1) {
+      return positions.positionA.clone().lerp(positions.positionB, value);
+    }
+
+    if (value < 2) {
+      return positions.positionB.clone().lerp(positions.positionC, value - 1);
+    }
+
+    return positions.positionC.clone().lerp(positions.positionD, value - 2);
+  };
+
+  const interpolateRotation = (value: number) => {
+    const from = value < 1 ? rotationA : value < 2 ? rotationB : rotationC;
+    const to = value < 1 ? rotationB : value < 2 ? rotationC : rotationD;
+    const t = value < 1 ? value : value < 2 ? value - 1 : value - 2;
+    const fromVec = new THREE.Vector3().setFromEuler(from);
+    const toVec = new THREE.Vector3().setFromEuler(to);
+    return fromVec.lerp(toVec, t);
+  };
+
   // Calculate the distanceFactor
   const distanceFactor = getDistanceFactor(height);
 
@@ -211,36 +235,12 @@ export default function Model({ position, state, setState, onLoaded, onClick, on
       <animated.group
         ref={group}
         position={position.to((p) => {
-          const pos = p < 1 ? positions.positionA.clone().lerp(positions.positionB, p) : positions.positionB.clone().lerp(positions.positionC, p - 1);
+          const pos = interpolateVector(p);
           return [pos.x, pos.y, pos.z] as [number, number, number];
         })}
-        rotation-x={position.to((p) => {
-          const from = p < 1 ? rotationA : rotationB;
-          const to = p < 1 ? rotationB : rotationC;
-          const t = p < 1 ? p : p - 1;
-          const fromVec = new THREE.Vector3().setFromEuler(from);
-          const toVec = new THREE.Vector3().setFromEuler(to);
-          const result = fromVec.lerp(toVec, t);
-          return result.x;
-        })}
-        rotation-y={position.to((p) => {
-          const from = p < 1 ? rotationA : rotationB;
-          const to = p < 1 ? rotationB : rotationC;
-          const t = p < 1 ? p : p - 1;
-          const fromVec = new THREE.Vector3().setFromEuler(from);
-          const toVec = new THREE.Vector3().setFromEuler(to);
-          const result = fromVec.lerp(toVec, t);
-          return result.y;
-        })}
-        rotation-z={position.to((p) => {
-          const from = p < 1 ? rotationA : rotationB;
-          const to = p < 1 ? rotationB : rotationC;
-          const t = p < 1 ? p : p - 1;
-          const fromVec = new THREE.Vector3().setFromEuler(from);
-          const toVec = new THREE.Vector3().setFromEuler(to);
-          const result = fromVec.lerp(toVec, t);
-          return result.z;
-        })}
+        rotation-x={position.to((p) => interpolateRotation(p).x)}
+        rotation-y={position.to((p) => interpolateRotation(p).y)}
+        rotation-z={position.to((p) => interpolateRotation(p).z)}
         dispose={null}>
         <animated.group rotation-x={open.to([0, 1], [1.57, -screenOffset])} position={[0, -0.04, 0.41]}>
           <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>

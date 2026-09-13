@@ -2413,6 +2413,11 @@ update-browserslist-db@^1.1.3:
     escalade "^3.2.0"
     picocolors "^1.1.1"
 
+urdf-loader@^0.12.7:
+  version "0.12.7"
+  resolved "https://registry.yarnpkg.com/urdf-loader/-/urdf-loader-0.12.7.tgz#f534c19cff5feec7a22831bb87807bbab89d2e74"
+  integrity sha512-9RQDhWt4x9K6R3uHjv68NLwX+JDm3A2XjhksrMgq6xl9NJcwqV21+htHU0cbG619hnqH1d4mUMFuqHo22R8DMA==
+
 uri-js@^4.2.2:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.4.1.tgz#9b1a52595225859e55f669d928f88c6c57f2a77e"
