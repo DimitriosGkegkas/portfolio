@@ -519,6 +519,8 @@ export const getFileSystem = () => portfolioData.fileSystem;
 export const getBranches = () => portfolioData.branches;
 export const getProjects = () => portfolioData.projects;
 export const getProjectById = (id: string) => portfolioData.projects[id];
+export const getProjectByHash = (hash: string) =>
+  Object.values(portfolioData.projects).find((project) => project.hash === hash);
 export const isRoboticsImmersiveProject = (id: string | null) => {
   if (!id) return false;
   return portfolioData.projects[id]?.experience === "robotics-immersive";

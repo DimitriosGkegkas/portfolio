@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useSpring } from "@react-spring/core";
 import UIManager from "./Components/UIManager";
 import RoboticsRoute from "./Routes/RoboticsRoute";
-import { isRoboticsImmersiveProject } from "./Data/portfolioData";
+import { getProjectByHash, getProjectById, isRoboticsImmersiveProject } from "./Data/portfolioData";
 
 const SceneManager = lazy(() => import("./Components/SceneManager"));
 
@@ -27,9 +27,32 @@ const getRoutePath = () => {
 };
 
 function PortfolioHome() {
-  const [state, setState] = useState({ open: false, project: null as string | null });
+  const [state, setState] = useState(() => {
+    const projectParam = new URLSearchParams(window.location.search).get("project");
+    const project = projectParam
+      ? getProjectById(projectParam) ?? getProjectByHash(projectParam)
+      : undefined;
+
+    return {
+      open: Boolean(project),
+      project: project?.id ?? null,
+    };
+  });
   const [loaded, setLoaded] = useState(false);
   const isRoboticsExperience = isRoboticsImmersiveProject(state.project);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const project = state.project ? getProjectById(state.project) : undefined;
+
+    if (project) {
+      url.searchParams.set("project", project.hash);
+    } else {
+      url.searchParams.delete("project");
+    }
+
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [state.project]);
 
   const props = useSpring({
     open: Number(state.open),
